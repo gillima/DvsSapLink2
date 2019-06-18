@@ -2,11 +2,10 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Input;
-using GalaSoft.MvvmLight;
 using WpfDemo.Model;
-using WpfDemo.ViewModel;
+using GalaSoft.MvvmLight;
 
-namespace Irene.ViewModel
+namespace WpfDemo.ViewModel
 {
     public class FileSystemItem
     {

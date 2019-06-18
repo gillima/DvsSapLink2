@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using Irene.ViewModel;
 using WpfDemo.Model;
+using WpfDemo.ViewModel;
 
 namespace WpfDemo
 {

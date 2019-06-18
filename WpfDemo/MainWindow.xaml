@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModel="clr-namespace:Irene.ViewModel"
-        xmlns:viewModel1="clr-namespace:WpfDemo.ViewModel"
+        xmlns:viewModel="clr-namespace:WpfDemo.ViewModel"
         mc:Ignorable="d"
         Title="CAD Beiblatt / DVS-Metadaten-Transfer" MinWidth="500"
         SizeToContent="WidthAndHeight"
@@ -93,7 +92,7 @@
         <GroupBox
             Header="SAP/R3-Daten"
             DataContext="{Binding SapData}"
-            d:DataContext="{d:DesignInstance viewModel1:SapData}"
+            d:DataContext="{d:DesignInstance viewModel:SapData}"
         >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
                 <HeaderedContentControl Header="Labor / Konstruktionsbüro">
