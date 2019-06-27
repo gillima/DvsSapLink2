@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Input;
+using DvsSapLink2.Command;
 using DvsSapLink2.Helper;
 using DvsSapLink2.Model;
 using GalaSoft.MvvmLight;
@@ -22,8 +23,12 @@ namespace DvsSapLink2.ViewModel
             this.configuration = configuration;
             this.files = files;
 
+            this.ArchiveCommand = configuration.Type == ConfigurationType.Archive
+                ? (ICommand)new ArchiveCommand(this.configuration)
+                : (ICommand)new PrepareCommand(this.configuration);
             this.SelectSourceDirectory = new BrowseDirectoryCommand(dir => this.SourceDirectory = dir, () => this.SourceDirectory);
             this.SelectDestinationDirectory = new BrowseDirectoryCommand(dir => this.DestinationDirectory = dir, () => this.DestinationDirectory);
+            
             this.UpdateFiles();
         }
 
@@ -80,6 +85,11 @@ namespace DvsSapLink2.ViewModel
         /// Gets or sets a value indicating whether the destination directory can be changed or not
         /// </summary>
         public bool CanChangeDestinationDirectory => this.configuration.CanChangeDestinationDirectory;
+
+        /// <summary>
+        /// Gets the action to be performed when the archive button is pressed
+        /// </summary>
+        public ICommand ArchiveCommand { get; }
 
         /// <summary>
         /// Updates the list of available attribute files to show the content of the current source directory

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using DvsSapLink2.Model;
 using GalaSoft.MvvmLight;
 using static DvsSapLink2.Resources.Strings;
@@ -21,6 +22,11 @@ namespace DvsSapLink2.ViewModel
             this.Message = "hello world";
             this.File = null;
         }
+
+        /// <summary>
+        /// Gets the action to be performed when the archive button is pressed
+        /// </summary>
+        public ICommand Archive => this.Configuration.ArchiveCommand;
 
         /// <summary>
         /// Gets or sets a message to display in the status bar of the application

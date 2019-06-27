@@ -76,7 +76,7 @@
 
         <Border BorderThickness="0" Background="WhiteSmoke" Padding="5">
             <DockPanel LastChildFill="True">
-                <Button DockPanel.Dock="Right">
+                <Button DockPanel.Dock="Right" Command="{Binding Archive}" CommandParameter="{Binding}">
                     <StackPanel Orientation="Vertical" MaxWidth="160">
                         <Image Source="Resources/baseline_archive_black_18dp.png" Height="24" Stretch="Uniform"/>
                         <Label Content="{x:Static res:Strings.TXT_DO_PREPARE}" Padding="2" />
