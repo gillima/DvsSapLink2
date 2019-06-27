@@ -1,4 +1,6 @@
+using System.IO;
 using System.Windows;
+using DvsSapLink2.Helper;
 using DvsSapLink2.Model;
 using DvsSapLink2.ViewModel;
 using static DvsSapLink2.Resources.Strings;
@@ -24,10 +26,16 @@ namespace DvsSapLink2.Command
             var viewModel = (MainViewModel)parameter;
             var file = viewModel.File.File;
 
-            this.CopyFile(file, ".txt", this.configuration.DestinationDirectory);
-            this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
-            this.CopyFile(file, ".pdf", this.configuration.DestinationDirectory);
-            this.DeleteFile(file, ".bak");
+            using (var logger = new Logger(Path.Combine(this.configuration.LogDirectory, file.Title + ".log")))
+            {
+                logger.Write("W_DIR", this.configuration.SourceDirectory);
+                logger.Write("A_DIR", this.configuration.DestinationDirectory);
+                
+                this.CopyFile(file, ".txt", this.configuration.DestinationDirectory);
+                this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
+                this.CopyFile(file, ".pdf", this.configuration.DestinationDirectory);
+                this.DeleteFile(file, ".bak");
+            }
            
             MessageBox.Show(TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
             

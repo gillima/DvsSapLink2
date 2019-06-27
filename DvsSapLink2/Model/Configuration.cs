@@ -23,11 +23,13 @@
                 case ConfigurationType.Prepare:
                     this.SourceDirectory = @"D:\Development\BirrMachines\testFiles\work\userwork";
                     this.DestinationDirectory = @"D:\Development\BirrMachines\testFiles\pre";
+                    this.LogDirectory = @"D:\Development\BirrMachines\testFiles\work\log";
                     break;
 
                 case ConfigurationType.Archive:
                     this.SourceDirectory = "D:\\Development\\BirrMachines\\test\\PreArchive\\";
                     this.DestinationDirectory = "D:\\Development\\BirrMachines\\test\\Archive\\";
+                    this.LogDirectory = @"D:\Development\BirrMachines\testFiles\work\log";
                     break;
             }
         }
@@ -56,5 +58,10 @@
         /// Gets or sets a value indicating whether the destination directory can be changed or not
         /// </summary>
         public bool CanChangeDestinationDirectory => this.Type == ConfigurationType.Archive;
+      
+        /// <summary>
+        /// Gets the directory where to put the log files
+        /// </summary>
+        public string LogDirectory { get; }
     }
 }
