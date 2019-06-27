@@ -1,97 +1,61 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Windows.Input;
-using WpfDemo.Model;
+﻿using System.Collections.ObjectModel;
+using DwgSapLink2.Model;
 using GalaSoft.MvvmLight;
 
-namespace WpfDemo.ViewModel
+namespace DwgSapLink2.ViewModel
 {
-    public class FileSystemItem
-    {
-        public string Path { get; set; }
-        public string Name { get; set; }
-    }
-
-    public class DirectoryItem : FileSystemItem
-    {
-        public DirectoryItem(string path)
-        {
-            this.Path = path;
-            this.Name = System.IO.Path.GetFileName(path);
-
-            this.Items = new ObservableCollection<FileSystemItem>();
-            try
-            {
-                foreach (var directory in Directory.GetDirectories(path))
-                {
-                    this.Items.Add(new DirectoryItem(directory));
-                }
-                foreach (var file in Directory.GetFiles(path))
-                {
-                    this.Items.Add(new FileItem(file));
-                }
-            }
-            catch (UnauthorizedAccessException)
-            {
-            }
-        }
-
-        public ObservableCollection<FileSystemItem> Items { get; private set; }
-    }
-
-    public class FileItem : FileSystemItem
-    {
-        public FileItem(string path)
-        {
-            this.Path = path;
-            this.Name = System.IO.Path.GetFileName(path);
-        }
-    }
-
     public class MainViewModel : ViewModelBase
     {
-        private readonly Order order;
-        private string currentFile;
-        private string workingDirectory;
-        private FileSystemItem directoryContent;
+        private string message;
+        private AttributeFileViewModel file;
 
-        public MainViewModel(Order order)
+        /// <summary>
+        /// Creates a new instance of the <see cref="MainViewModel"/> class
+        /// </summary>
+        /// <param name="configuration">Configuration to use</param>
+        public MainViewModel(Configuration configuration)
         {
-            this.SelectFile = new BrowseFile(file => this.CurrentFile = file, () => this.CurrentFile);
-            this.SelectWorkingDirectory= new BrowseDirectory(dir => this.WorkingDirectory = dir, () => this.WorkingDirectory);
-
-            this.order = order;
-            this.DirectoryContent = null;
-            this.SapData = new SapData(order);
+            this.Configuration = new ConfigurationViewModel(configuration, this.Files);
+            this.Sap = new SapDataViewModel(new SapData());
+            this.Message = "hello world";
+            this.File = null;
         }
 
-        public ICommand SelectFile { get; }
-
-        public ICommand SelectWorkingDirectory { get; }
-
-        public string CurrentFile
+        /// <summary>
+        /// Gets or sets a message to display in the status bar of the application
+        /// </summary>
+        public string Message
         {
-            get { return this.currentFile; }
-            private set { this.Set(ref this.currentFile, value); }
+            get => this.message;
+            set => this.Set(ref this.message, value);
         }
 
-        public string WorkingDirectory
+        /// <summary>
+        /// Gets the view model for the current application configuration
+        /// </summary>
+        public ConfigurationViewModel Configuration { get; }
+
+        /// <summary>
+        /// Gets the list of available attribute files in the selected directory
+        /// </summary>
+        public ObservableCollection<AttributeFileViewModel> Files { get; } = new ObservableCollection<AttributeFileViewModel>();
+
+        /// <summary>
+        /// Gets the view model of the currently selected attribute file
+        /// </summary>
+        public AttributeFileViewModel File
         {
-            get { return this.workingDirectory; }
-            private set
+            get => this.file;
+            set
             {
-                if (!this.Set(ref this.workingDirectory, value)) return;
-                this.DirectoryContent = new DirectoryItem(this.workingDirectory);
+                this.Set(ref this.file, value);
+                if (value == null) this.Message = "No file selected";
             }
         }
 
-        public SapData SapData { get; private set; }
-
-        public FileSystemItem DirectoryContent
-        {
-            get { return this.directoryContent; }
-            private set { this.Set(ref this.directoryContent, value); }
-        }
+        /// <summary>
+        /// Gets the view model for the SAP data of the archive action
+        /// </summary>
+        public SapDataViewModel Sap { get; }
     }
 }

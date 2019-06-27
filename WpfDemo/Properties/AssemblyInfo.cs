@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Irene")]
+[assembly: AssemblyTitle("DwgSapLink2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Schindler")]
-[assembly: AssemblyProduct("Irene")]
+[assembly: AssemblyProduct("DwgSapLink2")]
 [assembly: AssemblyCopyright("Copyright © Schindler 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
