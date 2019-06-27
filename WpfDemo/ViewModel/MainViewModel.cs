@@ -49,7 +49,31 @@ namespace DwgSapLink2.ViewModel
             set
             {
                 this.Set(ref this.file, value);
-                if (value == null) this.Message = "No file selected";
+                this.RaisePropertyChanged(nameof(MainViewModel.IsValid));
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the current file selection is valid for copy
+        /// </summary>
+        public bool IsValid
+        {
+            get
+            {
+                if (this.file == null)
+                {
+                    this.Message = "No file selected";
+                    return false;
+                }
+
+                if (!this.file.IsValid)
+                {
+                    this.Message = "File content not valid";
+                    return false;
+                }
+
+                this.Message = "";
+                return true;
             }
         }
 

@@ -84,13 +84,11 @@
 
                 <StackPanel
                     Orientation="Horizontal"
-                    DataContext="{Binding File}" d:DataContext="{d:DesignInstance viewModel:AttributeFileViewModel}"
-                    Visibility="{Binding IsValid,Converter={StaticResource BoolToVisibilityConverter}}"
+                    Visibility="{Binding IsValid,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=Invert}"
                 >
                     <Image Source="Resources/baseline_error_black_18dp.png" Height="34" Stretch="Uniform" VerticalAlignment="Center"/>
                     <Label
                         DockPanel.Dock="Left"
-                        DataContext="{Binding DataContext,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
                         Content="{Binding Message}"
                         VerticalAlignment="Center" />
                 </StackPanel>

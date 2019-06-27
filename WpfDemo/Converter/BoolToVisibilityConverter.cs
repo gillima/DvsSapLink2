@@ -10,6 +10,7 @@ namespace DwgSapLink2.Converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var boolValue = value is bool && (bool)value;
+            if (parameter?.ToString() == "Invert") boolValue = !boolValue;
             return boolValue ? Visibility.Visible : Visibility.Collapsed;
         }
 
