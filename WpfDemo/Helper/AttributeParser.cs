@@ -39,8 +39,38 @@ namespace DwgSapLink2.Helper
         /// </summary>
         private static readonly IDictionary<FileAttributeName, FileAttributeDefinition> Definitions = new Dictionary<FileAttributeName, FileAttributeDefinition>
         {
-            { FileAttributeName.ZeichnungsNummer, new FileAttributeDefinition(0, 15, s => s.ToUpperInvariant()) },
-            { FileAttributeName.Attribute_01, new FileAttributeDefinition(15, 8) },
+            { FileAttributeName.ZeichnungsNummer, new FileAttributeDefinition(0, 13, s => s.ToUpper()) },
+            { FileAttributeName.Typ, new FileAttributeDefinition(13, 24) },
+            { FileAttributeName.Haupttitel, new FileAttributeDefinition(37, 24) },
+            { FileAttributeName.Untertitel, new FileAttributeDefinition(61, 24) },
+            { FileAttributeName.AuftragsNummer, new FileAttributeDefinition(85, 24, FileAttributeParser.FormatOrderNumber) },
+            { FileAttributeName.Ersteller, new FileAttributeDefinition(109, 22) },
+            { FileAttributeName.Prüfer1, new FileAttributeDefinition(131, 22) },
+            { FileAttributeName.Prüfer2, new FileAttributeDefinition(153, 22) },
+            { FileAttributeName.Freigeber, new FileAttributeDefinition(175, 22) },
+            { FileAttributeName.SLgleicherNr, new FileAttributeDefinition(197, 1) },
+            { FileAttributeName.SLandererNr, new FileAttributeDefinition(198, 1) },
+            { FileAttributeName.EntstandAus, new FileAttributeDefinition(199, 10) },
+            { FileAttributeName.ErsatzFuer, new FileAttributeDefinition(209, 10) },
+            { FileAttributeName.Massstab, new FileAttributeDefinition(219, 5) },
+            { FileAttributeName.ZustandStelle, new FileAttributeDefinition(224, 8) },
+            { FileAttributeName.UebernehmendeStelle, new FileAttributeDefinition(232, 8) },
+            { FileAttributeName.DokumentArt, new FileAttributeDefinition(240, 3) },
+            { FileAttributeName.Sprache, new FileAttributeDefinition(243, 2) },
+            { FileAttributeName.Format, new FileAttributeDefinition(245, 2) },
+            { FileAttributeName.BlattNr, new FileAttributeDefinition(247, 2) },
+            { FileAttributeName.AnzBlatt, new FileAttributeDefinition(249, 2) },
+            { FileAttributeName.ToleranzMittel, new FileAttributeDefinition(251, 1) },
+            { FileAttributeName.ToleranzGrob, new FileAttributeDefinition(252, 1) },
+            { FileAttributeName.AeStand_aktuell, new FileAttributeDefinition(253, 14, s => s.ToUpper()) },
+            { FileAttributeName.AeStand_1, new FileAttributeDefinition(267, 14, s => s.ToUpper()) },
+            { FileAttributeName.AeStand_2, new FileAttributeDefinition(281, 14, s => s.ToUpper()) },
+            { FileAttributeName.AeStand_3, new FileAttributeDefinition(295, 14, s => s.ToUpper()) },
+            { FileAttributeName.AeStand_4, new FileAttributeDefinition(309, 14, s => s.ToUpper()) },
+            { FileAttributeName.AeStand_5, new FileAttributeDefinition(323, 14, s => s.ToUpper()) },
+            { FileAttributeName.AeStand_6, new FileAttributeDefinition(337, 14, s => s.ToUpper()) },
+            { FileAttributeName.AeStand_7, new FileAttributeDefinition(351, 14, s => s.ToUpper()) },
+            { FileAttributeName.Bemerkung, new FileAttributeDefinition(365, 60) },
         };
 
         /// <summary>
@@ -57,6 +87,12 @@ namespace DwgSapLink2.Helper
                     continue;
                 yield return new FileAttribute(definition.Key, attribute?.RawValue, attribute?.Value);
             }
+        }
+        
+        private static string FormatOrderNumber(string value)
+        {
+            // TODO: convert order number
+            return value;
         }
     }
 }

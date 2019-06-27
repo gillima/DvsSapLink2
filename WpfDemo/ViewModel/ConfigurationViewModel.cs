@@ -87,7 +87,8 @@ namespace DwgSapLink2.ViewModel
         private void UpdateFiles()
         {
             this.files.Clear();
-            foreach(var filePath in Directory.EnumerateFiles(this.SourceDirectory))
+            if (!Directory.Exists(this.SourceDirectory)) return;
+            foreach(var filePath in Directory.EnumerateFiles(this.SourceDirectory, "*.txt"))
             {
                 var file = new AttributeFile(filePath);
                 this.files.Add(new AttributeFileViewModel(file));

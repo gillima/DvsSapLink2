@@ -6,7 +6,37 @@
     public enum FileAttributeName
     {
         ZeichnungsNummer,
-        Attribute_01
+        Typ,
+        Haupttitel,
+        Untertitel,
+        AuftragsNummer,
+        Ersteller,
+        Prüfer1,
+        Prüfer2,
+        Freigeber,
+        SLgleicherNr,
+        SLandererNr,
+        EntstandAus,
+        ErsatzFuer,
+        Massstab,
+        ZustandStelle,
+        UebernehmendeStelle,
+        DokumentArt,
+        Sprache,
+        Format,
+        BlattNr,
+        AnzBlatt,
+        ToleranzMittel,
+        ToleranzGrob,
+        AeStand_aktuell,
+        AeStand_1,
+        AeStand_2,
+        AeStand_3,
+        AeStand_4,
+        AeStand_5,
+        AeStand_6,
+        AeStand_7,
+        Bemerkung,
     }
 
     public class FileAttribute

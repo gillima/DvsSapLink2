@@ -5,7 +5,7 @@
     xmlns:converter="clr-namespace:DwgSapLink2.Converter">
     <Application.Resources>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-
+        
         <Style TargetType="HeaderedContentControl">
             <Setter Property="Template">
                 <Setter.Value>

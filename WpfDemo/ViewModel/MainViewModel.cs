@@ -62,13 +62,13 @@ namespace DwgSapLink2.ViewModel
             {
                 if (this.file == null)
                 {
-                    this.Message = "No file selected";
+                    this.Message = "Keine Datei ausgewählt";
                     return false;
                 }
 
                 if (!this.file.IsValid)
                 {
-                    this.Message = "File content not valid";
+                    this.Message = this.file.Message;
                     return false;
                 }
 

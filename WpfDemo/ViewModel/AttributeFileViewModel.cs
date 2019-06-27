@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using DwgSapLink2.Model;
 using GalaSoft.MvvmLight;
 
@@ -26,19 +27,28 @@ namespace DwgSapLink2.ViewModel
         public string Title => this.attributeFile.Title;
 
         /// <summary>
+        /// Gets the validation message for this file
+        /// </summary>
+        public string Message { get; private set; }
+        
+        /// <summary>
         /// Gets a value indicating whether the file and the file content correspond to each other
         /// </summary>
         public bool IsValid
         {
             get
             {
-                var drawingAttribute = this.attributes.FirstOrDefault(a => a.Name == FileAttributeName.ZeichnungsNummer);
-                if (drawingAttribute == null) return false;
-
-                return string.Equals(
-                    this.attributeFile.Title,
-                    drawingAttribute.Value,
-                    StringComparison.InvariantCultureIgnoreCase);
+                try
+                {
+                    this.Validate();
+                    this.Message = "";
+                    return true;
+                }
+                catch (FormatException ex)
+                {
+                    this.Message = ex.Message;
+                }
+                return false;
             }
         }
 
@@ -47,5 +57,22 @@ namespace DwgSapLink2.ViewModel
         /// collection is accessed
         /// </summary>
         public ObservableCollection<FileAttribute> Attributes => this.attributes ?? (this.attributes = new ObservableCollection<FileAttribute>(this.attributeFile.Attributes));
+
+        public void Validate()
+        {
+            var drawingAttribute = this.attributes.FirstOrDefault(a => a.Name == FileAttributeName.ZeichnungsNummer);
+            if (drawingAttribute == null)
+            {
+                throw new FormatException("Zeichnungsnummer fehlt auf dem Zeichnungskopf");
+            }
+
+            var drawingNumber = drawingAttribute.Value;
+            var match = Regex.Match(this.Title, "(.*?)-.*");
+            if (!match.Success)
+                throw new FormatException("Fehler im Dateinamen");
+
+            if (!string.Equals(match.Groups[1].Value, drawingNumber, StringComparison.InvariantCultureIgnoreCase))
+                throw new FormatException("Zeichnungsnummern stimmen nicht überein");
+        }
     }
 }

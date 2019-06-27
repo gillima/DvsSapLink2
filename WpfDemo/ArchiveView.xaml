@@ -8,24 +8,24 @@
     xmlns:model="clr-namespace:DwgSapLink2.Model"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
-    Title="Archive" Height="450" Width="800"
+    Title="DVS-SAP Link" Height="450" Width="800"
     SizeToContent="Height"
 >
     <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True">
 
         <StackPanel Orientation="Vertical" Margin="5">
-            <GroupBox Header="Configuration" DataContext="{Binding Configuration}" d:DataContext="{d:DesignInstance viewModel:ConfigurationViewModel}">
+            <GroupBox Header="Pfade" DataContext="{Binding Configuration}" d:DataContext="{d:DesignInstance viewModel:ConfigurationViewModel}">
                 <StackPanel Orientation="Vertical">
-                    <HeaderedContentControl Header="Source">
+                    <HeaderedContentControl Header="Quellverzeichnis">
                         <Button Content="{Binding SourceDirectory}" Command="{Binding SelectSourceDirectory}" IsEnabled="{Binding CanChangeSourceDirectory}" Style="{StaticResource BrowseBox}"/>
                     </HeaderedContentControl>
-                    <HeaderedContentControl Header="Destination">
+                    <HeaderedContentControl Header="Archivverzeichnis">
                         <Button Content="{Binding DestinationDirectory}" Command="{Binding SelectDestinationDirectory}" IsEnabled="{Binding CanChangeDestinationDirectory}" Style="{StaticResource BrowseBox}"/>
                     </HeaderedContentControl>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Files">
+            <GroupBox Header="Dokumentdaten">
                 <Grid Height="280">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -60,13 +60,13 @@
 
             <GroupBox Header="SAP Data" DataContext="{Binding Sap}" d:DataContext="{d:DesignInstance viewModel:SapDataViewModel}">
                 <StackPanel Orientation="Vertical">
-                    <HeaderedContentControl Header="Labor">
+                    <HeaderedContentControl Header="Labor / Konstruktionsbüro">
                         <ComboBox ItemsSource="{Binding Labors}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Labor}" />
                     </HeaderedContentControl>
-                    <HeaderedContentControl Header="Status">
+                    <HeaderedContentControl Header="Zu setzender Status">
                         <ComboBox ItemsSource="{Binding States}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding State}" />
                     </HeaderedContentControl>
-                    <HeaderedContentControl Header="User">
+                    <HeaderedContentControl Header="User in SAP/R3">
                         <TextBox Text="{Binding User}" />
                     </HeaderedContentControl>
                 </StackPanel>
@@ -76,9 +76,9 @@
         <Border BorderThickness="0" Background="WhiteSmoke" Padding="5">
             <DockPanel LastChildFill="True">
                 <Button DockPanel.Dock="Right">
-                    <StackPanel Orientation="Vertical" MaxWidth="120">
+                    <StackPanel Orientation="Vertical" MaxWidth="160">
                         <Image Source="Resources/baseline_archive_black_18dp.png" Height="24" Stretch="Uniform"/>
-                        <Label Content="Archivieren" Padding="2" />
+                        <Label Content="Freigeben zum Archivieren" Padding="2" />
                     </StackPanel>
                 </Button>
 

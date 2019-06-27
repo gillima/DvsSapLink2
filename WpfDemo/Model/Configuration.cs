@@ -21,13 +21,13 @@
             switch (type)
             {
                 case ConfigurationType.Prepare:
-                    this.SourceDirectory = "d:\\dwg-sap\\work";
-                    this.DestinationDirectory = "d:\\dwg-sap\\stage";
+                    this.SourceDirectory = @"D:\Development\BirrMachines\testFiles\work\userwork";
+                    this.DestinationDirectory = @"D:\Development\BirrMachines\testFiles\pre";
                     break;
 
                 case ConfigurationType.Archive:
-                    this.SourceDirectory = "d:\\dwg-sap\\stage";
-                    this.DestinationDirectory = "d:\\dwg-sap\\archive";
+                    this.SourceDirectory = "D:\\Development\\BirrMachines\\test\\PreArchive\\";
+                    this.DestinationDirectory = "D:\\Development\\BirrMachines\\test\\Archive\\";
                     break;
             }
         }
