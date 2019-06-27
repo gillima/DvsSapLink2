@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using DvsSapLink2.Command;
 using DvsSapLink2.Model;
 using GalaSoft.MvvmLight;
 using static DvsSapLink2.Resources.Strings;

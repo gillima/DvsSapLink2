@@ -5,7 +5,7 @@ using DvsSapLink2.Model;
 
 namespace DvsSapLink2.Helper
 {
-    public class FileAttributeParser
+    public static class FileAttributeParser
     {
         /// <summary>
         /// Internal helper class used by the file attribute parser to parse the fields
