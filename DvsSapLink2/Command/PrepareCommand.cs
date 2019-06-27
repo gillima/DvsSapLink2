@@ -1,50 +1,38 @@
-using System;
-using System.Windows.Input;
+using System.Windows;
 using DvsSapLink2.Model;
 using DvsSapLink2.ViewModel;
+using static DvsSapLink2.Resources.Strings;
 
 namespace DvsSapLink2.Command
 {
-    public class PrepareCommand : ICommand
+    public class PrepareCommand : CopyCommand
     {
-        private readonly Configuration configuration;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PrepareCommand"/> class.
         /// </summary>
         public PrepareCommand(Configuration configuration)
+            : base(configuration, TXT_DO_PREPARE)
         {
-            this.configuration = configuration;
-        }
-
-        /// <summary>
-        /// Event raised to inform that the execute status of the command has changed
-        /// </summary>
-        public event EventHandler CanExecuteChanged
-        {
-            add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
-        }
-        
-        /// <summary>
-        /// Returns a value indicating whether the command can be executed or not
-        /// </summary>
-        /// <param name="parameter"><see cref="AttributeFile"/> to be copied</param>
-        /// <returns><c>true</c> if the command can be executed; <c>false</c> otherwise</returns>
-        public bool CanExecute(object parameter)
-        {
-            if (!(parameter is MainViewModel)) return false;
-            var viewModel = (MainViewModel) parameter;
-            return viewModel.IsValid;
         }
 
         /// <summary>
         /// Executes the prepare archive command
         /// </summary>
         /// <param name="parameter"><see cref="AttributeFile"/> to be copied</param>
-        public void Execute(object parameter)
+        public override void Execute(object parameter)
         {
             var viewModel = (MainViewModel)parameter;
+            var file = viewModel.File.File;
+
+            this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
+            this.CopyFile(file, ".pdf", this.configuration.DestinationDirectory);
+            this.CopyFile(file, ".txt", this.configuration.DestinationDirectory);
+            // this.DeleteFile(file, ".bak");
+           
+            MessageBox.Show(TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // HACK: force update of file list
+            viewModel.Configuration.SourceDirectory = viewModel.Configuration.SourceDirectory;
         }
     }
 }

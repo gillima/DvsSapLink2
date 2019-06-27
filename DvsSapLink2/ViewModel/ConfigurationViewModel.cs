@@ -24,13 +24,18 @@ namespace DvsSapLink2.ViewModel
             this.files = files;
 
             this.ArchiveCommand = configuration.Type == ConfigurationType.Archive
-                ? (ICommand)new ArchiveCommand(this.configuration)
-                : (ICommand)new PrepareCommand(this.configuration);
+                ? (CopyCommand)new ArchiveCommand(this.configuration)
+                : (CopyCommand)new PrepareCommand(this.configuration);
             this.SelectSourceDirectory = new BrowseDirectoryCommand(dir => this.SourceDirectory = dir, () => this.SourceDirectory);
             this.SelectDestinationDirectory = new BrowseDirectoryCommand(dir => this.DestinationDirectory = dir, () => this.DestinationDirectory);
             
             this.UpdateFiles();
         }
+
+        /// <summary>
+        /// Gets the configuration presented by this view model
+        /// </summary>
+        public Configuration Configuration => this.configuration;
 
         /// <summary>
         /// Gets the command to select the source directory
@@ -89,7 +94,7 @@ namespace DvsSapLink2.ViewModel
         /// <summary>
         /// Gets the action to be performed when the archive button is pressed
         /// </summary>
-        public ICommand ArchiveCommand { get; }
+        public CopyCommand ArchiveCommand { get; }
 
         /// <summary>
         /// Updates the list of available attribute files to show the content of the current source directory

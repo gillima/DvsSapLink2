@@ -23,7 +23,7 @@ namespace DvsSapLink2.Helper
         /// <summary>
         /// Raised when the executable state of the command has changed
         /// </summary>
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged { add {} remove {} }
 
         /// <summary>
         /// Gets whether the command can be executed or not

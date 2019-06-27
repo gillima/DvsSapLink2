@@ -86,6 +86,7 @@
       <DependentUpon>ArchiveView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Command\ArchiveCommand.cs" />
+    <Compile Include="Command\CopyCommand.cs" />
     <Compile Include="Command\PrepareCommand.cs" />
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Helper\AttributeParser.cs" />

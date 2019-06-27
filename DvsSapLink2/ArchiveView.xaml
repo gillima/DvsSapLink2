@@ -79,7 +79,7 @@
                 <Button DockPanel.Dock="Right" Command="{Binding Archive}" CommandParameter="{Binding}">
                     <StackPanel Orientation="Vertical" MaxWidth="160">
                         <Image Source="Resources/baseline_archive_black_18dp.png" Height="24" Stretch="Uniform"/>
-                        <Label Content="{x:Static res:Strings.TXT_DO_PREPARE}" Padding="2" />
+                        <Label Content="{Binding Archive.Title}" Padding="2" />
                     </StackPanel>
                 </Button>
 

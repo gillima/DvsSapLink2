@@ -28,6 +28,11 @@ namespace DvsSapLink2.ViewModel
         public string Title => this.attributeFile.Title;
 
         /// <summary>
+        /// Gets the attribute file represented by this view model
+        /// </summary>
+        public AttributeFile File => this.attributeFile;
+
+        /// <summary>
         /// Gets the validation message for this file
         /// </summary>
         public string Message { get; private set; }
@@ -59,6 +64,10 @@ namespace DvsSapLink2.ViewModel
         /// </summary>
         public ObservableCollection<FileAttribute> Attributes => this.attributes ?? (this.attributes = new ObservableCollection<FileAttribute>(this.attributeFile.Attributes));
 
+        /// <summary>
+        /// Validates the file content and compares the drawing number with the filename
+        /// </summary>
+        /// <exception cref="FormatException"></exception>
         public void Validate()
         {
             var drawingAttribute = this.attributes.FirstOrDefault(a => a.Name == FileAttributeName.ZeichnungsNummer);

@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using DvsSapLink2.Command;
 using DvsSapLink2.Model;
 using GalaSoft.MvvmLight;
 using static DvsSapLink2.Resources.Strings;
@@ -79,7 +81,13 @@ namespace DvsSapLink2.ViewModel
                     return false;
                 }
 
-                this.Message = "";
+                if (!this.Configuration.ArchiveCommand.Verify(this.file.File))
+                {
+                    this.Message = this.Configuration.ArchiveCommand.Message;
+                    return false;
+                }
+
+                this.Message = string.Empty;
                 return true;
             }
         }
