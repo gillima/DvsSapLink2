@@ -74,6 +74,7 @@
     <Compile Include="Helper\AttributeParser.cs" />
     <Compile Include="Helper\BrowseDirectoryCommand.cs" />
     <Compile Include="Helper\Logger.cs" />
+    <Compile Include="Helper\LogParser.cs" />
     <Compile Include="Model\FileAttribute.cs" />
     <Compile Include="Model\AttributeFile.cs" />
     <Compile Include="Model\Configuration.cs" />

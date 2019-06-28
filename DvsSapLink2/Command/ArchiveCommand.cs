@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Windows;
 using DvsSapLink2.Helper;
 using DvsSapLink2.Model;
@@ -25,8 +26,12 @@ namespace DvsSapLink2.Command
         {
             var viewModel = (MainViewModel)parameter;
             var file = viewModel.File.File;
+            
+            var logFile = Path.Combine(this.configuration.LogDirectory, file.Title + ".log");
+            var archiveDir = LogParser.ReadMessages(logFile, "A_DIR");
+            MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
 
-            using (var logger = new Logger(Path.Combine(this.configuration.LogDirectory, file.Title + ".log")))
+            using (var logger = new Logger(logFile))
             {
                 
                 this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory, false);
