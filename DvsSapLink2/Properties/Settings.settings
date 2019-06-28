@@ -2,23 +2,32 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DvsSapLink2.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="PREPARE_SOURCE_DIRECTORY" Type="System.String" Scope="User">
+    <Setting Name="WORKING_DIRECTORY" Type="System.String" Scope="User">
       <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_work\userwork</Value>
     </Setting>
-    <Setting Name="PREPARE_DESTINATION_DIRECTORY" Type="System.String" Scope="User">
+    <Setting Name="PENDING_DIRECTORY" Type="System.String" Scope="User">
       <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\ArchPending</Value>
     </Setting>
-    <Setting Name="PREPARE_LOG_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\logPending</Value>
-    </Setting>
-    <Setting Name="ARCHIVE_SOURCE_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\ArchPending</Value>
-    </Setting>
-    <Setting Name="ARCHIVE_DESTINATION_DIRECTORY" Type="System.String" Scope="User">
+    <Setting Name="ARCHIVE_DWG_DIRECTORY" Type="System.String" Scope="User">
       <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\archiv_autocad\dwg</Value>
     </Setting>
     <Setting Name="ARCHIVE_LOG_DIRECTORY" Type="System.String" Scope="User">
       <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\logArchiv\DwgLog</Value>
+    </Setting>
+    <Setting Name="SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\SapPending\dat</Value>
+    </Setting>
+    <Setting Name="ARCHIVE_SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\logArchiv\SapTransfer</Value>
+    </Setting>
+    <Setting Name="CONVERSION_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\KonvPending</Value>
+    </Setting>
+    <Setting Name="ARCHIVE_TXT_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\archiv_autocad\txt</Value>
+    </Setting>
+    <Setting Name="ARCHIVE_TIF_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\archiv_tif</Value>
     </Setting>
   </Settings>
 </SettingsFile>

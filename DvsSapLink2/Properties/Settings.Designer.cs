@@ -27,12 +27,12 @@ namespace DvsSapLink2.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_work\\userw" +
             "ork")]
-        public string PREPARE_SOURCE_DIRECTORY {
+        public string WORKING_DIRECTORY {
             get {
-                return ((string)(this["PREPARE_SOURCE_DIRECTORY"]));
+                return ((string)(this["WORKING_DIRECTORY"]));
             }
             set {
-                this["PREPARE_SOURCE_DIRECTORY"] = value;
+                this["WORKING_DIRECTORY"] = value;
             }
         }
         
@@ -40,38 +40,12 @@ namespace DvsSapLink2.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\Arch" +
             "Pending")]
-        public string PREPARE_DESTINATION_DIRECTORY {
+        public string PENDING_DIRECTORY {
             get {
-                return ((string)(this["PREPARE_DESTINATION_DIRECTORY"]));
+                return ((string)(this["PENDING_DIRECTORY"]));
             }
             set {
-                this["PREPARE_DESTINATION_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\logP" +
-            "ending")]
-        public string PREPARE_LOG_DIRECTORY {
-            get {
-                return ((string)(this["PREPARE_LOG_DIRECTORY"]));
-            }
-            set {
-                this["PREPARE_LOG_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\Arch" +
-            "Pending")]
-        public string ARCHIVE_SOURCE_DIRECTORY {
-            get {
-                return ((string)(this["ARCHIVE_SOURCE_DIRECTORY"]));
-            }
-            set {
-                this["ARCHIVE_SOURCE_DIRECTORY"] = value;
+                this["PENDING_DIRECTORY"] = value;
             }
         }
         
@@ -79,12 +53,12 @@ namespace DvsSapLink2.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\archiv_autocad\\dwg" +
             "")]
-        public string ARCHIVE_DESTINATION_DIRECTORY {
+        public string ARCHIVE_DWG_DIRECTORY {
             get {
-                return ((string)(this["ARCHIVE_DESTINATION_DIRECTORY"]));
+                return ((string)(this["ARCHIVE_DWG_DIRECTORY"]));
             }
             set {
-                this["ARCHIVE_DESTINATION_DIRECTORY"] = value;
+                this["ARCHIVE_DWG_DIRECTORY"] = value;
             }
         }
         
@@ -98,6 +72,70 @@ namespace DvsSapLink2.Properties {
             }
             set {
                 this["ARCHIVE_LOG_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\SapP" +
+            "ending\\dat")]
+        public string SAPTRANSFER_DIRECTORY {
+            get {
+                return ((string)(this["SAPTRANSFER_DIRECTORY"]));
+            }
+            set {
+                this["SAPTRANSFER_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\logA" +
+            "rchiv\\SapTransfer")]
+        public string ARCHIVE_SAPTRANSFER_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_SAPTRANSFER_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_SAPTRANSFER_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\Konv" +
+            "Pending")]
+        public string CONVERSION_DIRECTORY {
+            get {
+                return ((string)(this["CONVERSION_DIRECTORY"]));
+            }
+            set {
+                this["CONVERSION_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\archiv_autocad\\txt" +
+            "")]
+        public string ARCHIVE_TXT_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_TXT_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_TXT_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\archiv_tif")]
+        public string ARCHIVE_TIF_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_TIF_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_TIF_DIRECTORY"] = value;
             }
         }
     }

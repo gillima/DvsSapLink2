@@ -31,10 +31,11 @@ namespace DvsSapLink2.Command
                 logger.Write("W_DIR", this.configuration.SourceDirectory);
                 logger.Write("A_DIR", this.configuration.DestinationDirectory);
 
-                this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
-                this.CopyFile(file, ".pdf", this.configuration.DestinationDirectory);
-                this.CopyFile(file, ".txt", this.configuration.DestinationDirectory);
-                // this.DeleteFile(file, ".bak");
+                this.CopyFile(file, ".dwg", this.configuration.PendingDirectory, true);
+                this.CopyFile(file, ".pdf", this.configuration.PendingDirectory, true);
+                this.CopyFile(file, ".txt", this.configuration.PendingDirectory, true);
+
+                this.DeleteFile(file, ".bak");
             }
 
             MessageBox.Show(TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);

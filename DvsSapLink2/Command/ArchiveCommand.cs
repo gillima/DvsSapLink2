@@ -28,15 +28,22 @@ namespace DvsSapLink2.Command
 
             using (var logger = new Logger(Path.Combine(this.configuration.LogDirectory, file.Title + ".log")))
             {
-                logger.Write("W_DIR", this.configuration.SourceDirectory);
-                logger.Write("A_DIR", this.configuration.DestinationDirectory);
                 
-                this.CopyFile(file, ".txt", this.configuration.DestinationDirectory);
-                this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
-                this.CopyFile(file, ".pdf", this.configuration.DestinationDirectory);
-                this.DeleteFile(file, ".bak");
+                this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory, false);
+                this.CopyFile(file, ".dwg", this.configuration.ConversionDirectory, true);
+                this.CopyFile(file, ".txt", this.configuration.TxtDirectory, true);
+                this.DeleteFile(file, ".pdf");
+
+                //TODO: Text durch Textkonstante ersetzen
+                logger.Write("LOG", "Zeichnung archiviert");
+
+                //TODO: SapTransfer-Datei erstellen nach SAPTransfer-Directory
+                //TODO: SapTransfer-Datei erstellen nach SAPTransferArchiv-Directory
+
+                //TODO: Text durch Textkonstante ersetzen
+                logger.Write("LOG", "Transferdaten für SAP erstellt und archiviert");
             }
-           
+
             MessageBox.Show(TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
             
             // HACK: force update of file list
