@@ -3,22 +3,22 @@
   <Profiles />
   <Settings>
     <Setting Name="PREPARE_SOURCE_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\work\userwork</Value>
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_work\userwork</Value>
     </Setting>
     <Setting Name="PREPARE_DESTINATION_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\pre</Value>
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\ArchPending</Value>
     </Setting>
     <Setting Name="PREPARE_LOG_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\work\log</Value>
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\logPending</Value>
     </Setting>
     <Setting Name="ARCHIVE_SOURCE_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\test\PreArchive</Value>
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\ArchPending</Value>
     </Setting>
     <Setting Name="ARCHIVE_DESTINATION_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\test\Archive</Value>
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\archiv_autocad\dwg</Value>
     </Setting>
     <Setting Name="ARCHIVE_LOG_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\work\log</Value>
+      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\logArchiv\DwgLog</Value>
     </Setting>
   </Settings>
 </SettingsFile>
