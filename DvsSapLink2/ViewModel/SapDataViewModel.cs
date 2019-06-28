@@ -22,6 +22,7 @@ namespace DvsSapLink2.ViewModel
             var section = (GuiSettings)ConfigurationManager.GetSection("guiSettings");
             SapDataViewModel.Labors = section.Labors.As<string, int>();
             SapDataViewModel.States = section.States.As<string, string>();
+            SapDataViewModel.Users = section.Users.As<string, string>();
         }
 
         /// <summary>
@@ -42,6 +43,11 @@ namespace DvsSapLink2.ViewModel
         /// Gets the list of document states for the selection box
         /// </summary>
         public static IDictionary<string, string> States { get; }
+
+        /// <summary>
+        /// Gets the list of document states for the selection box
+        /// </summary>
+        public static IDictionary<string, string> Users { get; }
 
         /// <summary>
         /// Gets or sets the labor
@@ -68,6 +74,7 @@ namespace DvsSapLink2.ViewModel
                 this.RaisePropertyChanged();
             }
         }
+
 
         /// <summary>
         /// Gets or sets the SAP user

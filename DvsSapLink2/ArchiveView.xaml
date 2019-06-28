@@ -68,7 +68,7 @@
                         <ComboBox ItemsSource="{Binding States}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding State}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_USER}">
-                        <TextBox Text="{Binding User}" />
+                        <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding User}" />
                     </HeaderedContentControl>
                 </StackPanel>
             </GroupBox>
