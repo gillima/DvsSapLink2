@@ -29,7 +29,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <DockPanel LastChildFill="True">
-                            <Button DockPanel.Dock="Right" Command="{TemplateBinding Command}" Content="..." Width="23" Height="23" Margin="3,0,0,0" HorizontalAlignment="Right"/>
+                            <Button DockPanel.Dock="Right" Command="{TemplateBinding Command}" Width="23" Height="23" Margin="3,0,0,0" HorizontalAlignment="Right">
+                                <Image Source="Resources/baseline_folder_black_18dp.png" Stretch="Uniform" />
+                            </Button>
                             <TextBox DockPanel.Dock="Left" Text="{TemplateBinding Content}" IsReadOnly="True"></TextBox>
                         </DockPanel>
                     </ControlTemplate>

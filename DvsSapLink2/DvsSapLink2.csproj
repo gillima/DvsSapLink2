@@ -152,5 +152,8 @@
   <ItemGroup>
     <Resource Include="Resources\baseline_link_black_18dp.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\baseline_folder_black_18dp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
