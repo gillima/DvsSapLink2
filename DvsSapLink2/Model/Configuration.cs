@@ -21,15 +21,15 @@
             switch (type)
             {
                 case ConfigurationType.Prepare:
-                    this.SourceDirectory = @"D:\Development\BirrMachines\testFiles\work\userwork";
-                    this.DestinationDirectory = @"D:\Development\BirrMachines\testFiles\pre";
-                    this.LogDirectory = @"D:\Development\BirrMachines\testFiles\work\log";
+                    this.SourceDirectory = Properties.Settings.Default.PREPARE_SOURCE_DIRECTORY;
+                    this.DestinationDirectory = Properties.Settings.Default.PREPARE_DESTINATION_DIRECTORY;
+                    this.LogDirectory = Properties.Settings.Default.PREPARE_LOG_DIRECTORY;
                     break;
 
                 case ConfigurationType.Archive:
-                    this.SourceDirectory = "D:\\Development\\BirrMachines\\test\\PreArchive\\";
-                    this.DestinationDirectory = "D:\\Development\\BirrMachines\\test\\Archive\\";
-                    this.LogDirectory = @"D:\Development\BirrMachines\testFiles\work\log";
+                    this.SourceDirectory = Properties.Settings.Default.ARCHIVE_SOURCE_DIRECTORY;
+                    this.DestinationDirectory = Properties.Settings.Default.ARCHIVE_DESTINATION_DIRECTORY;
+                    this.LogDirectory = Properties.Settings.Default.ARCHIVE_LOG_DIRECTORY;
                     break;
             }
         }

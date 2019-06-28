@@ -1,7 +1,24 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DvsSapLink2.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PREPARE_SOURCE_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\work\userwork</Value>
+    </Setting>
+    <Setting Name="PREPARE_DESTINATION_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\pre</Value>
+    </Setting>
+    <Setting Name="PREPARE_LOG_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\work\log</Value>
+    </Setting>
+    <Setting Name="ARCHIVE_SOURCE_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Development\BirrMachines\test\PreArchive</Value>
+    </Setting>
+    <Setting Name="ARCHIVE_DESTINATION_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Development\BirrMachines\test\Archive</Value>
+    </Setting>
+    <Setting Name="ARCHIVE_LOG_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\work\log</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

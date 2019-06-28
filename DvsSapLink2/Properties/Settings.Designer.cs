@@ -19,7 +19,79 @@ namespace DvsSapLink2.Properties {
         
         public static Settings Default {
             get {
-                return Settings.defaultInstance;
+                return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Development\\BirrMachines\\testFiles\\work\\userwork")]
+        public string PREPARE_SOURCE_DIRECTORY {
+            get {
+                return ((string)(this["PREPARE_SOURCE_DIRECTORY"]));
+            }
+            set {
+                this["PREPARE_SOURCE_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Development\\BirrMachines\\testFiles\\pre")]
+        public string PREPARE_DESTINATION_DIRECTORY {
+            get {
+                return ((string)(this["PREPARE_DESTINATION_DIRECTORY"]));
+            }
+            set {
+                this["PREPARE_DESTINATION_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Development\\BirrMachines\\testFiles\\work\\log")]
+        public string PREPARE_LOG_DIRECTORY {
+            get {
+                return ((string)(this["PREPARE_LOG_DIRECTORY"]));
+            }
+            set {
+                this["PREPARE_LOG_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Development\\BirrMachines\\test\\PreArchive")]
+        public string ARCHIVE_SOURCE_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_SOURCE_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_SOURCE_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Development\\BirrMachines\\test\\Archive")]
+        public string ARCHIVE_DESTINATION_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_DESTINATION_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_DESTINATION_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Development\\BirrMachines\\testFiles\\work\\log")]
+        public string ARCHIVE_LOG_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_LOG_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_LOG_DIRECTORY"] = value;
             }
         }
     }
