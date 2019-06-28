@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using DvsSapLink2.Model;
+using DvsSapLink2.Settings;
 using GalaSoft.MvvmLight;
 
 namespace DvsSapLink2.ViewModel
@@ -10,6 +12,17 @@ namespace DvsSapLink2.ViewModel
     public class SapDataViewModel : ViewModelBase
     {
         private readonly SapData sapData;
+
+        /// <summary>
+        /// Static constructor executed on application load. Loads the app.config settings to fill
+        /// Labors and States to be used in combobox or other lists
+        /// </summary>
+        static SapDataViewModel()
+        {
+            var section = (GuiSettings)ConfigurationManager.GetSection("guiSettings");
+            SapDataViewModel.Labors = section.Labors.As<string, int>();
+            SapDataViewModel.States = section.States.As<string, string>();
+        }
 
         /// <summary>
         /// Creates a new instance of the <see cref="SapDataViewModel"/> class
@@ -23,23 +36,12 @@ namespace DvsSapLink2.ViewModel
         /// <summary>
         /// Gets the list of labors for the selection box
         /// </summary>
-        public IDictionary<string, int> Labors { get; } = new Dictionary<string, int>
-            {
-                { "Labor (100)", 100 },
-                { "Labor (200)", 200 },
-                { "Konstruktionsbüro (300)", 300 },
-            };
+        public static IDictionary<string, int> Labors { get; }
 
         /// <summary>
         /// Gets the list of document states for the selection box
         /// </summary>
-        public IDictionary<string, string> States { get; } = new Dictionary<string, string>
-            {
-                { "Preparation", "IN" },
-                { "Production", "PR" },
-                { "Delivery", "DE" },
-                { "Done", "DO" },
-            };
+        public static IDictionary<string, string> States { get; }
 
         /// <summary>
         /// Gets or sets the labor

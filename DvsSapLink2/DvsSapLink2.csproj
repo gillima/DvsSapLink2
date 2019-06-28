@@ -94,6 +94,9 @@
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\SapData.cs" />
     <Compile Include="Resources\Strings.cs" />
+    <Compile Include="Settings\SettingsDictionary.cs" />
+    <Compile Include="Settings\DictionaryElement.cs" />
+    <Compile Include="Settings\GuiSettings.cs" />
     <Compile Include="ViewModel\AttributeFileViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
