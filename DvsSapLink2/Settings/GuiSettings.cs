@@ -9,6 +9,7 @@ namespace DvsSapLink2.Settings
     {
         private SettingsDictionary labors;
         private SettingsDictionary states;
+        private SettingsDictionary users;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GuiSettings"/> class
@@ -17,6 +18,7 @@ namespace DvsSapLink2.Settings
         {
             this.labors = new SettingsDictionary();
             this.states = new SettingsDictionary();
+            this.users = new SettingsDictionary();
         }
 
         /// <summary>
@@ -39,6 +41,17 @@ namespace DvsSapLink2.Settings
         {
             get => (SettingsDictionary)this["states"];
             set => this["states"] = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the Usesrs
+        /// </summary>
+        [ConfigurationProperty("users", IsDefaultCollection = false)]
+        [ConfigurationCollection(typeof(DictionaryElement), AddItemName = "add", ClearItemsName = "clear", RemoveItemName = "remove")]
+        public SettingsDictionary Users
+        {
+            get => (SettingsDictionary)this["users"];
+            set => this["users"] = value;
         }
     }
 }
