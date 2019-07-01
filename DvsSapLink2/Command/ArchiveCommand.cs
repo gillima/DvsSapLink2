@@ -33,17 +33,18 @@ namespace DvsSapLink2.Command
         {
             var viewModel = (MainViewModel)parameter;
             var file = viewModel.File.File;
-            
+
             var logFile = Path.Combine(this.configuration.LogDirectory, file.Title + ".log");
+            var sapTransferFile = Path.Combine(this.configuration.LogDirectory, file.Title + ".dat");
             var archiveDir = LogParser.ReadMessages(logFile, "A_DIR");
             MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
 
             using (var logger = new Logger(logFile))
             {
-                foreach (var attribute in this.attributesToLog)
-                {
-                    logger.Write("INFO", $"{attribute}: {file[attribute]}");
-                }
+                //foreach (var attribute in this.attributesToLog)
+                //{
+                //    logger.Write("INFO", $"{attribute}: {file[attribute]}");
+                //}
 
                 //TODO: wieder aktivieren, da zum Testen vom log-File auskommentiert
                 //this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory, false);
@@ -54,10 +55,7 @@ namespace DvsSapLink2.Command
                 //TODO: Text durch Textkonstante ersetzen
                 logger.Write("LOG", "Zeichnung archiviert");
 
-                //TODO: Text durch Textkonstante ersetzen
-                logger.Write("LOG", "Files archiviert");
-
-                using (var sapTransferWriter = new SapTransferWriter(logFile))
+                using (var sapTransferWriter = new SapTransferWriter(sapTransferFile))
                 {
                     sapTransferWriter.WriteFileAttributes(file);
                 }
