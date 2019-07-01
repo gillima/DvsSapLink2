@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
+using DvsSapLink2.Command;
 using DvsSapLink2.Model;
 using GalaSoft.MvvmLight;
 using static DvsSapLink2.Resources.Strings;
@@ -20,6 +22,7 @@ namespace DvsSapLink2.ViewModel
         public AttributeFileViewModel(AttributeFile attributeFile)
         {
             this.attributeFile = attributeFile;
+            this.OpenFile = new OpenFileCommand(this.attributeFile);
         }
 
         /// <summary>
@@ -31,6 +34,11 @@ namespace DvsSapLink2.ViewModel
         /// Gets the attribute file represented by this view model
         /// </summary>
         public AttributeFile File => this.attributeFile;
+
+        /// <summary>
+        /// Command to open a file using windows default
+        /// </summary>
+        public ICommand OpenFile { get; }
 
         /// <summary>
         /// Gets the validation message for this file
