@@ -18,7 +18,7 @@ namespace DvsSapLink2.ViewModel
         public MainViewModel(Configuration configuration)
         {
             this.Configuration = new ConfigurationViewModel(configuration, this.Files);
-            this.Sap = new SapDataViewModel(new SapData());
+            this.Sap = new SapDataViewModel(new SapData(configuration));
             this.Message = "hello world";
             this.File = null;
         }
