@@ -5,6 +5,13 @@
     /// </summary>
     public class SapData
     {
+        public SapData()
+        {
+            this.Labor = Properties.Settings.Default.DEFAULT_SAP_LABOR;
+            this.User = Properties.Settings.Default.DEFAULT_SAP_USER;
+            this.State = Properties.Settings.Default.DEFAULT_SAP_STATE;
+        }
+
         /// <summary>
         /// Gets or sets the labor
         /// </summary>

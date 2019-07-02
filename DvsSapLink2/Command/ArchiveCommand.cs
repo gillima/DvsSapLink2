@@ -10,13 +10,6 @@ namespace DvsSapLink2.Command
 {
     public class ArchiveCommand : CopyCommand
     {
-        private FileAttributeName[] attributesToLog =
-        {
-            FileAttributeName.ZeichnungsNummer,
-            FileAttributeName.Massstab,
-            FileAttributeName.Bemerkung,
-        };
-        
         /// <summary>
         /// Initializes a new instance of the <see cref="ArchiveCommand"/> class.
         /// </summary>

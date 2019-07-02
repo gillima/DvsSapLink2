@@ -29,5 +29,14 @@
     <Setting Name="ARCHIVE_TIF_DIRECTORY" Type="System.String" Scope="User">
       <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\archiv_tif</Value>
     </Setting>
+    <Setting Name="DEFAULT_SAP_USER" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DEFAULT_SAP_LABOR" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">760</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SAP_STATE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RE</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
