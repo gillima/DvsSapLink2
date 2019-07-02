@@ -80,7 +80,7 @@ namespace DvsSapLink2.Helper
             string R = attributeFile.Title + ".tif";                                        // 491 File-Name 2              HTAM123456-0-01.tif
             string S = "LABOR/BÜRO";                                                        // 586 Bezugsort SAP            LABOR/BÜRO
 
-            var line = $"{A,-6}{B,-25}{C,-3}{D,-2}{E,-3}{F,-1}{G,-12}{H,-255}{I,-70}{J,-2}{K,-12}{L,-3}{M,-3}{N,-10}{O,-70}{P,-3}{Q,-10}{R,-95}{S,-14}";
+            var line = $"{A:-6}{B:-25}{C:-3}{D:-2}{E:-3}{F:-1}{G:-12}{H:-255}{I:-70}{J:-2}{K:-12}{L:-3}{M:-3}{N:-10}{O:-70}{P:-3}{Q:-10}{R:-95}{S:-14}";
             this.streamSapTransfer.WriteLine(line);
 
 
