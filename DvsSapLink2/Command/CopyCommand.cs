@@ -72,7 +72,7 @@ namespace DvsSapLink2.Command
                 if (!Directory.Exists(this.configuration.DestinationDirectory))
                     throw new InvalidOperationException(Strings.TXT_DESTINATION_MISSING);
                 
-                var fileToCheck = Path.Combine(this.configuration.DestinationDirectory, file.Title + ".dwg");
+                var fileToCheck = Path.Combine(this.configuration.ArchiveTifDirectory, file.Title + ".tif");
                 if (File.Exists(fileToCheck))
                     throw new InvalidOperationException(Strings.TXT_DESTINATION_FILE_EXISTS);
 
@@ -111,8 +111,7 @@ namespace DvsSapLink2.Command
             File.Copy(source, destination);
             if (!File.Exists(destination))
                 throw new IOException(TXT_COPY_FAILED);
-                
-            File.Delete(source);
+        
         }
         
         /// <summary>
@@ -122,15 +121,16 @@ namespace DvsSapLink2.Command
         /// <param name="fileExtension">File extension of the file to delete</param>
         protected void DeleteFile(AttributeFile file, string fileExtension)
         {
-            if (file?.Path == null || !File.Exists(file.Path))
+            if (file?.Path == null)
                 throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
-            
-            var source = Path.Combine(
-                Path.GetDirectoryName(file.Path),
-                file.Title + fileExtension);
-            
-            if (File.Exists(source))
-                File.Delete(source);
+
+                var source = Path.Combine(
+                    Path.GetDirectoryName(file.Path),
+                    file.Title + fileExtension);
+
+                if (File.Exists(source))
+                    File.Delete(source);
+
         }
     }
 }

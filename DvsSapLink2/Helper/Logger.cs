@@ -12,7 +12,7 @@ namespace DvsSapLink2.Helper
         /// </summary>
         public Logger(string path)
         {
-            this.stream = new StreamWriter(path);
+            this.stream = new StreamWriter(path, append: true);
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace DvsSapLink2.Helper
         /// <param name="message">Message to log</param>
         public void Write(string key, string message)
         {
-            var now = DateTime.Now.ToString("yyyy-mm-dd hh:mm:ss");
+            var now = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             var line = $"{Environment.UserName,-14}{now,-23}{key,-7}{message}";
             this.stream.WriteLine(line);
             this.stream.Flush();
