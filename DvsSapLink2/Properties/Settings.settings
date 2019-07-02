@@ -33,7 +33,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DEFAULT_SAP_LABOR" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">760</Value>
+      <Value Profile="(Default)">940</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_STATE" Type="System.String" Scope="User">
       <Value Profile="(Default)">RE</Value>

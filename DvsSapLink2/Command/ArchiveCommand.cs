@@ -99,6 +99,8 @@ namespace DvsSapLink2.Command
         /// </summary>
         private void WriteDocumentInfo(StreamWriter stream, AttributeFile file, string type, string changeNr)
         {
+            if (string.IsNullOrWhiteSpace(type)) return;
+
             var record = "DOK02";
             var number = file[FileAttributeName.ZeichnungsNummer];
             var docType = "ZAB";
