@@ -57,7 +57,7 @@ namespace DvsSapLink2.Command
 
                 using (var sapTransferWriter = new SapTransferWriter(sapTransferFile))
                 {
-                    sapTransferWriter.WriteFileAttributes(file);
+                    sapTransferWriter.WriteFileAttributes(file, viewModel.Sap.Data);
                 }
 
                 //TODO: Text durch Textkonstante ersetzen
