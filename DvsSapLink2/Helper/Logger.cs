@@ -55,7 +55,7 @@ namespace DvsSapLink2.Helper
         /// </summary>
         /// <param name="key">Log entry key</param>
         /// <param name="message">Message to log</param>
-        public void WriteFileAttributes(AttributeFile attributeFile)
+        public void WriteFileAttributes(AttributeFile attributeFile, SapData sapData)
         {
 
             // Zeile 1                                                                      Start-Pos, Beschreibung, Beispiel
@@ -70,9 +70,9 @@ namespace DvsSapLink2.Helper
             string H = attributeFile[FileAttributeName.Haupttitel];                         //  53 Titel                    Massbild
             string I = "CAD-DVS-Update";                                                    // 308 Änderungsbeschreib.      CAD-DVS-Update
             //TODO: SapData auslesen (für DR Werte lesen, für RE nur Status)
-            string J = "SapData.Status";                                                    // 378 Dokument-Status          DR
-            string K = "SapData.User";                                                      // 380 Sachbearbeiter           221226
-            string L = "SapData.Labor";                                                     // 392 Labor/Büro               760
+            string J = sapData.State;                                                       // 378 Dokument-Status          DR
+            string K = sapData.User;                                                        // 380 Sachbearbeiter           221226
+            string L = sapData.Labor.ToString();                                            // 392 Labor/Büro               760
             string M = "ACD";                                                               // 395 Datei 1                  ACD
             string N = "";                                                                  // 398 Datenträger 1           
             string O = "";                                                                  // 408 File-Name 1

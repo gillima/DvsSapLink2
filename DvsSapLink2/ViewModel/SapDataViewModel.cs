@@ -35,6 +35,11 @@ namespace DvsSapLink2.ViewModel
         }
 
         /// <summary>
+        /// Gets the SAP data model object
+        /// </summary>
+        public SapData Data => this.sapData;
+
+        /// <summary>
         /// Gets the list of labors for the selection box
         /// </summary>
         public static IDictionary<string, int> Labors { get; }
