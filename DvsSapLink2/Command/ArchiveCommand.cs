@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -27,10 +28,11 @@ namespace DvsSapLink2.Command
             var viewModel = (MainViewModel)parameter;
             var file = viewModel.File.File;
 
+            var timeStamp = DateTime.Now.ToString("yyyyMMddhhmmss");
             var logFile = Path.Combine(this.configuration.LogDirectory, file.Title + ".log");
-            var sapTransferFileTemp = Path.Combine(this.configuration.ArchiveSapTransferDirectory, file.Title + ".dat");
+            var sapTransferFileTemp = Path.Combine(this.configuration.SourceDirectory, file.Title + $"{timeStamp}.dat");
             var archiveDir = LogParser.ReadMessages(logFile, "A_DIR");
-            MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
+            //MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
 
             using (var logger = new Logger(logFile))
             {
@@ -47,10 +49,16 @@ namespace DvsSapLink2.Command
                 logger.Write("LOG", "Transferdaten für SAP erstellt");
 
                 //TODO: wieder aktivieren, da zum Testen vom log-File auskommentiert
-                //this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory, false);
-                //this.CopyFile(file, ".dwg", this.configuration.ConversionDirectory, true);
-                //this.CopyFile(file, ".txt", this.configuration.TxtDirectory, true);
-                //this.DeleteFile(file, ".pdf");
+                this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
+                this.CopyFile(file, ".dwg", this.configuration.ConversionDirectory);
+                this.CopyFile(file, ".txt", this.configuration.TxtDirectory);
+                this.CopyFile(file, $"{timeStamp}.dat", this.configuration.SapTransferDirectory);
+                this.CopyFile(file, $"{timeStamp}.dat", this.configuration.ArchiveSapTransferDirectory);
+
+                this.DeleteFile(file, ".pdf");
+                this.DeleteFile(file, $"{timeStamp}.dat");
+                this.DeleteFile(file, ".txt");
+                this.DeleteFile(file, ".dwg");
 
                 //TODO: Text durch Textkonstante ersetzen
                 logger.Write("LOG", "Zeichnung archiviert");

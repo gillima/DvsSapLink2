@@ -92,7 +92,7 @@ namespace DvsSapLink2.Command
         /// <param name="file">The attribute file</param>
         /// <param name="fileExtension">File extension of the file to copy</param>
         /// <param name="destinationDirectory">Destination directory</param>
-        protected void CopyFile(AttributeFile file, string fileExtension, string destinationDirectory, bool deleteFile = false)
+        protected void CopyFile(AttributeFile file, string fileExtension, string destinationDirectory)
         {
             if (file?.Path == null)
                 throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
@@ -111,9 +111,7 @@ namespace DvsSapLink2.Command
             File.Copy(source, destination);
             if (!File.Exists(destination))
                 throw new IOException(TXT_COPY_FAILED);
-                
-            if (deleteFile)
-                File.Delete(source);
+        
         }
         
         /// <summary>
@@ -123,15 +121,16 @@ namespace DvsSapLink2.Command
         /// <param name="fileExtension">File extension of the file to delete</param>
         protected void DeleteFile(AttributeFile file, string fileExtension)
         {
-            if (file?.Path == null || !File.Exists(file.Path))
+            if (file?.Path == null)
                 throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
-            
-            var source = Path.Combine(
-                Path.GetDirectoryName(file.Path),
-                file.Title + fileExtension);
-            
-            if (File.Exists(source))
-                File.Delete(source);
+
+                var source = Path.Combine(
+                    Path.GetDirectoryName(file.Path),
+                    file.Title + fileExtension);
+
+                if (File.Exists(source))
+                    File.Delete(source);
+
         }
     }
 }

@@ -30,7 +30,6 @@
 
                 case ConfigurationType.Archive:
                     this.SourceDirectory = Properties.Settings.Default.PENDING_DIRECTORY;
-                    //TODO: das DestinationDirectory muss aus der LOG-Datei gelesen werden (A_DIR)
                     this.DestinationDirectory = Properties.Settings.Default.ARCHIVE_DWG_DIRECTORY;
                     this.ConversionDirectory = Properties.Settings.Default.CONVERSION_DIRECTORY;
                     this.TxtDirectory = Properties.Settings.Default.ARCHIVE_TXT_DIRECTORY;
