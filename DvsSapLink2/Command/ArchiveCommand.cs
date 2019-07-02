@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using DvsSapLink2.Helper;
 using DvsSapLink2.Model;
+using DvsSapLink2.Resources;
 using DvsSapLink2.ViewModel;
 using static DvsSapLink2.Resources.Strings;
 
@@ -45,10 +46,8 @@ namespace DvsSapLink2.Command
                     this.WriteDocumentInfo(stream, file, "FORMAT_D", file[FileAttributeName.Format]);
                 }
 
-                //TODO: Text durch Textkonstante ersetzen
-                logger.Write("LOG", "Transferdaten für SAP erstellt");
+                logger.Write("LOG", Strings.TXT_TRANSFERFILE_CREATED);
 
-                //TODO: wieder aktivieren, da zum Testen vom log-File auskommentiert
                 this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
                 this.CopyFile(file, ".dwg", this.configuration.ConversionDirectory);
                 this.CopyFile(file, ".txt", this.configuration.TxtDirectory);
@@ -60,8 +59,7 @@ namespace DvsSapLink2.Command
                 this.DeleteFile(file, ".txt");
                 this.DeleteFile(file, ".dwg");
 
-                //TODO: Text durch Textkonstante ersetzen
-                logger.Write("LOG", "Zeichnung archiviert");
+                logger.Write("LOG", Strings.TXT_DRAWINGFILE_ARCHIVED);
             }
 
             MessageBox.Show(TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
