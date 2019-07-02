@@ -97,7 +97,7 @@ namespace DvsSapLink2.Helper
 
         private static string GetSheetNumber(string value)
         {
-            // TODO: get sheet number by regex
+            value = value.Trim(' ', '/');
             return value;
         }
     }

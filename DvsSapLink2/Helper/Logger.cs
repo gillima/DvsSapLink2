@@ -60,17 +60,17 @@ namespace DvsSapLink2.Helper
 
             // Zeile 1                                                                      Start-Pos, Beschreibung, Beispiel
             string A = "DOK01";                                                             //   1 Recordart
-            string B = attributeFile[FileAttributeName.ZeichnungsNummer];                   //   7 Dokument-Nummer          HTAM123456 Start: 1
+            string B = attributeFile[FileAttributeName.ZeichnungsNummer];                   //   7 Dokument-Nummer          HTAM123456
             string C = "ZAB";                                                               //  32 Dokument-Art             ZAB
             string D = attributeFile[FileAttributeName.AeStand_aktuell];                    //  35 Dokument-Version         A
-            //TODO: Blatt-Nummer muss zweistellig mit Nullen aufgefüllt sein (z.B. "02")
-            string E = "D" + attributeFile[FileAttributeName.BlattNr].PadLeft(2,'0');       //  37 Teildokument             D01
+            string E = string.Format("D{0:D2}", 
+                       int.Parse(attributeFile[FileAttributeName.BlattNr]));                //  37 Teildokument             D01
             string F = "D";                                                                 //  40 Sprache                  D
             string G = " ";                                                                 //  41 Änderungs-Nr.        
             string H = attributeFile[FileAttributeName.Haupttitel];                         //  53 Titel                    Massbild
             string I = "CAD-DVS-Update";                                                    // 308 Änderungsbeschreib.      CAD-DVS-Update
             //TODO: SapData auslesen (für DR Werte lesen, für RE nur Status)
-            string J = "SapData.Status";                                                    // 378 Dokument-Status          DR
+            string J = "ViewModel.SapData.Status";                                          // 378 Dokument-Status          DR
             string K = "SapData.User";                                                      // 380 Sachbearbeiter           221226
             string L = "SapData.Labor";                                                     // 392 Labor/Büro               760
             string M = "ACD";                                                               // 395 Datei 1                  ACD
@@ -81,7 +81,7 @@ namespace DvsSapLink2.Helper
             string R = attributeFile.Title + ".tif";                                        // 491 File-Name 2              HTAM123456-0-01.tif
             string S = "LABOR/BÜRO";                                                        // 586 Bezugsort SAP            LABOR/BÜRO
 
-            var line = $"{A,-6}{B,-25}{C,-3}{D,-2}D{E,-3}{F,-1}{G,-12}{H,-255}{I,-70}{J,-2}{K,-12}{L,-3}{M,-3}{N,-10}{O,-70}{P,-3}{Q,-10}{R,-95}{S,-14}";
+            var line = $"{A,-6}{B,-25}{C,-3}{D,-2}{E,-3}{F,-1}{G,-12}{H,-255}{I,-70}{J,-2}{K,-12}{L,-3}{M,-3}{N,-10}{O,-70}{P,-3}{Q,-10}{R,-95}{S,-14}";
             this.streamSapTransfer.WriteLine(line);
 
 
