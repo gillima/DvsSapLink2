@@ -15,10 +15,11 @@ namespace DvsSapLink2.ViewModel
         /// Creates a new instance of the <see cref="MainViewModel"/> class
         /// </summary>
         /// <param name="configuration">Configuration to use</param>
-        public MainViewModel(Configuration configuration)
+        /// <param name="sapData">SAP data DTO</param>
+        public MainViewModel(Configuration configuration, SapData sapData)
         {
             this.Configuration = new ConfigurationViewModel(configuration, this.Files);
-            this.Sap = new SapDataViewModel(new SapData());
+            this.Sap = new SapDataViewModel(sapData);
             this.Message = "hello world";
             this.File = null;
         }

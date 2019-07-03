@@ -141,13 +141,13 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DEFAULT_SAP_USER {
+        [global::System.Configuration.DefaultSettingValueAttribute("roman.eckert")]
+        public string DEFAULT_SAP_USER_ARCHIVE {
             get {
-                return ((string)(this["DEFAULT_SAP_USER"]));
+                return ((string)(this["DEFAULT_SAP_USER_ARCHIVE"]));
             }
             set {
-                this["DEFAULT_SAP_USER"] = value;
+                this["DEFAULT_SAP_USER_ARCHIVE"] = value;
             }
         }
         
@@ -165,13 +165,37 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("RE")]
-        public string DEFAULT_SAP_STATE {
+        [global::System.Configuration.DefaultSettingValueAttribute("DR")]
+        public string DEFAULT_SAP_STATE_PREPARE {
             get {
-                return ((string)(this["DEFAULT_SAP_STATE"]));
+                return ((string)(this["DEFAULT_SAP_STATE_PREPARE"]));
             }
             set {
-                this["DEFAULT_SAP_STATE"] = value;
+                this["DEFAULT_SAP_STATE_PREPARE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("RE")]
+        public string DEFAULT_SAP_STATE_ARCHIVE {
+            get {
+                return ((string)(this["DEFAULT_SAP_STATE_ARCHIVE"]));
+            }
+            set {
+                this["DEFAULT_SAP_STATE_ARCHIVE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DEFAULT_SAP_USER_PREPARE {
+            get {
+                return ((string)(this["DEFAULT_SAP_USER_PREPARE"]));
+            }
+            set {
+                this["DEFAULT_SAP_USER_PREPARE"] = value;
             }
         }
     }

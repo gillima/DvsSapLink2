@@ -5,12 +5,29 @@
     /// </summary>
     public class SapData
     {
-        public SapData()
+        public SapData(ConfigurationType type)
         {
-            this.Labor = Properties.Settings.Default.DEFAULT_SAP_LABOR;
-            this.User = Properties.Settings.Default.DEFAULT_SAP_USER;
-            this.State = Properties.Settings.Default.DEFAULT_SAP_STATE;
+            this.Type = type;
+            switch (type)
+            {
+                case ConfigurationType.Prepare:
+                    this.Labor = Properties.Settings.Default.DEFAULT_SAP_LABOR;
+                    this.User = Properties.Settings.Default.DEFAULT_SAP_USER_PREPARE;
+                    this.State = Properties.Settings.Default.DEFAULT_SAP_STATE_PREPARE;
+                    break;
+
+                case ConfigurationType.Archive:
+                    this.Labor = Properties.Settings.Default.DEFAULT_SAP_LABOR;
+                    this.User = Properties.Settings.Default.DEFAULT_SAP_USER_ARCHIVE;
+                    this.State = Properties.Settings.Default.DEFAULT_SAP_STATE_ARCHIVE;
+                    break;
+            }
         }
+
+        /// <summary>
+        /// Gets the current configuration type
+        /// </summary>
+        public ConfigurationType Type { get; }
 
         /// <summary>
         /// Gets or sets the labor
