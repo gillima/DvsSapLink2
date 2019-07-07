@@ -10,28 +10,34 @@ class FileAttributeParser
 class SapDataViewModel
 class AttributeFileViewModel
 
+class CopyCommand
+class ArchiveCommand
+class PrepareCommand
+class FileOpenCommand
 
+App ..> MainViewModel : create >
+App ..> ArchiveView : create >
+App ..> Configuration : create >
+App ..> SapData: create >
+
+ArchiveView .-> MainViewModel
+CopyCommand <|-- ArchiveCommand
+CopyCommand <|-- PrepareCommand
+ArchiveCommand --o MainViewModel
+PrepareCommand --o MainViewModel
+FileOpenCommand --o MainViewModel
+FileOpenCommand ---> AttributeFile
 
 AttributeFileViewModel o--> AttributeFile
 AttributeFile o--> FileAttribute
 AttributeFile ..> FileAttributeParser : use >
 FileAttributeParser .> FileAttribute : create >
 
-
 SapDataViewModel o--> SapData
-
 ConfigurationViewModel o--> Configuration
 
 MainViewModel o--> SapDataViewModel
 MainViewModel o--> ConfigurationViewModel
 MainViewModel o--> AttributeFileViewModel
-
-
-ArchiveView .-> MainViewModel
-
-App ..> MainViewModel : create >
-App ..> ArchiveView : create >
-App ..> Configuration : create >
-App ..> SapData: create >
 
 @enduml
