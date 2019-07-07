@@ -1,0 +1,21 @@
+@startuml
+
+start
+
+:select working directory;
+
+
+repeat
+  :list files;
+  :select file;
+  if (file valid) then (valid)
+    :pre-archive;
+  else (invalid)
+    :notify;
+    :abort;
+  endif
+repeat while
+
+stop
+
+@enduml

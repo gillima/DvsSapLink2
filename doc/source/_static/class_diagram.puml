@@ -1,0 +1,37 @@
+@startuml 
+
+class SapData
+class Configuration
+class AttributeFile
+class FileAttribute
+class FileAttributeParser
+
+
+class SapDataViewModel
+class AttributeFileViewModel
+
+
+
+AttributeFileViewModel o--> AttributeFile
+AttributeFile o--> FileAttribute
+AttributeFile ..> FileAttributeParser : use >
+FileAttributeParser .> FileAttribute : create >
+
+
+SapDataViewModel o--> SapData
+
+ConfigurationViewModel o--> Configuration
+
+MainViewModel o--> SapDataViewModel
+MainViewModel o--> ConfigurationViewModel
+MainViewModel o--> AttributeFileViewModel
+
+
+ArchiveView .-> MainViewModel
+
+App ..> MainViewModel : create >
+App ..> ArchiveView : create >
+App ..> Configuration : create >
+App ..> SapData: create >
+
+@enduml
