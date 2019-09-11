@@ -3,31 +3,31 @@
   <Profiles />
   <Settings>
     <Setting Name="WORKING_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_work\userwork</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork</Value>
     </Setting>
     <Setting Name="PENDING_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\ArchPending</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\ArchPending</Value>
     </Setting>
     <Setting Name="ARCHIVE_DWG_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\archiv_autocad\dwg</Value>
+      <Value Profile="(Default)">V:\Archiv_AutoCAD\dwg\bm</Value>
     </Setting>
     <Setting Name="ARCHIVE_LOG_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\logArchiv\DwgLog</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\logArchiv\DwgLog</Value>
     </Setting>
     <Setting Name="SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\SapPending\dat</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\SapPending\dat_test</Value>
     </Setting>
     <Setting Name="ARCHIVE_SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\logArchiv\SapTransfer</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\logArchiv\SapTransfer</Value>
     </Setting>
     <Setting Name="CONVERSION_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\autocad_admin\KonvPending</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\KonvPending</Value>
     </Setting>
     <Setting Name="ARCHIVE_TXT_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\archiv_autocad\txt</Value>
+      <Value Profile="(Default)">V:\Archiv_AutoCAD\txt</Value>
     </Setting>
     <Setting Name="ARCHIVE_TIF_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">I:\z_Temp\Irene_Walt\AutoCAD LT\Archivierung AutoCAD\testFiles\archiv_tif</Value>
+      <Value Profile="(Default)">V:\Archiv_Tif</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_USER_ARCHIVE" Type="System.String" Scope="User">
       <Value Profile="(Default)">roman.eckert</Value>
@@ -36,7 +36,7 @@
       <Value Profile="(Default)">940</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_STATE_PREPARE" Type="System.String" Scope="User">
-      <Value Profile="(Default)">DR</Value>
+      <Value Profile="(Default)">RE</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_STATE_ARCHIVE" Type="System.String" Scope="User">
       <Value Profile="(Default)">RE</Value>

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using DvsSapLink2.Helper;
 using DvsSapLink2.Model;
@@ -33,9 +34,10 @@ namespace DvsSapLink2.Command
             var logFile = Path.Combine(this.configuration.LogDirectory, file.Title + ".log");
             var sapTransferFileTemp = Path.Combine(this.configuration.SourceDirectory, file.Title + $"{timeStamp}.dat");
             var archiveDir = LogParser.ReadMessages(logFile, "A_DIR");
+            this.configuration.DestinationDirectory = archiveDir.FirstOrDefault();
             //MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
 
-            using (var logger = new Logger(logFile))
+            using (var logger = new Logger(logFile, true))
             {
                 using (var stream = new StreamWriter(sapTransferFileTemp))
                 {

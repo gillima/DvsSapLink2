@@ -17,6 +17,13 @@ namespace DvsSapLink2.Command
         {
         }
 
+        public override bool Verify(AttributeFile file)
+        {
+            if (!base.Verify(file)) return false;
+            // hier die Tests für Prepare einfügen iw
+            return true;
+        }
+
         /// <summary>
         /// Executes the prepare archive command
         /// </summary>
@@ -26,7 +33,7 @@ namespace DvsSapLink2.Command
             var viewModel = (MainViewModel)parameter;
             var file = viewModel.File.File;
 
-            using (var logger = new Logger(Path.Combine(this.configuration.LogDirectory, file.Title + ".log")))
+            using (var logger = new Logger(Path.Combine(this.configuration.LogDirectory, file.Title + ".log"),false))
             {
                 logger.Write("W_DIR", this.configuration.SourceDirectory);
                 logger.Write("A_DIR", this.configuration.DestinationDirectory);
