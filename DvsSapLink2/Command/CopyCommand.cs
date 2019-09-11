@@ -38,7 +38,7 @@ namespace DvsSapLink2.Command
         /// <summary>
         /// Gets a message indicating why the command cannot be executed
         /// </summary>
-        public string Message { get; private set; }
+        public string Message { get; protected set; }
         
         /// <summary>
         /// Returns a value indicating whether the command can be executed or not

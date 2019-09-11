@@ -23,6 +23,7 @@ namespace DvsSapLink2.Resources
         public static string TXT_INVALID_FILE_NAME = "Fehler im Dateinamen";
         public static string TXT_DESTINATION_MISSING = "Archivverzeichnis nicht gefunden";
         public static string TXT_DESTINATION_FILE_EXISTS = "Datei existiert im Archiv";
+        public static string TXT_PENDING_FILE_EXISTS = "Datei ist schon zum Archivieren weitergeleitet";
         public static string TXT_COPY_FAILED = "Fehler beim kopieren";
         public static string TXT_FILE_ARCHIVED = "Archivieren erfolgreich abgeschlossen";
         public static string TXT_TRANSFERFILE_CREATED = "Transferdaten für SAP erstellt";

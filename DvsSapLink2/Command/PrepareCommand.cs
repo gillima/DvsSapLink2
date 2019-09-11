@@ -1,7 +1,9 @@
+using System;
 using System.IO;
 using System.Windows;
 using DvsSapLink2.Helper;
 using DvsSapLink2.Model;
+using DvsSapLink2.Resources;
 using DvsSapLink2.ViewModel;
 using static DvsSapLink2.Resources.Strings;
 
@@ -20,8 +22,21 @@ namespace DvsSapLink2.Command
         public override bool Verify(AttributeFile file)
         {
             if (!base.Verify(file)) return false;
-            // hier die Tests für Prepare einfügen iw
-            return true;
+
+            try
+            {
+                var fileToCheck = Path.Combine(this.configuration.PendingDirectory, file.Title + ".dwg");
+                if (File.Exists(fileToCheck))
+                    throw new InvalidOperationException(Strings.TXT_PENDING_FILE_EXISTS);
+
+                return true;
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Message = ex.Message;
+                return false;
+            }
+
         }
 
         /// <summary>
