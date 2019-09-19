@@ -68,11 +68,18 @@ namespace DvsSapLink2.Command
             {
                 if (file == null || !File.Exists(file.Path))
                     throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
-                
+
+                if (file.Title.ToString().Length > 15)
+                    throw new InvalidOperationException(Strings.TXT_INVALID_FILE_NAME);
+
+                var fileToCheck = Path.Combine(this.configuration.SourceDirectory, file.Title + ".pdf");
+                if (!File.Exists(fileToCheck))
+                    throw new InvalidOperationException(Strings.TXT_PDF_DOES_NOT_EXIST);
+
                 if (!Directory.Exists(this.configuration.DestinationDirectory))
                     throw new InvalidOperationException(Strings.TXT_DESTINATION_MISSING);
                 
-                var fileToCheck = Path.Combine(this.configuration.ArchiveTifDirectory, file.Title + ".tif");
+                fileToCheck = Path.Combine(this.configuration.ArchiveTifDirectory, file.Title + ".tif");
                 if (File.Exists(fileToCheck))
                     throw new InvalidOperationException(Strings.TXT_DESTINATION_FILE_EXISTS);
 

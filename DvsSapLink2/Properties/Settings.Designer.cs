@@ -145,7 +145,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("940")]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
         public int DEFAULT_SAP_LABOR {
             get {
                 return ((int)(this["DEFAULT_SAP_LABOR"]));

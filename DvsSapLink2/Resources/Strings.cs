@@ -22,6 +22,7 @@ namespace DvsSapLink2.Resources
         public static string TXT_DRAWING_NUMBER_MISMATCH = "Zeichnungsnummern stimmen nicht überein";
         public static string TXT_INVALID_FILE_NAME = "Fehler im Dateinamen";
         public static string TXT_DESTINATION_MISSING = "Archivverzeichnis nicht gefunden";
+        public static string TXT_PDF_DOES_NOT_EXIST = "Vorschaudatei (pdf) fehlt";
         public static string TXT_DESTINATION_FILE_EXISTS = "Datei existiert im Archiv";
         public static string TXT_PENDING_FILE_EXISTS = "Datei ist schon zum Archivieren weitergeleitet";
         public static string TXT_COPY_FAILED = "Fehler beim kopieren";

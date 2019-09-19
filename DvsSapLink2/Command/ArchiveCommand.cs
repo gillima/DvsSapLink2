@@ -36,6 +36,8 @@ namespace DvsSapLink2.Command
             var archiveDir = LogParser.ReadMessages(logFile, "A_DIR");
             this.configuration.DestinationDirectory = archiveDir.FirstOrDefault();
             //MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
+            var archiveUser = LogParser.ReadMessages(logFile, "USER");
+            viewModel.Sap.Data.User = archiveUser.FirstOrDefault();
 
             using (var logger = new Logger(logFile, true))
             {
@@ -93,9 +95,9 @@ namespace DvsSapLink2.Command
             var M = "ACD";                                                      // 395 Datei 1                  ACD
             var N = "";                                                         // 398 Datenträger 1
             var O = "";                                                         // 408 File-Name 1
-            var P = "PDF";                                                      // 478 Datei 2                  PDF         (TIF)
-            var Q = "IM_PRE_V";                                                 // 481 Datenträger 2            IM_PRE_V    (IM_CAD_V)
-            var R = file.Title + ".tif";                                        // 491 File-Name 2              HTAM123456-0-01.tif
+            var P = "PDF";                                                      // 478 Datei 2                  PDF                     (TIF)
+            var Q = "IM_PRE_V";                                                 // 481 Datenträger 2            IM_PRE_V                (IM_CAD_V)
+            var R = file.Title + ".pdf";                                        // 491 File-Name 2              HTAM123456-0-01.pdf     (.tif)
             var S = "LABOR/BÜRO";                                               // 586 Bezugsort SAP            LABOR/BÜRO
 
             var line = $"{A,-6}{B,-25}{C,-3}{D,-2}{E,-3}{F,-1}{G,-12}{H,-255}{I,-70}{J,-2}{K,-12}{L,-3}{M,-3}{N,-10}{O,-70}{P,-3}{Q,-10}{R,-95}{S,-14}";

@@ -52,6 +52,7 @@ namespace DvsSapLink2.Command
             {
                 logger.Write("W_DIR", this.configuration.SourceDirectory);
                 logger.Write("A_DIR", this.configuration.DestinationDirectory);
+                logger.Write("USER", viewModel.Sap.Data.User.ToString());
 
                 this.CopyFile(file, ".dwg", this.configuration.PendingDirectory);
                 this.CopyFile(file, ".pdf", this.configuration.PendingDirectory);
