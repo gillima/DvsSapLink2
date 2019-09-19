@@ -1,4 +1,7 @@
-﻿namespace DvsSapLink2.Model
+﻿using System;
+using System.IO;
+
+namespace DvsSapLink2.Model
 {
     /// <summary>
     /// List of supported archive configurations. This has impact on the default value and supported actions
@@ -21,7 +24,7 @@
             switch (type)
             {
                 case ConfigurationType.Prepare:
-                    this.SourceDirectory = Properties.Settings.Default.WORKING_DIRECTORY;
+                    this.SourceDirectory = this.GetDirWithFallback(Path.Combine(Properties.Settings.Default.WORKING_DIRECTORY, Environment.UserName), Properties.Settings.Default.WORKING_DIRECTORY);
                     this.DestinationDirectory = Properties.Settings.Default.ARCHIVE_DWG_DIRECTORY;
                     this.PendingDirectory = Properties.Settings.Default.PENDING_DIRECTORY;
                     this.LogDirectory = Properties.Settings.Default.ARCHIVE_LOG_DIRECTORY;
@@ -100,5 +103,10 @@
         /// Gets the directory where to put the 'transfer file for SAP' to be archived
         /// </summary>
         public string ArchiveTifDirectory { get; }
+
+        private string GetDirWithFallback(string directory, string fallback)
+        {
+            return Directory.Exists(directory) ? directory : fallback;
+        }
     }
 }
