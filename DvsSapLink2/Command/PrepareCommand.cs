@@ -5,7 +5,6 @@ using DvsSapLink2.Helper;
 using DvsSapLink2.Model;
 using DvsSapLink2.Resources;
 using DvsSapLink2.ViewModel;
-using static DvsSapLink2.Resources.Strings;
 
 namespace DvsSapLink2.Command
 {
@@ -15,11 +14,11 @@ namespace DvsSapLink2.Command
         /// Initializes a new instance of the <see cref="PrepareCommand"/> class.
         /// </summary>
         public PrepareCommand(Configuration configuration)
-            : base(configuration, TXT_DO_PREPARE)
+            : base(configuration, Strings.TXT_DO_PREPARE)
         {
         }
 
-        public override bool Verify(AttributeFile file)
+        public override bool Verify(AttributeFile file = null)
         {
             if (!base.Verify(file)) return false;
 
@@ -36,7 +35,6 @@ namespace DvsSapLink2.Command
                 this.Message = ex.Message;
                 return false;
             }
-
         }
 
         /// <summary>
@@ -64,7 +62,7 @@ namespace DvsSapLink2.Command
                 this.DeleteFile(file, ".bak");
             }
 
-            MessageBox.Show(TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Strings.TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             // HACK: force update of file list
             viewModel.Configuration.SourceDirectory = viewModel.Configuration.SourceDirectory;

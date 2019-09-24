@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using DvsSapLink2.Helper;
 using DvsSapLink2.Model;
@@ -17,7 +16,7 @@ namespace DvsSapLink2.Command
         /// Initializes a new instance of the <see cref="ArchiveCommand"/> class.
         /// </summary>
         public ArchiveCommand(Configuration configuration)
-            : base(configuration, TXT_DO_ARCHIVE)
+            : base(configuration, Strings.TXT_DO_ARCHIVE)
         {
         }
 
@@ -66,7 +65,7 @@ namespace DvsSapLink2.Command
                 logger.Write("LOG", Strings.TXT_DRAWINGFILE_ARCHIVED);
             }
 
-            MessageBox.Show(TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Strings.TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
             
             // HACK: force update of file list
             viewModel.Configuration.SourceDirectory = viewModel.Configuration.SourceDirectory;

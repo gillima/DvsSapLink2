@@ -1,17 +1,20 @@
 using System;
 using System.IO;
+using System.Timers;
+using System.Windows;
 using System.Windows.Input;
 using DvsSapLink2.Model;
 using DvsSapLink2.Resources;
 using DvsSapLink2.ViewModel;
-using static DvsSapLink2.Resources.Strings;
 
 namespace DvsSapLink2.Command
 {
     public abstract class CopyCommand : ICommand
     {
         protected readonly Configuration configuration;
-
+        private readonly Timer validationTimer;
+        private AttributeFile lastAttributeFile;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyCommand"/> class.
         /// </summary>
@@ -19,16 +22,18 @@ namespace DvsSapLink2.Command
         {
             this.configuration = configuration;
             this.Title = title;
+            this.validationTimer = new Timer(2000)
+            {
+                AutoReset = true,
+                Enabled = true,
+            };
+            this.validationTimer.Elapsed += this.ReValidate;
         }
 
         /// <summary>
         /// Event raised to inform that the execute status of the command has changed
         /// </summary>
-        public event EventHandler CanExecuteChanged
-        {
-            add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
-        }
+        public event EventHandler CanExecuteChanged;
        
         /// <summary>
         /// Gets the title of the command
@@ -62,8 +67,11 @@ namespace DvsSapLink2.Command
         /// Verify that the file doesn't exists at the destination and the destination is writable
         /// </summary>
         /// <param name="file">Source file to copy</param>
-        public virtual bool Verify(AttributeFile file)
+        public virtual bool Verify(AttributeFile file = null)
         {
+            if (file == null) file = this.lastAttributeFile;
+            this.lastAttributeFile = file;
+           
             try
             {
                 if (file == null || !File.Exists(file.Path))
@@ -76,9 +84,9 @@ namespace DvsSapLink2.Command
                 if (!File.Exists(fileToCheck))
                     throw new InvalidOperationException(Strings.TXT_PDF_DOES_NOT_EXIST);
 
-                // funktioniert zwar, Anzeige wird aber nicht akutalisiert wenn das File geschlossen wird. Deshalb vorläufig deaktiviert.
-                //if (IsFileLocked(fileToCheck))
-                //    throw new InvalidOperationException(Strings.TXT_PDF_FILE_IS_OPENED);
+                // funktioniert zwar, Anzeige wird aber nicht akutalisiert wenn das File geschlossen wird. Deshalb vorlï¿½ufig deaktiviert.
+                if (this.IsFileLocked(fileToCheck))
+                    throw new InvalidOperationException(Strings.TXT_PDF_FILE_IS_OPENED);
 
                 if (!Directory.Exists(this.configuration.DestinationDirectory))
                     throw new InvalidOperationException(Strings.TXT_DESTINATION_MISSING);
@@ -121,7 +129,7 @@ namespace DvsSapLink2.Command
             
             File.Copy(source, destination);
             if (!File.Exists(destination))
-                throw new IOException(TXT_COPY_FAILED);
+                throw new IOException(Strings.TXT_COPY_FAILED);
         
         }
         
@@ -135,15 +143,19 @@ namespace DvsSapLink2.Command
             if (file?.Path == null)
                 throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
 
-                var source = Path.Combine(
-                    Path.GetDirectoryName(file.Path),
-                    file.Title + fileExtension);
+            var source = Path.Combine(
+                Path.GetDirectoryName(file.Path),
+                file.Title + fileExtension);
 
-                if (File.Exists(source))
-                    File.Delete(source);
-
+            if (File.Exists(source))
+                File.Delete(source);
         }
 
+        /// <summary>
+        /// Checks if the file is locked by another application
+        /// </summary>
+        /// <param name="fileToCheck">Path to the file to check</param>
+        /// <returns><c>true</c> if the file is locked by another application, <c>false</c> otherwise</returns>
         private bool IsFileLocked(string fileToCheck)
         {
             FileStream stream = null;
@@ -157,11 +169,20 @@ namespace DvsSapLink2.Command
             }
             finally
             {
-                if (stream != null)
-                    stream.Close();
+                stream?.Close();
             }
-
             return false;
+        }
+
+        /// <summary>
+        /// Background task to re-validate the file
+        /// </summary>
+        private void ReValidate(object source, ElapsedEventArgs args)
+        {
+            Application.Current.Dispatcher.Invoke(delegate
+            {
+                this.CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            });
         }
     }
 }
