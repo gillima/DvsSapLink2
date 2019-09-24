@@ -32,7 +32,7 @@ namespace DvsSapLink2.Command
 
             var timeStamp = DateTime.Now.ToString("yyyyMMddhhmmss");
             var logFile = Path.Combine(this.configuration.LogDirectory, file.Title + ".log");
-            var sapTransferFileTemp = Path.Combine(this.configuration.SourceDirectory, file.Title + $"{timeStamp}.dat");
+            var sapTransferFileTemp = Path.Combine(this.configuration.SourceDirectory, file.Title + $"_{timeStamp}.dat");
             var archiveDir = LogParser.ReadMessages(logFile, "A_DIR");
             this.configuration.DestinationDirectory = archiveDir.FirstOrDefault();
             //MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
@@ -41,7 +41,7 @@ namespace DvsSapLink2.Command
 
             using (var logger = new Logger(logFile, true))
             {
-                using (var stream = new StreamWriter(sapTransferFileTemp))
+                using (var stream = new StreamWriter(sapTransferFileTemp, false, System.Text.Encoding.GetEncoding("ISO-8859-1")))
                 {
                     this.WriteFileAttributes(stream, file, viewModel.Sap.Data);
                     this.WriteDocumentInfo(stream, file, "DOKTYP_ZAB_D", "mechanische Zeichnung");
@@ -55,11 +55,11 @@ namespace DvsSapLink2.Command
                 this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
                 this.CopyFile(file, ".dwg", this.configuration.ConversionDirectory);
                 this.CopyFile(file, ".txt", this.configuration.TxtDirectory);
-                this.CopyFile(file, $"{timeStamp}.dat", this.configuration.SapTransferDirectory);
-                this.CopyFile(file, $"{timeStamp}.dat", this.configuration.ArchiveSapTransferDirectory);
+                this.CopyFile(file, $"_{timeStamp}.dat", this.configuration.SapTransferDirectory);
+                this.CopyFile(file, $"_{timeStamp}.dat", this.configuration.ArchiveSapTransferDirectory);
 
                 this.DeleteFile(file, ".pdf");
-                this.DeleteFile(file, $"{timeStamp}.dat");
+                this.DeleteFile(file, $"_{timeStamp}.dat");
                 this.DeleteFile(file, ".txt");
                 this.DeleteFile(file, ".dwg");
 

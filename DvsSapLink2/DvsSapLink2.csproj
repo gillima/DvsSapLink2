@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\baseline_link_black_18dp.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\baseline_link_18dp.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -148,7 +148,7 @@
     <Resource Include="Resources\baseline_link_black_18dp.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\baseline_link_black_18dp.ico" />
+    <Resource Include="Resources\baseline_link_18dp.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\baseline_folder_black_18dp.png" />

@@ -76,6 +76,10 @@ namespace DvsSapLink2.Command
                 if (!File.Exists(fileToCheck))
                     throw new InvalidOperationException(Strings.TXT_PDF_DOES_NOT_EXIST);
 
+                // funktioniert zwar, Anzeige wird aber nicht akutalisiert wenn das File geschlossen wird. Deshalb vorläufig deaktiviert.
+                //if (IsFileLocked(fileToCheck))
+                //    throw new InvalidOperationException(Strings.TXT_PDF_FILE_IS_OPENED);
+
                 if (!Directory.Exists(this.configuration.DestinationDirectory))
                     throw new InvalidOperationException(Strings.TXT_DESTINATION_MISSING);
                 
@@ -138,6 +142,26 @@ namespace DvsSapLink2.Command
                 if (File.Exists(source))
                     File.Delete(source);
 
+        }
+
+        private bool IsFileLocked(string fileToCheck)
+        {
+            FileStream stream = null;
+            try
+            {
+                stream = File.Open(fileToCheck, FileMode.Open, FileAccess.Read, FileShare.None);
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
+
+            return false;
         }
     }
 }
