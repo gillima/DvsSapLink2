@@ -20,8 +20,8 @@ namespace DvsSapLink2.ViewModel
         {
             this.Configuration = new ConfigurationViewModel(configuration, this.Files);
             this.Sap = new SapDataViewModel(sapData);
-            this.Message = "hello world";
             this.File = null;
+            this.Archive.CanExecuteChanged += delegate { this.RaisePropertyChanged(nameof(MainViewModel.IsValid)); };
         }
 
         /// <summary>

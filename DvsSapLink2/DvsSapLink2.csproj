@@ -145,7 +145,7 @@
     <Resource Include="Resources\baseline_archive_black_18dp.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\baseline_link_black_18dp.png" />
+    <Resource Include="Resources\baseline_link_18dp.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\baseline_link_18dp.ico" />
