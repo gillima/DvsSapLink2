@@ -8,7 +8,7 @@
     xmlns:viewModel="clr-namespace:DvsSapLink2.ViewModel"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:command="http://www.galasoft.ch/mvvmlight"
-    Icon="Resources/baseline_link_black_18dp.png"
+    Icon="Resources/baseline_link_18dp.png"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
     Title="{x:Static res:Strings.TXT_APP_TITLE}" Height="450" Width="800"
