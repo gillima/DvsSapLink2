@@ -16,7 +16,7 @@ namespace DvsSapLink2.Command
         /// Initializes a new instance of the <see cref="ArchiveCommand"/> class.
         /// </summary>
         public ArchiveCommand(Configuration configuration)
-            : base(configuration, TXT_DO_ARCHIVE)
+            : base(configuration, Strings.TXT_DO_ARCHIVE)
         {
         }
 
@@ -31,13 +31,16 @@ namespace DvsSapLink2.Command
 
             var timeStamp = DateTime.Now.ToString("yyyyMMddhhmmss");
             var logFile = Path.Combine(this.configuration.LogDirectory, file.Title + ".log");
-            var sapTransferFileTemp = Path.Combine(this.configuration.SourceDirectory, file.Title + $"{timeStamp}.dat");
+            var sapTransferFileTemp = Path.Combine(this.configuration.SourceDirectory, file.Title + $"_{timeStamp}.dat");
             var archiveDir = LogParser.ReadMessages(logFile, "A_DIR");
+            this.configuration.DestinationDirectory = archiveDir.FirstOrDefault();
             //MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
+            var archiveUser = LogParser.ReadMessages(logFile, "USER");
+            viewModel.Sap.Data.User = archiveUser.FirstOrDefault();
 
-            using (var logger = new Logger(logFile))
+            using (var logger = new Logger(logFile, true))
             {
-                using (var stream = new StreamWriter(sapTransferFileTemp))
+                using (var stream = new StreamWriter(sapTransferFileTemp, false, System.Text.Encoding.GetEncoding("ISO-8859-1")))
                 {
                     this.WriteFileAttributes(stream, file, viewModel.Sap.Data);
                     this.WriteDocumentInfo(stream, file, "DOKTYP_ZAB_D", "mechanische Zeichnung");
@@ -51,18 +54,18 @@ namespace DvsSapLink2.Command
                 this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
                 this.CopyFile(file, ".dwg", this.configuration.ConversionDirectory);
                 this.CopyFile(file, ".txt", this.configuration.TxtDirectory);
-                this.CopyFile(file, $"{timeStamp}.dat", this.configuration.SapTransferDirectory);
-                this.CopyFile(file, $"{timeStamp}.dat", this.configuration.ArchiveSapTransferDirectory);
+                this.CopyFile(file, $"_{timeStamp}.dat", this.configuration.SapTransferDirectory);
+                this.CopyFile(file, $"_{timeStamp}.dat", this.configuration.ArchiveSapTransferDirectory);
 
                 this.DeleteFile(file, ".pdf");
-                this.DeleteFile(file, $"{timeStamp}.dat");
+                this.DeleteFile(file, $"_{timeStamp}.dat");
                 this.DeleteFile(file, ".txt");
                 this.DeleteFile(file, ".dwg");
 
                 logger.Write("LOG", Strings.TXT_DRAWINGFILE_ARCHIVED);
             }
 
-            MessageBox.Show(TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Strings.TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
             
             // HACK: force update of file list
             viewModel.Configuration.SourceDirectory = viewModel.Configuration.SourceDirectory;
@@ -91,9 +94,9 @@ namespace DvsSapLink2.Command
             var M = "ACD";                                                      // 395 Datei 1                  ACD
             var N = "";                                                         // 398 Datenträger 1
             var O = "";                                                         // 408 File-Name 1
-            var P = "PDF";                                                      // 478 Datei 2                  PDF         (TIF)
-            var Q = "IM_PRE_V";                                                 // 481 Datenträger 2            IM_PRE_V    (IM_CAD_V)
-            var R = file.Title + ".tif";                                        // 491 File-Name 2              HTAM123456-0-01.tif
+            var P = "PDF";                                                      // 478 Datei 2                  PDF                     (TIF)
+            var Q = "IM_PRE_V";                                                 // 481 Datenträger 2            IM_PRE_V                (IM_CAD_V)
+            var R = file.Title + ".pdf";                                        // 491 File-Name 2              HTAM123456-0-01.pdf     (.tif)
             var S = "LABOR/BÜRO";                                               // 586 Bezugsort SAP            LABOR/BÜRO
 
             var line = $"{A,-6}{B,-25}{C,-3}{D,-2}{E,-3}{F,-1}{G,-12}{H,-255}{I,-70}{J,-2}{K,-12}{L,-3}{M,-3}{N,-10}{O,-70}{P,-3}{Q,-10}{R,-95}{S,-14}";

@@ -8,11 +8,11 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DwgSapLink2")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Programm zum Verwalten des Archivierungsprozesses für AutoCAD Zeichnungen")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Schindler")]
+[assembly: AssemblyCompany("Birr Machines AG")]
 [assembly: AssemblyProduct("DwgSapLink2")]
-[assembly: AssemblyCopyright("Copyright © Schindler 2019")]
+[assembly: AssemblyCopyright("Copyright © Birr Machines AG 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

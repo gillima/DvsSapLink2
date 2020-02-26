@@ -10,9 +10,9 @@ namespace DvsSapLink2.Helper
         /// <summary>
         /// Initializes a new instance of the <see cref="Logger"/> class.
         /// </summary>
-        public Logger(string path)
+        public Logger(string path, bool append)
         {
-            this.stream = new StreamWriter(path, append: true);
+            this.stream = new StreamWriter(path, append);
         }
 
         /// <summary>

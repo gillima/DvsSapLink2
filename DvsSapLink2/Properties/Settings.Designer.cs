@@ -25,8 +25,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_work\\userw" +
-            "ork")]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork")]
         public string WORKING_DIRECTORY {
             get {
                 return ((string)(this["WORKING_DIRECTORY"]));
@@ -38,8 +37,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\Arch" +
-            "Pending")]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\ArchPending")]
         public string PENDING_DIRECTORY {
             get {
                 return ((string)(this["PENDING_DIRECTORY"]));
@@ -51,8 +49,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\archiv_autocad\\dwg" +
-            "")]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\Archiv_AutoCAD\\dwg\\bm")]
         public string ARCHIVE_DWG_DIRECTORY {
             get {
                 return ((string)(this["ARCHIVE_DWG_DIRECTORY"]));
@@ -64,8 +61,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\logA" +
-            "rchiv\\DwgLog")]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\logArchiv\\DwgLog")]
         public string ARCHIVE_LOG_DIRECTORY {
             get {
                 return ((string)(this["ARCHIVE_LOG_DIRECTORY"]));
@@ -77,8 +73,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\SapP" +
-            "ending\\dat")]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\SapPending\\dat_test")]
         public string SAPTRANSFER_DIRECTORY {
             get {
                 return ((string)(this["SAPTRANSFER_DIRECTORY"]));
@@ -90,8 +85,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\logA" +
-            "rchiv\\SapTransfer")]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\logArchiv\\SapTransfer")]
         public string ARCHIVE_SAPTRANSFER_DIRECTORY {
             get {
                 return ((string)(this["ARCHIVE_SAPTRANSFER_DIRECTORY"]));
@@ -103,8 +97,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\autocad_admin\\Konv" +
-            "Pending")]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\KonvPending")]
         public string CONVERSION_DIRECTORY {
             get {
                 return ((string)(this["CONVERSION_DIRECTORY"]));
@@ -116,8 +109,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\archiv_autocad\\txt" +
-            "")]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\Archiv_AutoCAD\\txt")]
         public string ARCHIVE_TXT_DIRECTORY {
             get {
                 return ((string)(this["ARCHIVE_TXT_DIRECTORY"]));
@@ -129,7 +121,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("I:\\z_Temp\\Irene_Walt\\AutoCAD LT\\Archivierung AutoCAD\\testFiles\\archiv_tif")]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\Archiv_Tif")]
         public string ARCHIVE_TIF_DIRECTORY {
             get {
                 return ((string)(this["ARCHIVE_TIF_DIRECTORY"]));
@@ -153,7 +145,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("940")]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
         public int DEFAULT_SAP_LABOR {
             get {
                 return ((int)(this["DEFAULT_SAP_LABOR"]));
@@ -165,7 +157,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DR")]
+        [global::System.Configuration.DefaultSettingValueAttribute("RE")]
         public string DEFAULT_SAP_STATE_PREPARE {
             get {
                 return ((string)(this["DEFAULT_SAP_STATE_PREPARE"]));
