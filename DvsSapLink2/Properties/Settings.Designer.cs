@@ -73,18 +73,6 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\SapPending\\dat_test")]
-        public string SAPTRANSFER_DIRECTORY {
-            get {
-                return ((string)(this["SAPTRANSFER_DIRECTORY"]));
-            }
-            set {
-                this["SAPTRANSFER_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\logArchiv\\SapTransfer")]
         public string ARCHIVE_SAPTRANSFER_DIRECTORY {
             get {
@@ -188,6 +176,18 @@ namespace DvsSapLink2.Properties {
             }
             set {
                 this["DEFAULT_SAP_USER_PREPARE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\SapPending\\dat")]
+        public string SAPTRANSFER_DIRECTORY {
+            get {
+                return ((string)(this["SAPTRANSFER_DIRECTORY"]));
+            }
+            set {
+                this["SAPTRANSFER_DIRECTORY"] = value;
             }
         }
     }
