@@ -73,15 +73,15 @@ namespace DvsSapLink2.Helper
             { FileAttributeName.Bemerkung, new FileAttributeDefinition(365, 60) },
         };
 
-        private static readonly IDictionary<FileAttributeName, Func<SapData, AttributeFile, string>> ConvertDefinitions = new Dictionary<FileAttributeName, Func<SapData, AttributeFile, string>>
+        /// <summary>
+        /// Converter definitions to enhance the attributes of the file
+        /// </summary>
+        public static readonly IDictionary<FileAttributeName, Func<AttributeFile, SapData, (int Order, string Value)>> ConvertDefinitions = new Dictionary<FileAttributeName, Func<AttributeFile, SapData, (int Order, string Value)>>
         {
-            { FileAttributeName.ZeichnungsNummer, BuildNumber }
+            // TODO: Add new fields....
+            { FileAttributeName.Version, FileAttributeParser.BuildVersion },
+            { FileAttributeName.FixValue, (f,s) => (34, "Hallo") },
         };
-
-        private static string BuildNumber(SapData sapData, AttributeFile attributeFile)
-        {
-            return $"{attributeFile[FileAttributeName.ZeichnungsNummer]}-{attributeFile[FileAttributeName.AeStand_1]}";
-        }
 
         /// <summary>
         /// Parses the file content and creates <see cref="FileAttribute"/>'s for the found fields.
@@ -99,6 +99,12 @@ namespace DvsSapLink2.Helper
                     continue;
                 yield return new FileAttribute(definition.Key, attribute?.RawValue, attribute?.Value);
             }
+        }
+
+        private static (int Order, string Value) BuildVersion(AttributeFile file, SapData sapData)
+        {
+            // TODO: you know...
+            return (33, $"{file[FileAttributeName.ZeichnungsNummer]}-{file[FileAttributeName.AeStand_1]}");
         }
 
         private static string FormatOrderNumber(string value)

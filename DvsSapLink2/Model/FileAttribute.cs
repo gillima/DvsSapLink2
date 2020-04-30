@@ -1,12 +1,19 @@
-﻿namespace DvsSapLink2.Model
+﻿using DvsSapLink2.Helper;
+
+namespace DvsSapLink2.Model
 {
     /// <summary>
     /// List of all possible file attributes
     /// </summary>
     public enum FileAttributeName
     {
+        [Elo("Dokument-Nummer", 1)]
         ZeichnungsNummer,
+        
+        [Elo("Typ bzw. Reihe", 2)]
         Typ,
+    
+        // TODO: define Elo attribute for all fields
         Haupttitel,
         Untertitel,
         AuftragsNummer,
@@ -37,6 +44,12 @@
         AeStand_6,
         AeStand_7,
         Bemerkung,
+        
+        [Elo("Version, TBD...", 3)]
+        Version,
+        
+        [Elo("Fix Value for Test", 4)]
+        FixValue,
     }
 
     public class FileAttribute

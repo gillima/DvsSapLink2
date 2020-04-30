@@ -54,22 +54,7 @@
     <ApplicationIcon>Resources\baseline_link_18dp.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>18D825CEB5EDE5096325E6E6852811A3EC048A5D</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>DvsSapLink2_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -108,6 +93,8 @@
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Helper\AttributeParser.cs" />
     <Compile Include="Helper\BrowseDirectoryCommand.cs" />
+    <Compile Include="Helper\EloAttribute.cs" />
+    <Compile Include="Helper\EnumExtension.cs" />
     <Compile Include="Helper\Logger.cs" />
     <Compile Include="Helper\LogParser.cs" />
     <Compile Include="Model\FileAttribute.cs" />
@@ -149,7 +136,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="DvsSapLink2_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

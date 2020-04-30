@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
@@ -80,6 +81,11 @@ namespace DvsSapLink2.Command
                 if (file.Title.ToString().Length > 15)
                     throw new InvalidOperationException(Strings.TXT_INVALID_FILE_NAME);
 
+                this.ValidateDate(file, FileAttributeName.Ersteller, true);
+                this.ValidateDate(file, FileAttributeName.Prüfer1, true);
+                this.ValidateDate(file, FileAttributeName.Prüfer2, false);
+                this.ValidateDate(file, FileAttributeName.Freigeber, true);
+
                 var fileToCheck = Path.Combine(this.configuration.SourceDirectory, file.Title + ".pdf");
                 if (!File.Exists(fileToCheck))
                     throw new InvalidOperationException(Strings.TXT_PDF_DOES_NOT_EXIST);
@@ -102,6 +108,24 @@ namespace DvsSapLink2.Command
                 this.Message = ex.Message;
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Validate a date. required format is yyyy-mm-dd
+        /// </summary>
+        /// <param name="file">Attribute file</param>
+        /// <param name="name">name of the attribute to check</param>
+        /// <param name="required">Indicates if a date is required or not</param>
+        private void ValidateDate(AttributeFile file, FileAttributeName name, bool required)
+        {
+            if (!required && string.IsNullOrEmpty(file[name]))
+                return;
+            
+            if (string.IsNullOrEmpty(file[name]))
+                throw new InvalidOperationException($"{Strings.TXT_MISSING_DATE}: {name}");
+            
+            if (!Regex.IsMatch(file[name], "\\d{4}-\\d{2}-\\d{2}"))
+                throw new InvalidOperationException($"{Strings.TXT_INVALID_DATE}: {name}");
         }
 
         /// <summary>

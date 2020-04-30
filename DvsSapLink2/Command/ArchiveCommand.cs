@@ -7,7 +7,6 @@ using DvsSapLink2.Helper;
 using DvsSapLink2.Model;
 using DvsSapLink2.Resources;
 using DvsSapLink2.ViewModel;
-using static DvsSapLink2.Resources.Strings;
 
 namespace DvsSapLink2.Command
 {
@@ -41,8 +40,7 @@ namespace DvsSapLink2.Command
 
             using (var logger = new Logger(logFile, true))
             {
-                // this.WriteR3File(sapTransferFileTemp, file, viewModel);
-                this.WriteEloFile($"{sapTransferFileTemp}.new", file, viewModel);
+                this.WriteEloFile(sapTransferFileTemp, file, viewModel);
                 logger.Write("LOG", Strings.TXT_TRANSFERFILE_CREATED);
 
                 this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
@@ -67,155 +65,47 @@ namespace DvsSapLink2.Command
 
         private void WriteEloFile(string fileName, AttributeFile file, MainViewModel viewModel)
         {
-            file.UpdateAttributes(viewModel.Sap);
-
             using (var stream = new StreamWriter(fileName, false, System.Text.Encoding.GetEncoding("ISO-8859-1")))
             {
-                foreach (var converter in file.Attributes)
+                var attributes = this.GetFileAttributes(file, viewModel.Sap.Data);
+                foreach (var attribute in attributes.OrderBy(a => a.Name.GetOrder()))
                 {
-                    attributes[converter.Key] = converter.Value(sapData, values.ToList());
-
+                    this.WriteEloAttribute(stream, attribute.Name, attribute.Value);
                 }
-
-
-                // pseudocode:
-                /*
-                 * foreach(name,value in values)
-                 * {
-                 *   WriteEloAttribute(stream, name, value);
-                 * }
-                 * */
             }
         }
 
-        // hier kommen deine formatter f�r alle attribute rein...
-        private static IDictionary<FileAttributeName, (string Name, Func<string, string> Formatter)> EloAttributes = new Dictionary<FileAttributeName, (string Name, Func<string, string> Formatter)>
+        /// <summary>
+        /// Updates the attributes of the file by the data of the SAP view model
+        /// </summary>
+        /// <param name="file">The attribute file</param>
+        /// <param name="sapData">SAP view model</param>
+        private IEnumerable<FileAttribute> GetFileAttributes(AttributeFile file, SapData sapData)
         {
-            // { xxx, ("Dateiname", DefaultFormatter) },
-            // Dateiversion
-            // SAP ID
-            // Ablagepfad
-            // { file.Title, ("Kurzbezeichnung", DefaultFormatter) },
-            // Datum
-            { FileAttributeName.Haupttitel, ("Titel", DefaultFormatter) },
-            { FileAttributeName.ZeichnungsNummer, ("Dokument-Nummer", DefaultFormatter) },
-            // Status
-            { FileAttributeName.AeStand_aktuell, ("Revision", DefaultFormatter) },
-            { FileAttributeName.BlattNr, ("Blatt-Nummer", x => $"x:2") },
-            // Dokument-Typ
-            // Sprache
-            // Fertigungsprozess
-            // Stand �berarbeitung
-            // Verteilung
-            // ATEX relevant
-            // Auftragsstatus
-            // Klassifizierung
-            { FileAttributeName.AuftragsNummer, ("Kundenauftrag", DefaultFormatter) },
-            // Projektname
-            { FileAttributeName.Typ, ("Typ bzw. Reihe", DefaultFormatter) },
-            // CAD Applikation
-            { FileAttributeName.BlattFormat, ("Format", DefaultFormatter) },
-            // Dokument-Inhalt
-            { FileAttributeName.ErsatzFuer, ("Ersatz f�r (Vorg.)", DefaultFormatter) },
-            // Ersetzt durch (Nachf.)
-            { FileAttributeName.EntstandAus, ("Entstanden aus", DefaultFormatter) },
-            // Einordnungs-Nr.
-            // Erstellt / Ge�ndert am
-            // Erstellt / Ge�ndert von
-            // Gepr�ft am
-            // Gepr�ft von
-            // Freigegeben am
-            // Freigegeben von
-
-            /*
-            { FileAttributeName.Ersteller, ("", DefaultFormatter) },
-            { FileAttributeName.Freigeber, ("", DefaultFormatter) },
-            { FileAttributeName.Pr�fer1, ("", DefaultFormatter) },
-            { FileAttributeName.Pr�fer2, ("", DefaultFormatter) },
-            { FileAttributeName.Sprache, ("", DefaultFormatter) },
-            { FileAttributeName.Untertitel, ("", DefaultFormatter) },
-            */
-
-            // nachfolgend Beispiele von Markus
-            { FileAttributeName.ZeichnungsNummer, ("ZEICHNUNG", x => x.ToString()) },
-            { FileAttributeName.Untertitel, ("UNTERTITEL", DefaultFormatter) },
-            { FileAttributeName.ZustandStelle, ("ZUSTAND", null) },
-        };
-
-        private static string DefaultFormatter(string value)
-        {
-            return value.ToString();
-        }
-
-        private void WriteEloAttribute(StreamWriter stream, FileAttributeName attribute, string value)
-        {
-            var name = ArchiveCommand.EloAttributes[attribute].Name;
-            var formatter = ArchiveCommand.EloAttributes[attribute].Formatter ?? DefaultFormatter;
-
-
-            var line = string.IsNullOrEmpty(value) ? $"{name}" : $"{name}={value}";
-            stream.WriteLine(line);
-
-        }
-
-        private void WriteR3File(string fileName, AttributeFile file, MainViewModel viewModel)
-        {
-            using (var stream = new StreamWriter(fileName, false, System.Text.Encoding.GetEncoding("ISO-8859-1")))
+            foreach (var attribute in file.Attributes)
             {
-                this.WriteFileAttributes(stream, file, viewModel.Sap.Data);
-                this.WriteDocumentInfo(stream, file, "DOKTYP_ZAB_D", "mechanische Zeichnung");
-                this.WriteDocumentInfo(stream, file, "PROJ_D", file[FileAttributeName.Typ]);
-                this.WriteDocumentInfo(stream, file, "AUFTR_NR_D", file[FileAttributeName.AuftragsNummer]);
-                this.WriteDocumentInfo(stream, file, "FORMAT_D", file[FileAttributeName.BlattFormat]);
+                yield return attribute;
+            }
+            
+            foreach (var converter in FileAttributeParser.ConvertDefinitions)
+            {
+                var (order, value) = converter.Value(file, sapData);
+                yield return new FileAttribute(converter.Key, null, value);
             }
         }
 
         /// <summary>
-        /// Writes a log entry
+        /// Format and write a ELO attribute line
         /// </summary>
-        /// <param name="stream">Stream of the file to write</param>
-        /// <param name="file">Attribute file to write into the file</param>
-        /// <param name="sapData">SAP data to write into the file</param>
-        private void WriteFileAttributes(StreamWriter stream, AttributeFile file, SapData sapData)
+        /// <param name="stream"></param>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        private void WriteEloAttribute(StreamWriter stream, FileAttributeName name, string value)
         {
-            var A = "DOK01";                                                    //   1 Recordart
-            var B = file[FileAttributeName.ZeichnungsNummer];                   //   7 Dokument-Nummer          HTAM123456
-            var C = "ZAB";                                                      //  32 Dokument-Art             ZAB
-            var D = file[FileAttributeName.AeStand_aktuell];                    //  35 Dokument-Version         A
-            var E = $"D{int.Parse(file[FileAttributeName.BlattNr]):D2}";        //  37 Teildokument             D01
-            var F = "D";                                                        //  40 Sprache                  D
-            var G = " ";                                                        //  41 �nderungs-Nr.
-            var H = file[FileAttributeName.Haupttitel];                         //  53 Titel                    Massbild
-            var I = "CAD-DVS-Update";                                           // 308 �nderungsbeschreib.      CAD-DVS-Update
-            var J = sapData.State;                                              // 378 Dokument-Status          DR
-            var K = sapData.User;                                               // 380 Sachbearbeiter           221226
-            var L = sapData.Labor.ToString();                                   // 392 Labor/B�ro               760
-            var M = "ACD";                                                      // 395 Datei 1                  ACD
-            var N = "";                                                         // 398 Datentr�ger 1
-            var O = "";                                                         // 408 File-Name 1
-            var P = "PDF";                                                      // 478 Datei 2                  PDF                     (TIF)
-            var Q = "IM_PRE_V";                                                 // 481 Datentr�ger 2            IM_PRE_V                (IM_CAD_V)
-            var R = file.Title + ".pdf";                                        // 491 File-Name 2              HTAM123456-0-01.pdf     (.tif)
-            var S = "LABOR/B�RO";                                               // 586 Bezugsort SAP            LABOR/B�RO
-
-            var line = $"{A,-6}{B,-25}{C,-3}{D,-2}{E,-3}{F,-1}{G,-12}{H,-255}{I,-70}{J,-2}{K,-12}{L,-3}{M,-3}{N,-10}{O,-70}{P,-3}{Q,-10}{R,-95}{S,-14}";
+            var line = string.IsNullOrEmpty(value)
+                ? $"{name.GetDescription()}"
+                : $"{name.GetDescription(),-25} = {value}";
             stream.WriteLine(line);
-        }
-
-        /// <summary>
-        /// Write document information as fix width attributes into the file
-        /// </summary>
-        private void WriteDocumentInfo(StreamWriter stream, AttributeFile file, string type, string changeNr)
-        {
-            if (string.IsNullOrWhiteSpace(type)) return;
-
-            var record = "DOK02";
-            var number = file[FileAttributeName.ZeichnungsNummer];
-            var docType = "ZAB";
-            var version = file[FileAttributeName.AeStand_aktuell];
-            var page = $"D{int.Parse(file[FileAttributeName.BlattNr]):D2}";
-
-            stream.WriteLine($"{record,-6}{number,-25}{docType,-3}{version,-2}{page,-3}{type,-30}{changeNr,-530}");
         }
     }
 }
