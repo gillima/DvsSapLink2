@@ -7,49 +7,147 @@ namespace DvsSapLink2.Model
     /// </summary>
     public enum FileAttributeName
     {
-        [Elo("Dokument-Nummer", 1)]
-        ZeichnungsNummer,
-        
-        [Elo("Typ bzw. Reihe", 2)]
+        // ab hier Werte aus dem AttributFile
+
+        [Elo("Dokument-Nummer", 8)]
+        Zeichnungsnummer,
+
+        [Elo("Typ bzw. Reihe", 22)]
         Typ,
-    
-        // TODO: define Elo attribute for all fields
+
+        [Elo("-Haupttitel", 0)]
         Haupttitel,
+
+        [Elo("-Untertitel", 0)]
         Untertitel,
+
+        [Elo("Kundenauftrag", 20)]
         AuftragsNummer,
-        Ersteller,
-        Prüfer1,
-        Prüfer2,
-        Freigeber,
-        SLgleicherNr,
-        SLandererNr,
+
+        // Ersteller,
+        // Prüfer1,
+        // Prüfer2,
+        // Freigeber,
+        // SLgleicherNr,
+        // SLandererNr,
+
+        [Elo("Entstanden aus", 28)]
         EntstandAus,
+
+        [Elo("Ersatz für (Vorg.)", 26)]
         ErsatzFuer,
-        Massstab,
-        ZustandStelle,
-        UebernehmendeStelle,
-        DokumentArt,
+
+        // Massstab,
+        // ZustandStelle,
+        // UebernehmendeStelle,
+        // DokumentArt,
+
+        [Elo("Sprache", 13)]
         Sprache,
+
+        [Elo("Format", 24)]
         BlattFormat,
+
+        [Elo("Blatt-Nummer", 11)]
         BlattNr,
-        AnzBlatt,
-        ToleranzMittel,
-        ToleranzGrob,
+
+        // AnzBlatt,
+        // ToleranzMittel,
+        // ToleranzGrob,
+
+        [Elo("Revision", 10)]
         AeStand_aktuell,
-        AeStand_1,
-        AeStand_2,
-        AeStand_3,
-        AeStand_4,
-        AeStand_5,
-        AeStand_6,
-        AeStand_7,
-        Bemerkung,
-        
-        [Elo("Version, TBD...", 3)]
-        Version,
-        
-        [Elo("Fix Value for Test", 4)]
-        FixValue,
+
+        // AeStand_1,
+        // AeStand_2,
+        // AeStand_3,
+        // AeStand_4,
+        // AeStand_5,
+        // AeStand_6,
+        // AeStand_7,
+        // Bemerkung,
+
+
+        // ab hier Werte, die berechnet werden oder aus sapData stammen
+
+        [Elo("Dateiname", 1)]
+        Dateiname,
+
+        [Elo("Dateiversion", 2)]
+        Dateiversion,
+
+        [Elo("SAP ID", 3)]
+        SapID,
+
+        [Elo("Unterordner1", 4)]
+        Unterordner1,
+
+        [Elo("Kurzbezeichnung", 5)]
+        Kurzbezeichnung,
+
+        [Elo("Datum", 6)]
+        DokDatum,
+
+        [Elo("Titel", 7)]
+        Titel,
+
+        [Elo("Status", 9)]
+        DokStatus,
+
+        [Elo("Dokument-Typ", 12)]
+        DokTyp,
+
+        [Elo("Fertigungsprozess", 14)]
+        FertigungsProzess,
+
+        [Elo("Stand Überarbeitung", 15)]
+        StandUeberarbeitung,
+
+        [Elo("Verteilung", 16)]
+        Verteilung,
+
+        [Elo("ATEX relevant", 17)]
+        ATEX,
+
+        [Elo("Auftragsstatus", 18)]
+        Auftragsstatus,
+
+        [Elo("Klassifizierung", 19)]
+        Klassifizierung,
+
+        [Elo("Projektname", 21)]
+        Projektname,
+
+        [Elo("CAD Applikation", 23)]
+        CadApp,
+
+        [Elo("Dokument-Inhalt", 25)]
+        DokInhalt,
+
+        [Elo("Ersetzt durch (Nachf.)", 27)]
+        ErsetztDurch,
+
+        [Elo("Einordnungs-Nr.", 29)]
+        EinordnungsNr,
+
+        [Elo("Erstellt / Geändert am", 30)]
+        ErstelltDatum,
+
+        [Elo("Erstellt / Geändert von", 31)]
+        ErstelltName,
+
+        [Elo("Geprüft am", 32)]
+        GeprueftDatum,
+
+        [Elo("Geprüft von", 33)]
+        GeprueftName,
+
+        [Elo("Freigegeben am", 34)]
+        FreigegebenDatum,
+
+        [Elo("Freigegeben von", 35)]
+        FreigegebenName,
+
     }
 
     public class FileAttribute

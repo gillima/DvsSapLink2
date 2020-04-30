@@ -81,10 +81,10 @@ namespace DvsSapLink2.Command
                 if (file.Title.ToString().Length > 15)
                     throw new InvalidOperationException(Strings.TXT_INVALID_FILE_NAME);
 
-                this.ValidateDate(file, FileAttributeName.Ersteller, true);
-                this.ValidateDate(file, FileAttributeName.Prüfer1, true);
-                this.ValidateDate(file, FileAttributeName.Prüfer2, false);
-                this.ValidateDate(file, FileAttributeName.Freigeber, true);
+                this.ValidateDate(file, FileAttributeName.ErstelltDatum, true);
+                this.ValidateDate(file, FileAttributeName.GeprueftDatum, true);
+                // this.ValidateDate(file, FileAttributeName.Prüfer2, false);
+                this.ValidateDate(file, FileAttributeName.FreigegebenDatum, true);
 
                 var fileToCheck = Path.Combine(this.configuration.SourceDirectory, file.Title + ".pdf");
                 if (!File.Exists(fileToCheck))

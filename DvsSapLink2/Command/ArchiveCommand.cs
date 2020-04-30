@@ -29,12 +29,12 @@ namespace DvsSapLink2.Command
             var viewModel = (MainViewModel)parameter;
             var file = viewModel.File.File;
 
-            var timeStamp = DateTime.Now.ToString("yyyyMMddhhmmss");
+            // var timeStamp = DateTime.Now.ToString("yyyyMMddhhmmss");
             var logFile = Path.Combine(this.configuration.LogDirectory, file.Title + ".log");
-            var sapTransferFileTemp = Path.Combine(this.configuration.SourceDirectory, file.Title + $"_{timeStamp}.dat");
+            var sapTransferFileTemp = Path.Combine(this.configuration.SourceDirectory, file.Title + ".dat");
             var archiveDir = LogParser.ReadMessages(logFile, "A_DIR");
             this.configuration.DestinationDirectory = archiveDir.FirstOrDefault();
-            //MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
+            // MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
             var archiveUser = LogParser.ReadMessages(logFile, "USER");
             viewModel.Sap.Data.User = archiveUser.FirstOrDefault();
 
@@ -46,11 +46,11 @@ namespace DvsSapLink2.Command
                 this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
                 this.CopyFile(file, ".dwg", this.configuration.ConversionDirectory);
                 this.CopyFile(file, ".txt", this.configuration.TxtDirectory);
-                this.CopyFile(file, $"_{timeStamp}.dat", this.configuration.SapTransferDirectory);
-                this.CopyFile(file, $"_{timeStamp}.dat", this.configuration.ArchiveSapTransferDirectory);
+                this.CopyFile(file, ".dat", this.configuration.SapTransferDirectory);
+                this.CopyFile(file, ".dat", this.configuration.ArchiveSapTransferDirectory);
 
                 this.DeleteFile(file, ".pdf");
-                this.DeleteFile(file, $"_{timeStamp}.dat");
+                this.DeleteFile(file, ".dat");
                 this.DeleteFile(file, ".txt");
                 this.DeleteFile(file, ".dwg");
 
@@ -70,6 +70,7 @@ namespace DvsSapLink2.Command
                 var attributes = this.GetFileAttributes(file, viewModel.Sap.Data);
                 foreach (var attribute in attributes.OrderBy(a => a.Name.GetOrder()))
                 {
+                    // TODO: hier auschliessen, dass alle mit Order = 0 nicht geschrieben werden
                     this.WriteEloAttribute(stream, attribute.Name, attribute.Value);
                 }
             }
