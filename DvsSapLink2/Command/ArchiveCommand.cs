@@ -60,18 +60,18 @@ namespace DvsSapLink2.Command
             }
 
             MessageBox.Show(Strings.TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
-            
+
             // HACK: force update of file list
             viewModel.Configuration.SourceDirectory = viewModel.Configuration.SourceDirectory;
         }
 
         private void WriteEloFile(string fileName, AttributeFile file, MainViewModel viewModel)
         {
+            file.UpdateAttributes(viewModel.Sap);
+
             using (var stream = new StreamWriter(fileName, false, System.Text.Encoding.GetEncoding("ISO-8859-1")))
             {
-                var attributes = file.Attributes.ToList();
-
-                foreach (var converter in ConvertDefinitions)
+                foreach (var converter in file.Attributes)
                 {
                     attributes[converter.Key] = converter.Value(sapData, values.ToList());
 
@@ -88,7 +88,7 @@ namespace DvsSapLink2.Command
             }
         }
 
-        // hier kommen deine formatter für alle attribute rein...
+        // hier kommen deine formatter fï¿½r alle attribute rein...
         private static IDictionary<FileAttributeName, (string Name, Func<string, string> Formatter)> EloAttributes = new Dictionary<FileAttributeName, (string Name, Func<string, string> Formatter)>
         {
             // { xxx, ("Dateiname", DefaultFormatter) },
@@ -105,7 +105,7 @@ namespace DvsSapLink2.Command
             // Dokument-Typ
             // Sprache
             // Fertigungsprozess
-            // Stand Überarbeitung
+            // Stand ï¿½berarbeitung
             // Verteilung
             // ATEX relevant
             // Auftragsstatus
@@ -116,22 +116,22 @@ namespace DvsSapLink2.Command
             // CAD Applikation
             { FileAttributeName.BlattFormat, ("Format", DefaultFormatter) },
             // Dokument-Inhalt
-            { FileAttributeName.ErsatzFuer, ("Ersatz für (Vorg.)", DefaultFormatter) },
+            { FileAttributeName.ErsatzFuer, ("Ersatz fï¿½r (Vorg.)", DefaultFormatter) },
             // Ersetzt durch (Nachf.)
             { FileAttributeName.EntstandAus, ("Entstanden aus", DefaultFormatter) },
             // Einordnungs-Nr.
-            // Erstellt / Geändert am
-            // Erstellt / Geändert von
-            // Geprüft am
-            // Geprüft von
+            // Erstellt / Geï¿½ndert am
+            // Erstellt / Geï¿½ndert von
+            // Geprï¿½ft am
+            // Geprï¿½ft von
             // Freigegeben am
             // Freigegeben von
 
             /*
             { FileAttributeName.Ersteller, ("", DefaultFormatter) },
             { FileAttributeName.Freigeber, ("", DefaultFormatter) },
-            { FileAttributeName.Prüfer1, ("", DefaultFormatter) },
-            { FileAttributeName.Prüfer2, ("", DefaultFormatter) },
+            { FileAttributeName.Prï¿½fer1, ("", DefaultFormatter) },
+            { FileAttributeName.Prï¿½fer2, ("", DefaultFormatter) },
             { FileAttributeName.Sprache, ("", DefaultFormatter) },
             { FileAttributeName.Untertitel, ("", DefaultFormatter) },
             */
@@ -184,19 +184,19 @@ namespace DvsSapLink2.Command
             var D = file[FileAttributeName.AeStand_aktuell];                    //  35 Dokument-Version         A
             var E = $"D{int.Parse(file[FileAttributeName.BlattNr]):D2}";        //  37 Teildokument             D01
             var F = "D";                                                        //  40 Sprache                  D
-            var G = " ";                                                        //  41 Änderungs-Nr.
+            var G = " ";                                                        //  41 ï¿½nderungs-Nr.
             var H = file[FileAttributeName.Haupttitel];                         //  53 Titel                    Massbild
-            var I = "CAD-DVS-Update";                                           // 308 Änderungsbeschreib.      CAD-DVS-Update
+            var I = "CAD-DVS-Update";                                           // 308 ï¿½nderungsbeschreib.      CAD-DVS-Update
             var J = sapData.State;                                              // 378 Dokument-Status          DR
             var K = sapData.User;                                               // 380 Sachbearbeiter           221226
-            var L = sapData.Labor.ToString();                                   // 392 Labor/Büro               760
+            var L = sapData.Labor.ToString();                                   // 392 Labor/Bï¿½ro               760
             var M = "ACD";                                                      // 395 Datei 1                  ACD
-            var N = "";                                                         // 398 Datenträger 1
+            var N = "";                                                         // 398 Datentrï¿½ger 1
             var O = "";                                                         // 408 File-Name 1
             var P = "PDF";                                                      // 478 Datei 2                  PDF                     (TIF)
-            var Q = "IM_PRE_V";                                                 // 481 Datenträger 2            IM_PRE_V                (IM_CAD_V)
+            var Q = "IM_PRE_V";                                                 // 481 Datentrï¿½ger 2            IM_PRE_V                (IM_CAD_V)
             var R = file.Title + ".pdf";                                        // 491 File-Name 2              HTAM123456-0-01.pdf     (.tif)
-            var S = "LABOR/BÜRO";                                               // 586 Bezugsort SAP            LABOR/BÜRO
+            var S = "LABOR/Bï¿½RO";                                               // 586 Bezugsort SAP            LABOR/Bï¿½RO
 
             var line = $"{A,-6}{B,-25}{C,-3}{D,-2}{E,-3}{F,-1}{G,-12}{H,-255}{I,-70}{J,-2}{K,-12}{L,-3}{M,-3}{N,-10}{O,-70}{P,-3}{Q,-10}{R,-95}{S,-14}";
             stream.WriteLine(line);

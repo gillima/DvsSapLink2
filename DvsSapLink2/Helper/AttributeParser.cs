@@ -73,14 +73,14 @@ namespace DvsSapLink2.Helper
             { FileAttributeName.Bemerkung, new FileAttributeDefinition(365, 60) },
         };
 
-        private static readonly IDictionary<FileAttributeName, Func<SapData, IDictionary<FileAttributeName, string>, string>> ConvertDefinitions = new Dictionary<FileAttributeName, Func<SapData, IDictionary<FileAttributeName, string>, string>>
+        private static readonly IDictionary<FileAttributeName, Func<SapData, AttributeFile, string>> ConvertDefinitions = new Dictionary<FileAttributeName, Func<SapData, AttributeFile, string>>
         {
             { FileAttributeName.ZeichnungsNummer, BuildNumber }
         };
 
-        public static string BuildNumber(SapData sapData, IDictionary<FileAttributeName, string> attributeValues)
+        private static string BuildNumber(SapData sapData, AttributeFile attributeFile)
         {
-            return $"{attributeValues[FileAttributeName.ZeichnungsNummer]}-{attributeValues[FileAttributeName.AeStand_1]}";
+            return $"{attributeFile[FileAttributeName.ZeichnungsNummer]}-{attributeFile[FileAttributeName.AeStand_1]}";
         }
 
         /// <summary>
