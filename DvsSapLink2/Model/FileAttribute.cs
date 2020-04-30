@@ -23,7 +23,7 @@
         UebernehmendeStelle,
         DokumentArt,
         Sprache,
-        Format,
+        BlattFormat,
         BlattNr,
         AnzBlatt,
         ToleranzMittel,

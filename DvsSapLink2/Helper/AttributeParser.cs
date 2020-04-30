@@ -57,7 +57,7 @@ namespace DvsSapLink2.Helper
             { FileAttributeName.UebernehmendeStelle, new FileAttributeDefinition(232, 8) },
             { FileAttributeName.DokumentArt, new FileAttributeDefinition(240, 3) },
             { FileAttributeName.Sprache, new FileAttributeDefinition(243, 2) },
-            { FileAttributeName.Format, new FileAttributeDefinition(245, 2) },
+            { FileAttributeName.BlattFormat, new FileAttributeDefinition(245, 2) },
             { FileAttributeName.BlattNr, new FileAttributeDefinition(247, 2, FileAttributeParser.GetSheetNumber) },
             { FileAttributeName.AnzBlatt, new FileAttributeDefinition(249, 2) },
             { FileAttributeName.ToleranzMittel, new FileAttributeDefinition(251, 1) },
@@ -73,6 +73,16 @@ namespace DvsSapLink2.Helper
             { FileAttributeName.Bemerkung, new FileAttributeDefinition(365, 60) },
         };
 
+        private static readonly IDictionary<FileAttributeName, Func<SapData, IDictionary<FileAttributeName, string>, string>> ConvertDefinitions = new Dictionary<FileAttributeName, Func<SapData, IDictionary<FileAttributeName, string>, string>>
+        {
+            { FileAttributeName.ZeichnungsNummer, BuildNumber }
+        };
+
+        public static string BuildNumber(SapData sapData, IDictionary<FileAttributeName, string> attributeValues)
+        {
+            return $"{attributeValues[FileAttributeName.ZeichnungsNummer]}-{attributeValues[FileAttributeName.AeStand_1]}";
+        }
+
         /// <summary>
         /// Parses the file content and creates <see cref="FileAttribute"/>'s for the found fields.
         /// </summary>
@@ -81,7 +91,9 @@ namespace DvsSapLink2.Helper
         public static IEnumerable<FileAttribute> Parse(string filePath)
         {
             var content = File.ReadAllText(filePath);
-            foreach(var definition in FileAttributeParser.Definitions)
+
+            var values = new Dictionary<FileAttributeName, string>();
+            foreach (var definition in FileAttributeParser.Definitions)
             {
                 if (!definition.Value.TryParse(content, out var attribute))
                     continue;

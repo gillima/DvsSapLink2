@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -40,15 +41,8 @@ namespace DvsSapLink2.Command
 
             using (var logger = new Logger(logFile, true))
             {
-                using (var stream = new StreamWriter(sapTransferFileTemp, false, System.Text.Encoding.GetEncoding("ISO-8859-1")))
-                {
-                    this.WriteFileAttributes(stream, file, viewModel.Sap.Data);
-                    this.WriteDocumentInfo(stream, file, "DOKTYP_ZAB_D", "mechanische Zeichnung");
-                    this.WriteDocumentInfo(stream, file, "PROJ_D", file[FileAttributeName.Typ]);
-                    this.WriteDocumentInfo(stream, file, "AUFTR_NR_D", file[FileAttributeName.AuftragsNummer]);
-                    this.WriteDocumentInfo(stream, file, "FORMAT_D", file[FileAttributeName.Format]);
-                }
-
+                // this.WriteR3File(sapTransferFileTemp, file, viewModel);
+                this.WriteEloFile($"{sapTransferFileTemp}.new", file, viewModel);
                 logger.Write("LOG", Strings.TXT_TRANSFERFILE_CREATED);
 
                 this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
@@ -69,6 +63,111 @@ namespace DvsSapLink2.Command
             
             // HACK: force update of file list
             viewModel.Configuration.SourceDirectory = viewModel.Configuration.SourceDirectory;
+        }
+
+        private void WriteEloFile(string fileName, AttributeFile file, MainViewModel viewModel)
+        {
+            using (var stream = new StreamWriter(fileName, false, System.Text.Encoding.GetEncoding("ISO-8859-1")))
+            {
+                var attributes = file.Attributes.ToList();
+
+                foreach (var converter in ConvertDefinitions)
+                {
+                    attributes[converter.Key] = converter.Value(sapData, values.ToList());
+
+                }
+
+
+                // pseudocode:
+                /*
+                 * foreach(name,value in values)
+                 * {
+                 *   WriteEloAttribute(stream, name, value);
+                 * }
+                 * */
+            }
+        }
+
+        // hier kommen deine formatter für alle attribute rein...
+        private static IDictionary<FileAttributeName, (string Name, Func<string, string> Formatter)> EloAttributes = new Dictionary<FileAttributeName, (string Name, Func<string, string> Formatter)>
+        {
+            // { xxx, ("Dateiname", DefaultFormatter) },
+            // Dateiversion
+            // SAP ID
+            // Ablagepfad
+            // { file.Title, ("Kurzbezeichnung", DefaultFormatter) },
+            // Datum
+            { FileAttributeName.Haupttitel, ("Titel", DefaultFormatter) },
+            { FileAttributeName.ZeichnungsNummer, ("Dokument-Nummer", DefaultFormatter) },
+            // Status
+            { FileAttributeName.AeStand_aktuell, ("Revision", DefaultFormatter) },
+            { FileAttributeName.BlattNr, ("Blatt-Nummer", x => $"x:2") },
+            // Dokument-Typ
+            // Sprache
+            // Fertigungsprozess
+            // Stand Überarbeitung
+            // Verteilung
+            // ATEX relevant
+            // Auftragsstatus
+            // Klassifizierung
+            { FileAttributeName.AuftragsNummer, ("Kundenauftrag", DefaultFormatter) },
+            // Projektname
+            { FileAttributeName.Typ, ("Typ bzw. Reihe", DefaultFormatter) },
+            // CAD Applikation
+            { FileAttributeName.BlattFormat, ("Format", DefaultFormatter) },
+            // Dokument-Inhalt
+            { FileAttributeName.ErsatzFuer, ("Ersatz für (Vorg.)", DefaultFormatter) },
+            // Ersetzt durch (Nachf.)
+            { FileAttributeName.EntstandAus, ("Entstanden aus", DefaultFormatter) },
+            // Einordnungs-Nr.
+            // Erstellt / Geändert am
+            // Erstellt / Geändert von
+            // Geprüft am
+            // Geprüft von
+            // Freigegeben am
+            // Freigegeben von
+
+            /*
+            { FileAttributeName.Ersteller, ("", DefaultFormatter) },
+            { FileAttributeName.Freigeber, ("", DefaultFormatter) },
+            { FileAttributeName.Prüfer1, ("", DefaultFormatter) },
+            { FileAttributeName.Prüfer2, ("", DefaultFormatter) },
+            { FileAttributeName.Sprache, ("", DefaultFormatter) },
+            { FileAttributeName.Untertitel, ("", DefaultFormatter) },
+            */
+
+            // nachfolgend Beispiele von Markus
+            { FileAttributeName.ZeichnungsNummer, ("ZEICHNUNG", x => x.ToString()) },
+            { FileAttributeName.Untertitel, ("UNTERTITEL", DefaultFormatter) },
+            { FileAttributeName.ZustandStelle, ("ZUSTAND", null) },
+        };
+
+        private static string DefaultFormatter(string value)
+        {
+            return value.ToString();
+        }
+
+        private void WriteEloAttribute(StreamWriter stream, FileAttributeName attribute, string value)
+        {
+            var name = ArchiveCommand.EloAttributes[attribute].Name;
+            var formatter = ArchiveCommand.EloAttributes[attribute].Formatter ?? DefaultFormatter;
+
+
+            var line = string.IsNullOrEmpty(value) ? $"{name}" : $"{name}={value}";
+            stream.WriteLine(line);
+
+        }
+
+        private void WriteR3File(string fileName, AttributeFile file, MainViewModel viewModel)
+        {
+            using (var stream = new StreamWriter(fileName, false, System.Text.Encoding.GetEncoding("ISO-8859-1")))
+            {
+                this.WriteFileAttributes(stream, file, viewModel.Sap.Data);
+                this.WriteDocumentInfo(stream, file, "DOKTYP_ZAB_D", "mechanische Zeichnung");
+                this.WriteDocumentInfo(stream, file, "PROJ_D", file[FileAttributeName.Typ]);
+                this.WriteDocumentInfo(stream, file, "AUFTR_NR_D", file[FileAttributeName.AuftragsNummer]);
+                this.WriteDocumentInfo(stream, file, "FORMAT_D", file[FileAttributeName.BlattFormat]);
+            }
         }
 
         /// <summary>
