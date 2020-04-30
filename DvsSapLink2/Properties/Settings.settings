@@ -14,9 +14,6 @@
     <Setting Name="ARCHIVE_LOG_DIRECTORY" Type="System.String" Scope="User">
       <Value Profile="(Default)">V:\AutoCAD_Admin\logArchiv\DwgLog</Value>
     </Setting>
-    <Setting Name="SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\AutoCAD_Admin\SapPending\dat_test</Value>
-    </Setting>
     <Setting Name="ARCHIVE_SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
       <Value Profile="(Default)">V:\AutoCAD_Admin\logArchiv\SapTransfer</Value>
     </Setting>
@@ -43,6 +40,9 @@
     </Setting>
     <Setting Name="DEFAULT_SAP_USER_PREPARE" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">V:\AutoCAD_Admin\SapPending\dat</Value>
     </Setting>
   </Settings>
 </SettingsFile>
