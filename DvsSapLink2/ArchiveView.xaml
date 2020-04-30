@@ -5,9 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:res="clr-namespace:DvsSapLink2.Resources"
-    xmlns:model="clr-namespace:DvsSapLink2.Model"
     xmlns:viewModel="clr-namespace:DvsSapLink2.ViewModel"
-    Icon="Resources/baseline_link_black_18dp.png"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:command="http://www.galasoft.ch/mvvmlight"
+    Icon="Resources/baseline_link_18dp.png"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
     Title="{x:Static res:Strings.TXT_APP_TITLE}" Height="450" Width="800"
@@ -36,11 +37,22 @@
 
                     <ListBox
                         Grid.Column="0" VerticalAlignment="Stretch"
-                        DisplayMemberPath="Title"
                         ItemsSource="{Binding Files}"
                         SelectedItem="{Binding File}"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
-                    />
+                    >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Title}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDoubleClick">
+                                            <command:EventToCommand Command="{Binding OpenFile}" CommandParameter="pdf" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Label>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
                     <ItemsControl
                         Grid.Column="1" VerticalAlignment="Stretch"
@@ -68,7 +80,7 @@
                         <ComboBox ItemsSource="{Binding States}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding State}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_USER}">
-                        <TextBox Text="{Binding User}" />
+                        <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding User}" />
                     </HeaderedContentControl>
                 </StackPanel>
             </GroupBox>

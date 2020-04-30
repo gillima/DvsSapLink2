@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
+using DvsSapLink2.Command;
 using DvsSapLink2.Model;
 using GalaSoft.MvvmLight;
 using static DvsSapLink2.Resources.Strings;
@@ -20,6 +22,7 @@ namespace DvsSapLink2.ViewModel
         public AttributeFileViewModel(AttributeFile attributeFile)
         {
             this.attributeFile = attributeFile;
+            this.OpenFile = new OpenFileCommand(this.attributeFile);
         }
 
         /// <summary>
@@ -31,6 +34,11 @@ namespace DvsSapLink2.ViewModel
         /// Gets the attribute file represented by this view model
         /// </summary>
         public AttributeFile File => this.attributeFile;
+
+        /// <summary>
+        /// Command to open a file using windows default
+        /// </summary>
+        public ICommand OpenFile { get; }
 
         /// <summary>
         /// Gets the validation message for this file
@@ -65,7 +73,7 @@ namespace DvsSapLink2.ViewModel
         public ObservableCollection<FileAttribute> Attributes => this.attributes ?? (this.attributes = new ObservableCollection<FileAttribute>(this.attributeFile.Attributes));
 
         /// <summary>
-        /// Validates the file content and compares the drawing number with the filename
+        /// Validates the file content and compares the drawing number with the filename (including revision)
         /// </summary>
         /// <exception cref="FormatException"></exception>
         public void Validate()
@@ -77,12 +85,30 @@ namespace DvsSapLink2.ViewModel
             }
 
             var drawingNumber = drawingAttribute.Value;
+            // regex selects any character(s) left of the first "-"
             var match = Regex.Match(this.Title, "(.*?)-.*");
             if (!match.Success)
                 throw new FormatException(TXT_INVALID_FILE_NAME);
 
             if (!string.Equals(match.Groups[1].Value, drawingNumber, StringComparison.InvariantCultureIgnoreCase))
                 throw new FormatException(TXT_DRAWING_NUMBER_MISMATCH);
+
+
+            var revisionAttribute = this.attributes.FirstOrDefault(a => a.Name == FileAttributeName.AeStand_aktuell);
+            if (revisionAttribute == null)
+            {
+                throw new FormatException(TXT_REVISION_MISSING);
+            }
+
+            var revIndex = revisionAttribute.Value.Replace("-","0");
+            // regex selects one or two character(s) between the first and second "-"
+            match = Regex.Match(this.Title, ".*?-(.{1,2})-.*");
+            if (!match.Success)
+                throw new FormatException(TXT_INVALID_FILE_NAME);
+
+            if (!string.Equals(match.Groups[1].Value, revIndex, StringComparison.InvariantCultureIgnoreCase))
+                throw new FormatException(TXT_REVISION_MISMATCH);
+
         }
     }
 }

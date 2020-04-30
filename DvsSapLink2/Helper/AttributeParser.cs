@@ -58,7 +58,7 @@ namespace DvsSapLink2.Helper
             { FileAttributeName.DokumentArt, new FileAttributeDefinition(240, 3) },
             { FileAttributeName.Sprache, new FileAttributeDefinition(243, 2) },
             { FileAttributeName.Format, new FileAttributeDefinition(245, 2) },
-            { FileAttributeName.BlattNr, new FileAttributeDefinition(247, 2) },
+            { FileAttributeName.BlattNr, new FileAttributeDefinition(247, 2, FileAttributeParser.GetSheetNumber) },
             { FileAttributeName.AnzBlatt, new FileAttributeDefinition(249, 2) },
             { FileAttributeName.ToleranzMittel, new FileAttributeDefinition(251, 1) },
             { FileAttributeName.ToleranzGrob, new FileAttributeDefinition(252, 1) },
@@ -88,10 +88,16 @@ namespace DvsSapLink2.Helper
                 yield return new FileAttribute(definition.Key, attribute?.RawValue, attribute?.Value);
             }
         }
-        
+
         private static string FormatOrderNumber(string value)
         {
             // TODO: convert order number
+            return value;
+        }
+
+        private static string GetSheetNumber(string value)
+        {
+            value = value.Trim(' ', '/');
             return value;
         }
     }

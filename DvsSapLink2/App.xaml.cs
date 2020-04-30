@@ -15,14 +15,17 @@ namespace DvsSapLink2
             base.OnStartup(startup);
 
             // parse command line arguments and look for "archive
-            var configuration = new Configuration(startup.Args.FirstOrDefault(a => a.ToLowerInvariant().Contains("archive")) != null
+            var configurationType = startup.Args.FirstOrDefault(a => a.ToLowerInvariant().Contains("archive")) != null
                 ? ConfigurationType.Archive
-                : ConfigurationType.Prepare);
+                : ConfigurationType.Prepare;
+
+            var configuration = new Configuration(configurationType);
+            var sapData = new SapData(configurationType);
 
             // create the main window and set data context
             this.MainWindow = new ArchiveView
             {
-                DataContext = new MainViewModel(configuration)
+                DataContext = new MainViewModel(configuration, sapData)
             };
 
             // show the main window

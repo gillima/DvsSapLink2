@@ -1,9 +1,10 @@
+using System;
 using System.IO;
 using System.Windows;
 using DvsSapLink2.Helper;
 using DvsSapLink2.Model;
+using DvsSapLink2.Resources;
 using DvsSapLink2.ViewModel;
-using static DvsSapLink2.Resources.Strings;
 
 namespace DvsSapLink2.Command
 {
@@ -13,8 +14,27 @@ namespace DvsSapLink2.Command
         /// Initializes a new instance of the <see cref="PrepareCommand"/> class.
         /// </summary>
         public PrepareCommand(Configuration configuration)
-            : base(configuration, TXT_DO_PREPARE)
+            : base(configuration, Strings.TXT_DO_PREPARE)
         {
+        }
+
+        public override bool Verify(AttributeFile file = null)
+        {
+            if (!base.Verify(file)) return false;
+
+            try
+            {
+                var fileToCheck = Path.Combine(this.configuration.PendingDirectory, file.Title + ".dwg");
+                if (File.Exists(fileToCheck))
+                    throw new InvalidOperationException(Strings.TXT_PENDING_FILE_EXISTS);
+
+                return true;
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Message = ex.Message;
+                return false;
+            }
         }
 
         /// <summary>
@@ -26,18 +46,23 @@ namespace DvsSapLink2.Command
             var viewModel = (MainViewModel)parameter;
             var file = viewModel.File.File;
 
-            using (var logger = new Logger(Path.Combine(this.configuration.LogDirectory, file.Title + ".log")))
+            using (var logger = new Logger(Path.Combine(this.configuration.LogDirectory, file.Title + ".log"),false))
             {
                 logger.Write("W_DIR", this.configuration.SourceDirectory);
                 logger.Write("A_DIR", this.configuration.DestinationDirectory);
+                logger.Write("USER", viewModel.Sap.Data.User.ToString());
 
-                this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
-                this.CopyFile(file, ".pdf", this.configuration.DestinationDirectory);
-                this.CopyFile(file, ".txt", this.configuration.DestinationDirectory);
-                // this.DeleteFile(file, ".bak");
+                this.CopyFile(file, ".dwg", this.configuration.PendingDirectory);
+                this.CopyFile(file, ".pdf", this.configuration.PendingDirectory);
+                this.CopyFile(file, ".txt", this.configuration.PendingDirectory);
+
+                this.DeleteFile(file, ".pdf");
+                this.DeleteFile(file, ".dwg");
+                this.DeleteFile(file, ".txt");
+                this.DeleteFile(file, ".bak");
             }
 
-            MessageBox.Show(TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Strings.TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             // HACK: force update of file list
             viewModel.Configuration.SourceDirectory = viewModel.Configuration.SourceDirectory;

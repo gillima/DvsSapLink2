@@ -51,6 +51,12 @@
         {
             this.Name = name;
             this.RawValue = rawValue;
+            if (name == FileAttributeName.Haupttitel || name == FileAttributeName.Untertitel)
+            {
+                value = value
+                    .Replace("%%c", "Ø")
+                    .Replace("%%C", "Ø");
+            }
             this.Value = value;
         }
 

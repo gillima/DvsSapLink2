@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DvsSapLink2.Helper;
 
 namespace DvsSapLink2.Model
@@ -43,6 +44,19 @@ namespace DvsSapLink2.Model
                 this.attributes = FileAttributeParser.Parse(this.Path);
                 return this.attributes;
             }
+        }
+
+        /// <summary>
+        /// Gets the value of the given attribute or string.Empty if the attribute is
+        /// not present
+        /// </summary>
+        public string this[FileAttributeName key]
+        {
+           get
+           {
+              var attribute = this.Attributes.FirstOrDefault(a => a.Name == key);
+              return attribute?.Value ?? string.Empty;
+           }
         }
     }
 }

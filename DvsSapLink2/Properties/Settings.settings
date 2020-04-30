@@ -2,23 +2,47 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DvsSapLink2.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="PREPARE_SOURCE_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\work\userwork</Value>
+    <Setting Name="WORKING_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork</Value>
     </Setting>
-    <Setting Name="PREPARE_DESTINATION_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\pre</Value>
+    <Setting Name="PENDING_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">V:\AutoCAD_Admin\ArchPending</Value>
     </Setting>
-    <Setting Name="PREPARE_LOG_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\work\log</Value>
-    </Setting>
-    <Setting Name="ARCHIVE_SOURCE_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\test\PreArchive</Value>
-    </Setting>
-    <Setting Name="ARCHIVE_DESTINATION_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\test\Archive</Value>
+    <Setting Name="ARCHIVE_DWG_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">V:\Archiv_AutoCAD\dwg\bm</Value>
     </Setting>
     <Setting Name="ARCHIVE_LOG_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Development\BirrMachines\testFiles\work\log</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\logArchiv\DwgLog</Value>
+    </Setting>
+    <Setting Name="ARCHIVE_SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">V:\AutoCAD_Admin\logArchiv\SapTransfer</Value>
+    </Setting>
+    <Setting Name="CONVERSION_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">V:\AutoCAD_Admin\KonvPending</Value>
+    </Setting>
+    <Setting Name="ARCHIVE_TXT_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">V:\Archiv_AutoCAD\txt</Value>
+    </Setting>
+    <Setting Name="ARCHIVE_TIF_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">V:\Archiv_Tif</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SAP_USER_ARCHIVE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">roman.eckert</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SAP_LABOR" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SAP_STATE_PREPARE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RE</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SAP_STATE_ARCHIVE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RE</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SAP_USER_PREPARE" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">V:\AutoCAD_Admin\SapPending\dat</Value>
     </Setting>
   </Settings>
 </SettingsFile>
