@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using DvsSapLink2.Model;
 
 namespace DvsSapLink2.Helper
@@ -13,6 +12,10 @@ namespace DvsSapLink2.Helper
         /// </summary>
         private class FileAttributeDefinition
         {
+            private readonly int Start;
+            private readonly int Length;
+            private readonly Func<string, string> Transform;
+
             public FileAttributeDefinition(int start, int length, Func<string, string> transform = null)
             {
                 this.Start = start;
@@ -20,15 +23,14 @@ namespace DvsSapLink2.Helper
                 this.Transform = transform ?? new Func<string, string>(value => value);
             }
 
-            public int Start { get; }
-            public int Length { get; }
-            public Func<string, string> Transform { get; }
-
             public bool TryParse(string content, out (string RawValue, string Value)? attribute)
             {
-                // TODO: neu müssen alle Attribute ausgegeben werden, auch wenn sie einen leeren String als Wert enthalten
-                attribute = null;
-                if (content.Length <= this.Start) return false;
+                if (content.Length <= this.Start)
+                {
+                    attribute = (null, string.Empty);
+                    return false;
+                }
+
                 var rawValue = content.Substring(this.Start, this.Length);
                 var value = this.Transform(rawValue.Trim());
                 attribute = (rawValue, value);
@@ -81,38 +83,38 @@ namespace DvsSapLink2.Helper
         /// <summary>
         /// Converter definitions to enhance the attributes of the file
         /// </summary>
-        public static readonly IDictionary<FileAttributeName, Func<AttributeFile, SapData, (int Order, string Value)>> ConvertDefinitions = new Dictionary<FileAttributeName, Func<AttributeFile, SapData, (int Order, string Value)>>
+        public static readonly IDictionary<FileAttributeName, Func<AttributeFile, SapData, string>> ConvertDefinitions = new Dictionary<FileAttributeName, Func<AttributeFile, SapData, string>>
         {
             // TODO: Add new fields....
             { FileAttributeName.Dateiname, BuildDateiname },
-            { FileAttributeName.Dateiversion, (f,s) => (34, "1.0") },
-            { FileAttributeName.SapID, (f,s) => (34, "") },
+            { FileAttributeName.Dateiversion, (f,s) => "1.0" },
+            { FileAttributeName.SapID, (f,s) => string.Empty },
             { FileAttributeName.Unterordner1, BuildUnterordner },
             { FileAttributeName.Kurzbezeichnung, BuildKurzbezeichnung },
-            { FileAttributeName.DokDatum, (f,s) => (34, "") },
+            { FileAttributeName.DokDatum, (f,s) => string.Empty },
             { FileAttributeName.Titel, BuildFullTitle },
             // ZeichnungsNummer
-            { FileAttributeName.DokStatus, (f,s) => (34, "freigegeben") },
+            { FileAttributeName.DokStatus, (f,s) => "freigegeben" },
             // AeStand_aktuell
             // BlattNr
-            { FileAttributeName.DokTyp, (f,s) => (34, "ZE") },
+            { FileAttributeName.DokTyp, (f,s) => "ZE" },
             // Sprache
-            { FileAttributeName.FertigungsProzess, (f,s) => (34, "") },
-            { FileAttributeName.StandUeberarbeitung, (f,s) => (34, "") },
-            { FileAttributeName.Verteilung, (f,s) => (34, "LAUF") },
-            { FileAttributeName.ATEX, (f,s) => (34, "xxx") },
-            { FileAttributeName.Auftragsstatus, (f,s) => (34, "xxx") },
-            { FileAttributeName.Klassifizierung, (f,s) => (34, "xxx") },
+            { FileAttributeName.FertigungsProzess, (f,s) => string.Empty },
+            { FileAttributeName.StandUeberarbeitung, (f,s) => string.Empty },
+            { FileAttributeName.Verteilung, (f,s) => "LAUF" },
+            { FileAttributeName.ATEX, (f,s) => "xxx" },
+            { FileAttributeName.Auftragsstatus, (f,s) => "xxx" },
+            { FileAttributeName.Klassifizierung, (f,s) => "xxx" },
             // Kundenauftrag
-            { FileAttributeName.Projektname, (f,s) => (34, "xxx") },
+            { FileAttributeName.Projektname, (f,s) => "xxx" },
             // Typ
-            { FileAttributeName.CadApp, (f,s) => (34, "AutoCAD") },
+            { FileAttributeName.CadApp, (f,s) => "AutoCAD" },
             // Format
-            { FileAttributeName.DokInhalt, (f,s) => (34, "xxx") },
+            { FileAttributeName.DokInhalt, (f,s) => "xxx" },
             // Ersatz für
-            { FileAttributeName.ErsetztDurch, (f,s) => (34, "") },
+            { FileAttributeName.ErsetztDurch, (f,s) => string.Empty },
             // ErnstandAus
-            { FileAttributeName.EinordnungsNr, (f,s) => (34, "") },
+            { FileAttributeName.EinordnungsNr, (f,s) => string.Empty },
             // 3x Datum und Name
         };
 
@@ -128,41 +130,41 @@ namespace DvsSapLink2.Helper
             var values = new Dictionary<FileAttributeName, string>();
             foreach (var definition in FileAttributeParser.Definitions)
             {
-                // Test, ob auch leere Strings ausgegeben werden können...
-                //if (!definition.Value.TryParse(content, out var attribute))
-                //    continue;
                 definition.Value.TryParse(content, out var attribute);
                 yield return new FileAttribute(definition.Key, attribute?.RawValue, attribute?.Value);
             }
         }
 
-        private static (int Order, string Value) BuildDateiname(AttributeFile file, SapData sapData)
+        private static string BuildDateiname(AttributeFile file, SapData sapData)
         {
-            // TODO: richtig schreiben ?!
-            // return (33, $"{String.Join(".", file.Title, "pdf")}");
-            return (33, $"{file.Title}" + $".pdf" );
+            return $"{file.Title}.pdf";
         }
 
-        private static (int Order, string Value) BuildKurzbezeichnung(AttributeFile file, SapData sapData)
+        private static string BuildKurzbezeichnung(AttributeFile file, SapData sapData)
         {
             // TODO: richtig schreiben ?!
-            return (33, $"{file.Title}");
+            return file.Title;
         }
 
-        private static (int Order, string Value) BuildFullTitle(AttributeFile file, SapData sapData)
+        private static string BuildFullTitle(AttributeFile file, SapData sapData)
         {
             // TODO: / nur wenn Untertitel vorhanden
-            return (33, $"{file[FileAttributeName.Haupttitel]} / {file[FileAttributeName.Untertitel]}");
+            return file[FileAttributeName.Untertitel] != null
+                ? $"{file[FileAttributeName.Haupttitel]} / {file[FileAttributeName.Untertitel]}"
+                : file[FileAttributeName.Haupttitel];
         }
 
-        private static (int Order, string Value) BuildUnterordner(AttributeFile file, SapData sapData)
+        private static string BuildUnterordner(AttributeFile file, SapData sapData)
         {
-            return (33, $"{file[FileAttributeName.Zeichnungsnummer].Substring(0, 4).Trim()}");
+            return $"{file[FileAttributeName.Zeichnungsnummer].Substring(0, 4).Trim()}";
         }
 
         private static string FormatOrderNumber(string value)
         {
             // TODO: convert order number
+            // return int.TryParse(value, out var number)
+            //     ? $"{number,8:00}"
+            //     : value; // throw new FormatException(Strings.TXT_INVALID_SHEET_NUMBER);
             return value;
         }
 
@@ -183,8 +185,10 @@ namespace DvsSapLink2.Helper
 
         private static string GetSheetNumber(string value)
         {
-            value = String.Format("{0,2:00}", value.Trim(' ', '/'));
-            return value;
+            // TODO: was machen wenn die nummer keine nummer ist?
+            return int.TryParse(value.Trim(' ', '/'), out var number)
+                ? $"{number,2:00}"
+                : value; // throw new FormatException(Strings.TXT_INVALID_SHEET_NUMBER);
         }
     }
 }

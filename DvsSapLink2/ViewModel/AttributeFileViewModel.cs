@@ -44,7 +44,7 @@ namespace DvsSapLink2.ViewModel
         /// Gets the validation message for this file
         /// </summary>
         public string Message { get; private set; }
-        
+
         /// <summary>
         /// Gets a value indicating whether the file and the file content correspond to each other
         /// </summary>
@@ -76,9 +76,9 @@ namespace DvsSapLink2.ViewModel
         /// Validates the file content and compares the drawing number with the filename (including revision)
         /// </summary>
         /// <exception cref="FormatException"></exception>
-        public void Validate()
+        private void Validate()
         {
-            var drawingAttribute = this.attributes.FirstOrDefault(a => a.Name == FileAttributeName.ZeichnungsNummer);
+            var drawingAttribute = this.attributes.FirstOrDefault(a => a.Name == FileAttributeName.Zeichnungsnummer);
             if (drawingAttribute == null)
             {
                 throw new FormatException(TXT_DRAWING_NUMBER_MISSING);

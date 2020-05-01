@@ -87,11 +87,13 @@ namespace DvsSapLink2.Command
             {
                 yield return attribute;
             }
-            
+
             foreach (var converter in FileAttributeParser.ConvertDefinitions)
             {
-                var (order, value) = converter.Value(file, sapData);
-                yield return new FileAttribute(converter.Key, null, value);
+                yield return new FileAttribute(
+                    converter.Key,
+                    null,
+                    converter.Value(file, sapData));
             }
         }
 
