@@ -68,9 +68,10 @@ namespace DvsSapLink2.Command
             using (var stream = new StreamWriter(fileName, false, System.Text.Encoding.GetEncoding("ISO-8859-1")))
             {
                 var attributes = this.GetFileAttributes(file, viewModel.Sap.Data);
-                foreach (var attribute in attributes.OrderBy(a => a.Name.GetOrder()))
+                foreach (var attribute in attributes
+                    .Where(a => a.Name.GetOrder() != 0)
+                    .OrderBy(a => a.Name.GetOrder()))
                 {
-                    // TODO: hier auschliessen, dass alle mit Order = 0 nicht geschrieben werden
                     this.WriteEloAttribute(stream, attribute.Name, attribute.Value);
                 }
             }
