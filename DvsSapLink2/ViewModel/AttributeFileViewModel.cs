@@ -100,7 +100,9 @@ namespace DvsSapLink2.ViewModel
                 throw new FormatException(TXT_REVISION_MISSING);
             }
 
-            var revIndex = revisionAttribute.Value.Replace("-","0");
+            var revIndex = string.IsNullOrEmpty(revisionAttribute.Value)
+                ? $"0"
+                : revisionAttribute.Value.Replace("-", "0");
             // regex selects one or two character(s) between the first and second "-"
             match = Regex.Match(this.Title, ".*?-(.{1,2})-.*");
             if (!match.Success)
@@ -108,6 +110,24 @@ namespace DvsSapLink2.ViewModel
 
             if (!string.Equals(match.Groups[1].Value, revIndex, StringComparison.InvariantCultureIgnoreCase))
                 throw new FormatException(TXT_REVISION_MISMATCH);
+
+
+            var sheetNoAttribute = this.attributes.FirstOrDefault(a => a.Name == FileAttributeName.BlattNr);
+            if (sheetNoAttribute == null)
+            {
+                throw new FormatException(TXT_SHEET_NUMBER_MISSING);
+            }
+
+            var sheetNo = int.TryParse(sheetNoAttribute.Value.Trim(' ', '/'), out var number)
+                ? $"{number,2:00}"
+                : throw new FormatException(TXT_INVALID_SHEET_NUMBER);
+            // regex selects any character(s) right of the second "-"
+            match = Regex.Match(this.Title, ".*?-.{1,2}-(.*)");
+            if (!match.Success)
+                throw new FormatException(TXT_INVALID_FILE_NAME);
+
+            if (!string.Equals(match.Groups[1].Value, sheetNo, StringComparison.InvariantCultureIgnoreCase))
+                throw new FormatException(TXT_SHEET_NUMBER_MISMATCH);
 
         }
     }

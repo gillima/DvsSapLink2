@@ -46,7 +46,7 @@ namespace DvsSapLink2.Command
                 this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
                 this.CopyFile(file, ".dwg", this.configuration.ConversionDirectory);
                 this.CopyFile(file, ".txt", this.configuration.TxtDirectory);
-                this.CopyFile(file, ".dat", this.configuration.SapTransferDirectory);
+                this.CopyFile(file, ".dat", this.configuration.SapTransferDirectory, ".txt");
                 this.CopyFile(file, ".dat", this.configuration.ArchiveSapTransferDirectory);
 
                 this.DeleteFile(file, ".pdf");

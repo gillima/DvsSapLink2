@@ -68,6 +68,7 @@ namespace DvsSapLink2.Command
         /// Verify that the file doesn't exists at the destination and the destination is writable
         /// </summary>
         /// <param name="file">Source file to copy</param>
+ 
         public virtual bool Verify(AttributeFile file = null)
         {
             if (file == null) file = this.lastAttributeFile;
@@ -120,10 +121,10 @@ namespace DvsSapLink2.Command
         {
             if (!required && string.IsNullOrEmpty(file[name]))
                 return;
-            
+
             if (string.IsNullOrEmpty(file[name]))
                 throw new InvalidOperationException($"{Strings.TXT_MISSING_DATE}: {name}");
-            
+
             if (!Regex.IsMatch(file[name], "\\d{4}-\\d{2}-\\d{2}"))
                 throw new InvalidOperationException($"{Strings.TXT_INVALID_DATE}: {name}");
         }
@@ -135,21 +136,24 @@ namespace DvsSapLink2.Command
         /// <param name="file">The attribute file</param>
         /// <param name="fileExtension">File extension of the file to copy</param>
         /// <param name="destinationDirectory">Destination directory</param>
-        protected void CopyFile(AttributeFile file, string fileExtension, string destinationDirectory)
+        protected void CopyFile(AttributeFile file, string fileExtensionSource, string destinationDirectory, string fileExtensionDestination = "")
         {
             if (file?.Path == null)
                 throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
             
             var source = Path.Combine(
                 Path.GetDirectoryName(file.Path),
-                file.Title + fileExtension);
+                file.Title + fileExtensionSource);
                 
             if (!File.Exists(source))
                 throw new InvalidOperationException(Strings.TXT_SOURCE_FILE_MISSING);
-             
+
+            if (fileExtensionDestination == "")
+                fileExtensionDestination = fileExtensionSource;
+
             var destination = Path.Combine(
                 destinationDirectory,
-                file.Title + fileExtension);
+                file.Title + fileExtensionDestination);
             
             File.Copy(source, destination);
             if (!File.Exists(destination))

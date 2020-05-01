@@ -22,9 +22,13 @@ namespace DvsSapLink2.Resources
         public static string TXT_DRAWING_NUMBER_MISMATCH = "Zeichnungsnummern stimmen nicht überein";
         public static string TXT_REVISION_MISSING = "Revision fehlt auf dem Zeichnungskopf";
         public static string TXT_REVISION_MISMATCH = "Revision stimmt nicht überein";
+        public static string TXT_SHEET_NUMBER_MISSING = "Blatt-Nummer fehlt auf dem Zeichnungskopf";
+        public static string TXT_SHEET_NUMBER_MISMATCH = "Blatt-Nummer stimmt nicht überein";
+        public static string TXT_INVALID_SHEET_NUMBER = "Fehler in der Blatt-Nummer";
         public static string TXT_INVALID_FILE_NAME = "Fehler im Dateinamen";
         public static string TXT_INVALID_DATE = "Fehler im Datum (yyyy-mm-dd)";
         public static string TXT_MISSING_DATE = "Fehlendes Datum (yyyy-mm-dd)";
+        public static string TXT_INVALID_ORDER_NUMBER = "Fehler in der Auftragsnummer";
         public static string TXT_DESTINATION_MISSING = "Archivverzeichnis nicht gefunden";
         public static string TXT_PDF_DOES_NOT_EXIST = "Vorschaudatei (pdf) fehlt";
         public static string TXT_PDF_FILE_IS_OPENED = "Vorschaudatei (pdf) ist geöffnet";

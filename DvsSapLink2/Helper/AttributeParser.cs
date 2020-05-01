@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using DvsSapLink2.Model;
+using DvsSapLink2.Resources;
+using static DvsSapLink2.Resources.Strings;
 
 namespace DvsSapLink2.Helper
 {
@@ -142,13 +145,11 @@ namespace DvsSapLink2.Helper
 
         private static string BuildKurzbezeichnung(AttributeFile file, SapData sapData)
         {
-            // TODO: richtig schreiben ?!
             return file.Title;
         }
 
         private static string BuildFullTitle(AttributeFile file, SapData sapData)
         {
-            // TODO: / nur wenn Untertitel vorhanden
             return file[FileAttributeName.Untertitel] != null
                 ? $"{file[FileAttributeName.Haupttitel]} / {file[FileAttributeName.Untertitel]}"
                 : file[FileAttributeName.Haupttitel];
@@ -161,21 +162,51 @@ namespace DvsSapLink2.Helper
 
         private static string FormatOrderNumber(string value)
         {
-            // TODO: convert order number
-            // return int.TryParse(value, out var number)
-            //     ? $"{number,8:00}"
-            //     : value; // throw new FormatException(Strings.TXT_INVALID_SHEET_NUMBER);
-            return value;
+            // RFQ_123456789 wäre richtig mit 9 Stellen (eigentlich nur Zahlen, wird hier nicht kontrolliert)
+            // 1- oder 1-... sind ungültig
+            // es gibt keine 9-stelligen Auftragsnummern (passiert durch vertippen oder weglassen von RFQ)
+            var match = Regex.Match(value, "(\bRFQ_.{0,8}$)|(\bRFQ_.{10,99}$)|1-$|1-[.]+|^[0-9]{9}$");
+            if (match.Success)
+                throw new FormatException(Strings.TXT_INVALID_ORDER_NUMBER);
+
+            // z.B. 0011005084* -> 11005084*, die führenden Nullen sollen entfernt werden (egal, ob noch eine -Pos kommt oder nicht)
+            match = Regex.Match(value, "^00([0-9]{8}[-]?[0-9]*$)");
+            if (match.Success)
+                value = match.Groups[1].Value;
+
+            // z.B. 1-1005084* -> 11005084*, Trennstrich entfernen wenn danach Zahl 8-stellig
+            match = Regex.Match(value, "^([1-9])-([0-9]{7}\b.*)$");
+            if (match.Success)
+                value = match.Groups[1].Value + match.Groups[2].Value;
+
+            // z.B. 11005084-101 -> 11005084-000101, Position soll 6-stellig sein für 8-stellige Auftragsnummern
+            match = Regex.Match(value, "(^[0-9]{8}\b-)([0]{0,3})([0-9]{3})$");
+            if (match.Success)
+                value = match.Groups[1].Value + "000" + match.Groups[3].Value;
+
+            return value.Trim();
         }
 
         private static string GetDate(string value)
         {
-            return $"{value.Substring(0, 10)}";
+            if (!string.IsNullOrEmpty(value))
+            {
+                // regex returns any characters from the start until the spaces
+                var match = Regex.Match(value, "^([^ ]*)[ ]+(.*)$");
+                value = match.Groups[1].Value;
+            }
+            return value;
         }
 
         private static string GetName(string value)
         {
-            return value.Substring(10).Trim();
+            if (!string.IsNullOrEmpty(value))
+            {
+                // regex returns any characters after the spaces until the end
+                var match = Regex.Match(value, "^([^ ]*)[ ]+(.*)$");
+                value = match.Groups[2].Value;
+            }
+            return value;
         }
 
         private static string GetLanguageCode(string value)
@@ -185,10 +216,9 @@ namespace DvsSapLink2.Helper
 
         private static string GetSheetNumber(string value)
         {
-            // TODO: was machen wenn die nummer keine nummer ist?
             return int.TryParse(value.Trim(' ', '/'), out var number)
                 ? $"{number,2:00}"
-                : value; // throw new FormatException(Strings.TXT_INVALID_SHEET_NUMBER);
+                : value; // wenn es keine Zahl ist, wird in AttributeFileViewModel abgefangen
         }
     }
 }
