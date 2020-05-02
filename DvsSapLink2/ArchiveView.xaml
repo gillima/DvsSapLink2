@@ -11,7 +11,7 @@
     Icon="Resources/baseline_link_18dp.png"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
-    Title="{x:Static res:Strings.TXT_APP_TITLE}" Height="450" Width="800"
+    Title="{x:Static res:Strings.TXT_APP_TITLE}" Height="800" Width="800"
     SizeToContent="Height" ResizeMode="NoResize"
 >
     <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True">
@@ -29,7 +29,7 @@
             </GroupBox>
 
             <GroupBox Header="{x:Static res:Strings.TXT_FILE_DATA}">
-                <Grid Height="280">
+                <Grid Height="400">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="3*" />
@@ -73,20 +73,30 @@
 
             <GroupBox Header="{x:Static res:Strings.TXT_SAP_DATA}" DataContext="{Binding Sap}">
                 <StackPanel Orientation="Vertical">
-                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_LABOR}">
-                        <ComboBox ItemsSource="{Binding Labors}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Labor}" />
+
+                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_USER}">
+                        <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding User}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_STATUS}">
                         <ComboBox ItemsSource="{Binding States}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding State}" />
                     </HeaderedContentControl>
-                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_USER}">
-                        <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding User}" />
+                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ATEX}">
+                        <ComboBox ItemsSource="{Binding Atexs}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Atex}" />
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ORDERSTATE}">
+                        <ComboBox ItemsSource="{Binding OrderStates}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding OrderState}" />
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_CLASSIFICATION}">
+                        <ComboBox ItemsSource="{Binding Classifications}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Classification}" />
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_DOCCONTENT}">
+                        <ComboBox ItemsSource="{Binding DocContents}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding DocContent}" />
                     </HeaderedContentControl>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
 
-        <Border BorderThickness="0" Background="WhiteSmoke" Padding="5">
+        <Border BorderThickness="0" Background="WhiteSmoke" Padding="15 20 15 0">
             <DockPanel LastChildFill="True">
                 <Button DockPanel.Dock="Right" Command="{Binding Archive}" CommandParameter="{Binding}">
                     <StackPanel Orientation="Vertical" MaxWidth="160">

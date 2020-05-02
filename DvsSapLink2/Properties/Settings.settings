@@ -27,22 +27,31 @@
       <Value Profile="(Default)">V:\Archiv_Tif</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_USER_ARCHIVE" Type="System.String" Scope="User">
-      <Value Profile="(Default)">roman.eckert</Value>
-    </Setting>
-    <Setting Name="DEFAULT_SAP_LABOR" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
+      <Value Profile="(Default)">joel.meier</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_STATE_PREPARE" Type="System.String" Scope="User">
-      <Value Profile="(Default)">RE</Value>
+      <Value Profile="(Default)">freigegeben</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_STATE_ARCHIVE" Type="System.String" Scope="User">
-      <Value Profile="(Default)">RE</Value>
+      <Value Profile="(Default)">freigegeben</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_USER_PREPARE" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">paulo.venturinha</Value>
     </Setting>
     <Setting Name="SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
       <Value Profile="(Default)">V:\AutoCAD_Admin\SapPending\dat</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SAP_ATEX_PREPARE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">nein</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SAP_ORDERSTATE_PREPARE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">auftragsbezogen</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SAP_CLASSIFICATION_PREPARE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">extern</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SAP_DOCCONTENT_PREPARE" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

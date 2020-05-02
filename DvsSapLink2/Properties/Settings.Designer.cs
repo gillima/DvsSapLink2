@@ -121,7 +121,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("roman.eckert")]
+        [global::System.Configuration.DefaultSettingValueAttribute("joel.meier")]
         public string DEFAULT_SAP_USER_ARCHIVE {
             get {
                 return ((string)(this["DEFAULT_SAP_USER_ARCHIVE"]));
@@ -133,19 +133,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int DEFAULT_SAP_LABOR {
-            get {
-                return ((int)(this["DEFAULT_SAP_LABOR"]));
-            }
-            set {
-                this["DEFAULT_SAP_LABOR"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("RE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("freigegeben")]
         public string DEFAULT_SAP_STATE_PREPARE {
             get {
                 return ((string)(this["DEFAULT_SAP_STATE_PREPARE"]));
@@ -157,7 +145,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("RE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("freigegeben")]
         public string DEFAULT_SAP_STATE_ARCHIVE {
             get {
                 return ((string)(this["DEFAULT_SAP_STATE_ARCHIVE"]));
@@ -169,7 +157,7 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("paulo.venturinha")]
         public string DEFAULT_SAP_USER_PREPARE {
             get {
                 return ((string)(this["DEFAULT_SAP_USER_PREPARE"]));
@@ -188,6 +176,54 @@ namespace DvsSapLink2.Properties {
             }
             set {
                 this["SAPTRANSFER_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("nein")]
+        public string DEFAULT_SAP_ATEX_PREPARE {
+            get {
+                return ((string)(this["DEFAULT_SAP_ATEX_PREPARE"]));
+            }
+            set {
+                this["DEFAULT_SAP_ATEX_PREPARE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("auftragsbezogen")]
+        public string DEFAULT_SAP_ORDERSTATE_PREPARE {
+            get {
+                return ((string)(this["DEFAULT_SAP_ORDERSTATE_PREPARE"]));
+            }
+            set {
+                this["DEFAULT_SAP_ORDERSTATE_PREPARE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("extern")]
+        public string DEFAULT_SAP_CLASSIFICATION_PREPARE {
+            get {
+                return ((string)(this["DEFAULT_SAP_CLASSIFICATION_PREPARE"]));
+            }
+            set {
+                this["DEFAULT_SAP_CLASSIFICATION_PREPARE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DEFAULT_SAP_DOCCONTENT_PREPARE {
+            get {
+                return ((string)(this["DEFAULT_SAP_DOCCONTENT_PREPARE"]));
+            }
+            set {
+                this["DEFAULT_SAP_DOCCONTENT_PREPARE"] = value;
             }
         }
     }

@@ -10,9 +10,12 @@ namespace DvsSapLink2.Resources
         public static string TXT_SOURCE_DIRECTORIES = "Quellverzeichnis";
         public static string TXT_DESTINATION_DIRECTORIES = "Archivverzeichnis";
         public static string TXT_FILE_DATA = "Dokumentdaten";
-        public static string TXT_SAP_DATA = "SAP Data";
-        public static string TXT_SAP_LABOR = "Labor / Konstruktionsbüro";
-        public static string TXT_SAP_STATUS = "Zu setzender Status";
+        public static string TXT_SAP_DATA = "ELO Daten";
+        public static string TXT_SAP_STATUS = "Status";
+        public static string TXT_SAP_ATEX = "ATEX-Relevant";
+        public static string TXT_SAP_ORDERSTATE = "Auftragsstatus";
+        public static string TXT_SAP_CLASSIFICATION = "Klassifizierung";
+        public static string TXT_SAP_DOCCONTENT = "Dokument-Inhalt";
         public static string TXT_SAP_USER = "User in SAP/R3";
         public static string TXT_DO_PREPARE = "Freigeben zum Archivieren";
         public static string TXT_DO_ARCHIVE = "Archivieren";
