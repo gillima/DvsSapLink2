@@ -162,27 +162,20 @@ namespace DvsSapLink2.Helper
 
         private static string FormatOrderNumber(string value)
         {
-            // RFQ_123456789 wäre richtig mit 9 Stellen (eigentlich nur Zahlen, wird hier nicht kontrolliert)
-            // 1- oder 1-... sind ungültig
-            // es gibt keine 9-stelligen Auftragsnummern (passiert durch vertippen oder weglassen von RFQ)
-            var match = Regex.Match(value, "(\bRFQ_.{0,8}$)|(\bRFQ_.{10,99}$)|1-$|1-[.]+|^[0-9]{9}$");
-            if (match.Success)
-                throw new FormatException(Strings.TXT_INVALID_ORDER_NUMBER);
-
             // z.B. 0011005084* -> 11005084*, die führenden Nullen sollen entfernt werden (egal, ob noch eine -Pos kommt oder nicht)
-            match = Regex.Match(value, "^00([0-9]{8}[-]?[0-9]*$)");
+            var match = Regex.Match(value, "^00([0-9]{8}[-]?[0-9]*$)");
             if (match.Success)
                 value = match.Groups[1].Value;
 
             // z.B. 1-1005084* -> 11005084*, Trennstrich entfernen wenn danach Zahl 8-stellig
-            match = Regex.Match(value, "^([1-9])-([0-9]{7}\b.*)$");
+            match = Regex.Match(value, "^([1-9])-([0-9]{7}[-]?.*)$");
             if (match.Success)
                 value = match.Groups[1].Value + match.Groups[2].Value;
 
             // z.B. 11005084-101 -> 11005084-000101, Position soll 6-stellig sein für 8-stellige Auftragsnummern
-            match = Regex.Match(value, "(^[0-9]{8}\b-)([0]{0,3})([0-9]{3})$");
+            match = Regex.Match(value, "(^[0-9]{8}-)([0]{0,3})([0-9]{3})$");
             if (match.Success)
-                value = match.Groups[1].Value + "000" + match.Groups[3].Value;
+                value = match.Groups[1].Value + $"000" + match.Groups[3].Value;
 
             return value.Trim();
         }
@@ -194,6 +187,8 @@ namespace DvsSapLink2.Helper
                 // regex returns any characters from the start until the spaces
                 var match = Regex.Match(value, "^([^ ]*)[ ]+(.*)$");
                 value = match.Groups[1].Value;
+
+                // TODO: Datum so formatieren, dass es in ELO richtig als Datum importiert wird
             }
             return value;
         }
