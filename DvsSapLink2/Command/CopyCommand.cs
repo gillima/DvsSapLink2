@@ -84,8 +84,9 @@ namespace DvsSapLink2.Command
 
                 this.ValidateDate(file, FileAttributeName.ErstelltDatum, true);
                 this.ValidateDate(file, FileAttributeName.GeprueftDatum, true);
-                // this.ValidateDate(file, FileAttributeName.Prüfer2, false);
                 this.ValidateDate(file, FileAttributeName.FreigegebenDatum, true);
+                this.ValidateDate(file, FileAttributeName.AuftragsNummer, false);
+
 
                 var fileToCheck = Path.Combine(this.configuration.SourceDirectory, file.Title + ".pdf");
                 if (!File.Exists(fileToCheck))
@@ -128,6 +129,28 @@ namespace DvsSapLink2.Command
             if (!Regex.IsMatch(file[name], "\\d{4}-\\d{2}-\\d{2}"))
                 throw new InvalidOperationException($"{Strings.TXT_INVALID_DATE}: {name}");
         }
+
+        /// <summary>
+        /// Validate a ordernumber. required format is 
+        /// - RFQ_123456789
+        /// - nicht 9 Zeichen lang
+        /// - nicht 1- oder 1-...
+        /// </summary>
+        /// <param name="file">Attribute file</param>
+        /// <param name="name">name of the attribute to check</param>
+        /// <param name="required">Indicates if a date is required or not</param>
+        private void ValidateOrderNumber(AttributeFile file, FileAttributeName name, bool required)
+        {
+            if (!required && string.IsNullOrEmpty(file[name]))
+                return;
+
+            if (string.IsNullOrEmpty(file[name]))
+                throw new InvalidOperationException($"{Strings.TXT_MISSING_DATE}: {name}");
+
+            if (Regex.IsMatch(file[name], "(^RFQ_.{0,8}$)|(^RFQ_.{10,99}$)|^1-$|^1-[.]+|^[0-9]{9}$"))
+                throw new InvalidOperationException($"{Strings.TXT_INVALID_ORDER_NUMBER}: {name}");
+        }
+
 
         /// <summary>
         /// Copy the file with the given extension related to the attribute file into the

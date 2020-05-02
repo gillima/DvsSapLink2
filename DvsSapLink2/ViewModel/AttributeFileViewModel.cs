@@ -132,26 +132,6 @@ namespace DvsSapLink2.ViewModel
             if (!string.Equals(match.Groups[1].Value, sheetNo, StringComparison.InvariantCultureIgnoreCase))
                 throw new FormatException(TXT_SHEET_NUMBER_MISMATCH);
 
-
-            // TODO: Ist diese Prüfung am richtigen Ort???
-
-            // validates whether the order number in the attribute file is valid
-            // RFQ_123456789 ist richtig mit 9 Stellen (eigentlich nur Zahlen, wird hier nicht kontrolliert)
-            // - für RFQ gibt es keine 0-8 und keine 10+-stelligen Nummern (passiert durch vertippen oder weglassen von RFQ)
-            // - 1- oder 1-... sind ungültig, ebenso Nummern, die 9 Zeichen enthalten
-            var ordernumberAttribute = this.attributes.FirstOrDefault(a => a.Name == FileAttributeName.AuftragsNummer);
-            if (!(ordernumberAttribute == null))
-            {
-                var orderNumber = ordernumberAttribute.Value;
-                if (!string.IsNullOrEmpty(orderNumber))
-                {
-                    match = Regex.Match(orderNumber, "(^RFQ_.{0,8}$)|(^RFQ_.{10,99}$)|^1-$|^1-[.]+|^[0-9]{9}$");
-                    if (match.Success)
-                        throw new FormatException(TXT_INVALID_ORDER_NUMBER);
-                }
-            }
-
-
         }
     }
 }
