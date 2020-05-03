@@ -25,6 +25,7 @@ namespace DvsSapLink2.ViewModel
             SapDataViewModel.Atexs = section.Atexs.As<string, string>();
             SapDataViewModel.OrderStates = section.OrderStates.As<string, string>();
             SapDataViewModel.Classifications = section.Classifications.As<string, string>();
+            SapDataViewModel.Projects = section.Projects.As<string, string>();
             SapDataViewModel.DocContents = section.DocContents.As<string, string>();
         }
 
@@ -66,6 +67,11 @@ namespace DvsSapLink2.ViewModel
         /// Gets the list of document contents for the selection box
         /// </summary>
         public static IDictionary<string, string> DocContents { get; }
+
+        /// <summary>
+        /// Gets the list of document contents for the selection box
+        /// </summary>
+        public static IDictionary<string, string> Projects { get; }
 
         /// <summary>
         /// Gets the list of users for the selection box
@@ -134,6 +140,19 @@ namespace DvsSapLink2.ViewModel
             set
             {
                 this.sapData.DocContent = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the project name
+        /// </summary>
+        public string Project
+        {
+            get => this.sapData.Project;
+            set
+            {
+                this.sapData.Project = value;
                 this.RaisePropertyChanged();
             }
         }

@@ -51,6 +51,13 @@ namespace DvsSapLink2.Command
                 logger.Write("W_DIR", this.configuration.SourceDirectory);
                 logger.Write("A_DIR", this.configuration.DestinationDirectory);
                 logger.Write("USER", viewModel.Sap.Data.User.ToString());
+                logger.Write("STATE", viewModel.Sap.Data.State.ToString());
+                logger.Write("ATEX", viewModel.Sap.Data.Atex.ToString());
+                logger.Write("ORDER", viewModel.Sap.Data.OrderState.ToString());
+                logger.Write("CLASS", viewModel.Sap.Data.Classification.ToString());
+                logger.Write("PROJ", viewModel.Sap.Data.Project.ToString());
+                logger.Write("CONT", viewModel.Sap.Data.DocContent.ToString());
+
 
                 this.CopyFile(file, ".dwg", this.configuration.PendingDirectory);
                 this.CopyFile(file, ".pdf", this.configuration.PendingDirectory);

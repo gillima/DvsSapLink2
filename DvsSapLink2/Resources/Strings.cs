@@ -15,6 +15,7 @@ namespace DvsSapLink2.Resources
         public static string TXT_SAP_ATEX = "ATEX-Relevant";
         public static string TXT_SAP_ORDERSTATE = "Auftragsstatus";
         public static string TXT_SAP_CLASSIFICATION = "Klassifizierung";
+        public static string TXT_SAP_PROJECT = "Projektname";
         public static string TXT_SAP_DOCCONTENT = "Dokument-Inhalt";
         public static string TXT_SAP_USER = "User in SAP/R3";
         public static string TXT_DO_PREPARE = "Freigeben zum Archivieren";
@@ -32,6 +33,7 @@ namespace DvsSapLink2.Resources
         public static string TXT_INVALID_DATE = "Fehler im Datum (yyyy-mm-dd)";
         public static string TXT_MISSING_DATE = "Fehlendes Datum (yyyy-mm-dd)";
         public static string TXT_INVALID_ORDER_NUMBER = "Fehler in der Auftragsnummer";
+        public static string TXT_MISSING_ORDER_NUMBER = "Fehlende Auftragsnummer";
         public static string TXT_DESTINATION_MISSING = "Archivverzeichnis nicht gefunden";
         public static string TXT_PDF_DOES_NOT_EXIST = "Vorschaudatei (pdf) fehlt";
         public static string TXT_PDF_FILE_IS_OPENED = "Vorschaudatei (pdf) ist geöffnet";

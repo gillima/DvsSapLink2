@@ -37,11 +37,24 @@ namespace DvsSapLink2.Command
             // MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
             var archiveUser = LogParser.ReadMessages(logFile, "USER");
             viewModel.Sap.Data.User = archiveUser.FirstOrDefault();
+            var docState = LogParser.ReadMessages(logFile, "STATE");
+            viewModel.Sap.Data.State = docState.FirstOrDefault();
+            var atex = LogParser.ReadMessages(logFile, "ATEX");
+            viewModel.Sap.Data.Atex = docState.FirstOrDefault();
+            var orderState = LogParser.ReadMessages(logFile, "ORDER");
+            viewModel.Sap.Data.OrderState = orderState.FirstOrDefault();
+            var classification = LogParser.ReadMessages(logFile, "CLASS");
+            viewModel.Sap.Data.Classification = classification.FirstOrDefault();
+            var docContent = LogParser.ReadMessages(logFile, "CONT");
+            viewModel.Sap.Data.DocContent = docContent.FirstOrDefault();
+            var project = LogParser.ReadMessages(logFile, "PROJ");
+            viewModel.Sap.Data.Project = docContent.FirstOrDefault();
 
-            using (var logger = new Logger(logFile, true))
+            // TODO: Logger erzeugt einen Konflikt, weil LogParser auf gleiches File zugreift. Zum Testen auskommentiert.
+            //using (var logger = new Logger(logFile, true))
             {
                 this.WriteEloFile(sapTransferFileTemp, file, viewModel);
-                logger.Write("LOG", Strings.TXT_TRANSFERFILE_CREATED);
+            //    logger.Write("LOG", Strings.TXT_TRANSFERFILE_CREATED);
 
                 this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
                 this.CopyFile(file, ".dwg", this.configuration.ConversionDirectory);
@@ -54,7 +67,7 @@ namespace DvsSapLink2.Command
                 this.DeleteFile(file, ".txt");
                 this.DeleteFile(file, ".dwg");
 
-                logger.Write("LOG", Strings.TXT_DRAWINGFILE_ARCHIVED);
+            //    logger.Write("LOG", Strings.TXT_DRAWINGFILE_ARCHIVED);
             }
 
             MessageBox.Show(Strings.TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);

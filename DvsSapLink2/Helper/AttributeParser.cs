@@ -105,15 +105,15 @@ namespace DvsSapLink2.Helper
             { FileAttributeName.FertigungsProzess, (f,s) => string.Empty },
             { FileAttributeName.StandUeberarbeitung, (f,s) => string.Empty },
             { FileAttributeName.Verteilung, (f,s) => "LAUF" },
-            { FileAttributeName.ATEX, (f,s) => "xxx" },
-            { FileAttributeName.Auftragsstatus, (f,s) => "xxx" },
-            { FileAttributeName.Klassifizierung, (f,s) => "xxx" },
+            { FileAttributeName.ATEX, GetSapAtex },
+            { FileAttributeName.Auftragsstatus, GetSapOrderState },
+            { FileAttributeName.Klassifizierung, GetSapClassification },
             // Kundenauftrag
-            { FileAttributeName.Projektname, (f,s) => "xxx" },
+            { FileAttributeName.Projektname, GetSapProjectName },
             // Typ
             { FileAttributeName.CadApp, (f,s) => "AutoCAD" },
             // Format
-            { FileAttributeName.DokInhalt, (f,s) => "xxx" },
+            { FileAttributeName.DokInhalt, GetSapDocContent },
             // Ersatz für
             { FileAttributeName.ErsetztDurch, (f,s) => string.Empty },
             // ErnstandAus
@@ -136,6 +136,31 @@ namespace DvsSapLink2.Helper
                 definition.Value.TryParse(content, out var attribute);
                 yield return new FileAttribute(definition.Key, attribute?.RawValue, attribute?.Value);
             }
+        }
+
+        private static string GetSapAtex(AttributeFile file, SapData sapData)
+        {
+            return $"{sapData.Atex}";
+        }
+
+        private static string GetSapOrderState(AttributeFile file, SapData sapData)
+        {
+            return $"{sapData.OrderState}";
+        }
+
+        private static string GetSapClassification(AttributeFile file, SapData sapData)
+        {
+            return $"{sapData.Classification}";
+        }
+
+        private static string GetSapProjectName(AttributeFile file, SapData sapData)
+        {
+            return $"{sapData.Project}";
+        }
+
+        private static string GetSapDocContent(AttributeFile file, SapData sapData)
+        {
+            return $"{sapData.DocContent}";
         }
 
         private static string BuildDateiname(AttributeFile file, SapData sapData)

@@ -20,12 +20,12 @@
                     break;
 
                 case ConfigurationType.Archive:
-                    this.User = Properties.Settings.Default.DEFAULT_SAP_USER_ARCHIVE;
-                    this.State = Properties.Settings.Default.DEFAULT_SAP_STATE_ARCHIVE;
-                    this.Atex = Properties.Settings.Default.DEFAULT_SAP_ATEX_PREPARE;
-                    this.OrderState = Properties.Settings.Default.DEFAULT_SAP_ORDERSTATE_PREPARE;
-                    this.Classification = Properties.Settings.Default.DEFAULT_SAP_CLASSIFICATION_PREPARE;
-                    this.DocContent = Properties.Settings.Default.DEFAULT_SAP_DOCCONTENT_PREPARE;
+                    this.User = ""; // TODO: Daten aus Logfile lesen (inkl. Archiv-PFad)
+                    this.State = "";
+                    this.Atex = ""; // Properties.Settings.Default.DEFAULT_SAP_ATEX_PREPARE;
+                    this.OrderState = ""; //  Properties.Settings.Default.DEFAULT_SAP_ORDERSTATE_PREPARE;
+                    this.Classification = ""; // Properties.Settings.Default.DEFAULT_SAP_CLASSIFICATION_PREPARE;
+                    this.DocContent = ""; //  Properties.Settings.Default.DEFAULT_SAP_DOCCONTENT_PREPARE;
                     break;
             }
         }
@@ -59,6 +59,11 @@
         /// Gets or sets the document state
         /// </summary>
         public string Classification { get; set; }
+
+        /// <summary>
+        /// Gets or sets the project name
+        /// </summary>
+        public string Project { get; set; }
 
         /// <summary>
         /// Gets or sets the document state

@@ -85,7 +85,7 @@ namespace DvsSapLink2.Command
                 this.ValidateDate(file, FileAttributeName.ErstelltDatum, true);
                 this.ValidateDate(file, FileAttributeName.GeprueftDatum, true);
                 this.ValidateDate(file, FileAttributeName.FreigegebenDatum, true);
-                this.ValidateDate(file, FileAttributeName.AuftragsNummer, false);
+                this.ValidateOrderNumber(file, FileAttributeName.AuftragsNummer, false);
 
 
                 var fileToCheck = Path.Combine(this.configuration.SourceDirectory, file.Title + ".pdf");
@@ -145,10 +145,10 @@ namespace DvsSapLink2.Command
                 return;
 
             if (string.IsNullOrEmpty(file[name]))
-                throw new InvalidOperationException($"{Strings.TXT_MISSING_DATE}: {name}");
+                throw new InvalidOperationException($"{Strings.TXT_MISSING_ORDER_NUMBER}");
 
             if (Regex.IsMatch(file[name], "(^RFQ_.{0,8}$)|(^RFQ_.{10,99}$)|^1-$|^1-[.]+|^[0-9]{9}$"))
-                throw new InvalidOperationException($"{Strings.TXT_INVALID_ORDER_NUMBER}: {name}");
+                throw new InvalidOperationException($"{Strings.TXT_INVALID_ORDER_NUMBER}");
         }
 
 

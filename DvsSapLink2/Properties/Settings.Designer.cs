@@ -25,114 +25,6 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork")]
-        public string WORKING_DIRECTORY {
-            get {
-                return ((string)(this["WORKING_DIRECTORY"]));
-            }
-            set {
-                this["WORKING_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\ArchPending")]
-        public string PENDING_DIRECTORY {
-            get {
-                return ((string)(this["PENDING_DIRECTORY"]));
-            }
-            set {
-                this["PENDING_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V:\\Archiv_AutoCAD\\dwg\\bm")]
-        public string ARCHIVE_DWG_DIRECTORY {
-            get {
-                return ((string)(this["ARCHIVE_DWG_DIRECTORY"]));
-            }
-            set {
-                this["ARCHIVE_DWG_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\logArchiv\\DwgLog")]
-        public string ARCHIVE_LOG_DIRECTORY {
-            get {
-                return ((string)(this["ARCHIVE_LOG_DIRECTORY"]));
-            }
-            set {
-                this["ARCHIVE_LOG_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\logArchiv\\SapTransfer")]
-        public string ARCHIVE_SAPTRANSFER_DIRECTORY {
-            get {
-                return ((string)(this["ARCHIVE_SAPTRANSFER_DIRECTORY"]));
-            }
-            set {
-                this["ARCHIVE_SAPTRANSFER_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\KonvPending")]
-        public string CONVERSION_DIRECTORY {
-            get {
-                return ((string)(this["CONVERSION_DIRECTORY"]));
-            }
-            set {
-                this["CONVERSION_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V:\\Archiv_AutoCAD\\txt")]
-        public string ARCHIVE_TXT_DIRECTORY {
-            get {
-                return ((string)(this["ARCHIVE_TXT_DIRECTORY"]));
-            }
-            set {
-                this["ARCHIVE_TXT_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V:\\Archiv_Tif")]
-        public string ARCHIVE_TIF_DIRECTORY {
-            get {
-                return ((string)(this["ARCHIVE_TIF_DIRECTORY"]));
-            }
-            set {
-                this["ARCHIVE_TIF_DIRECTORY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("joel.meier")]
-        public string DEFAULT_SAP_USER_ARCHIVE {
-            get {
-                return ((string)(this["DEFAULT_SAP_USER_ARCHIVE"]));
-            }
-            set {
-                this["DEFAULT_SAP_USER_ARCHIVE"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("freigegeben")]
         public string DEFAULT_SAP_STATE_PREPARE {
             get {
@@ -145,18 +37,6 @@ namespace DvsSapLink2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("freigegeben")]
-        public string DEFAULT_SAP_STATE_ARCHIVE {
-            get {
-                return ((string)(this["DEFAULT_SAP_STATE_ARCHIVE"]));
-            }
-            set {
-                this["DEFAULT_SAP_STATE_ARCHIVE"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("paulo.venturinha")]
         public string DEFAULT_SAP_USER_PREPARE {
             get {
@@ -164,18 +44,6 @@ namespace DvsSapLink2.Properties {
             }
             set {
                 this["DEFAULT_SAP_USER_PREPARE"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Admin\\SapPending\\dat")]
-        public string SAPTRANSFER_DIRECTORY {
-            get {
-                return ((string)(this["SAPTRANSFER_DIRECTORY"]));
-            }
-            set {
-                this["SAPTRANSFER_DIRECTORY"] = value;
             }
         }
         
@@ -224,6 +92,114 @@ namespace DvsSapLink2.Properties {
             }
             set {
                 this["DEFAULT_SAP_DOCCONTENT_PREPARE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork\\irene.walt\\DvsSapLink-Tests")]
+        public string WORKING_DIRECTORY {
+            get {
+                return ((string)(this["WORKING_DIRECTORY"]));
+            }
+            set {
+                this["WORKING_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork\\irene.walt\\DvsSapLink-Tests\\ArchPending")]
+        public string PENDING_DIRECTORY {
+            get {
+                return ((string)(this["PENDING_DIRECTORY"]));
+            }
+            set {
+                this["PENDING_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork\\irene.walt\\DvsSapLink-Tests\\Archive\\bm")]
+        public string ARCHIVE_DWG_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_DWG_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_DWG_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork\\irene.walt\\DvsSapLink-Tests\\ArchiveLog")]
+        public string ARCHIVE_LOG_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_LOG_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_LOG_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork\\irene.walt\\DvsSapLink-Tests\\Archive")]
+        public string ARCHIVE_SAPTRANSFER_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_SAPTRANSFER_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_SAPTRANSFER_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork\\irene.walt\\DvsSapLink-Tests\\KonvPending")]
+        public string CONVERSION_DIRECTORY {
+            get {
+                return ((string)(this["CONVERSION_DIRECTORY"]));
+            }
+            set {
+                this["CONVERSION_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork\\irene.walt\\DvsSapLink-Tests\\Archive")]
+        public string ARCHIVE_TXT_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_TXT_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_TXT_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork\\irene.walt\\DvsSapLink-Tests\\Archive")]
+        public string ARCHIVE_TIF_DIRECTORY {
+            get {
+                return ((string)(this["ARCHIVE_TIF_DIRECTORY"]));
+            }
+            set {
+                this["ARCHIVE_TIF_DIRECTORY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V:\\AutoCAD_Data\\UserWork\\irene.walt\\DvsSapLink-Tests\\EloPending")]
+        public string SAPTRANSFER_DIRECTORY {
+            get {
+                return ((string)(this["SAPTRANSFER_DIRECTORY"]));
+            }
+            set {
+                this["SAPTRANSFER_DIRECTORY"] = value;
             }
         }
     }

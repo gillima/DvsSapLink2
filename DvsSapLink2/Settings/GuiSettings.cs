@@ -12,6 +12,7 @@ namespace DvsSapLink2.Settings
         private SettingsDictionary orderstates;
         private SettingsDictionary classifications;
         private SettingsDictionary doccontents;
+        private SettingsDictionary projects;
         private SettingsDictionary users;
 
         /// <summary>
@@ -24,6 +25,7 @@ namespace DvsSapLink2.Settings
             this.orderstates = new SettingsDictionary();
             this.classifications = new SettingsDictionary();
             this.doccontents = new SettingsDictionary();
+            this.projects = new SettingsDictionary();
             this.users = new SettingsDictionary();
         }
 
@@ -69,6 +71,17 @@ namespace DvsSapLink2.Settings
         {
             get => (SettingsDictionary)this["classifications"];
             set => this["classificatins"] = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the Projects
+        /// </summary>
+        [ConfigurationProperty("projects", IsDefaultCollection = false)]
+        [ConfigurationCollection(typeof(DictionaryElement), AddItemName = "add", ClearItemsName = "clear", RemoveItemName = "remove")]
+        public SettingsDictionary Projects
+        {
+            get => (SettingsDictionary)this["projects"];
+            set => this["projects"] = value;
         }
 
         /// <summary>

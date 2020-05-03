@@ -89,6 +89,9 @@
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_CLASSIFICATION}">
                         <ComboBox ItemsSource="{Binding Classifications}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Classification}" />
                     </HeaderedContentControl>
+                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_PROJECT}">
+                        <TextBox Name="txtProject" Text="{Binding Project}" />
+                    </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_DOCCONTENT}">
                         <ComboBox ItemsSource="{Binding DocContents}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding DocContent}" />
                     </HeaderedContentControl>
