@@ -55,8 +55,10 @@ namespace DvsSapLink2.Command
                 logger.Write("ATEX", viewModel.Sap.Data.Atex.ToString());
                 logger.Write("ORDER", viewModel.Sap.Data.OrderState.ToString());
                 logger.Write("CLASS", viewModel.Sap.Data.Classification.ToString());
-                logger.Write("PROJ", viewModel.Sap.Data.Project.ToString());
-                logger.Write("CONT", viewModel.Sap.Data.DocContent.ToString());
+                if ((viewModel.Sap.Data.Project) != null)
+                    logger.Write("PROJ", viewModel.Sap.Data.Project.ToString());
+                if ((viewModel.Sap.Data.DocContent) != null)
+                    logger.Write("CONT", viewModel.Sap.Data.DocContent.ToString());
 
 
                 this.CopyFile(file, ".dwg", this.configuration.PendingDirectory);

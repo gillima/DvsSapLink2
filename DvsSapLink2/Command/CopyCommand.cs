@@ -128,6 +128,10 @@ namespace DvsSapLink2.Command
 
             if (!Regex.IsMatch(file[name], "\\d{4}-\\d{2}-\\d{2}"))
                 throw new InvalidOperationException($"{Strings.TXT_INVALID_DATE}: {name}");
+
+            DateTime dateValue;
+            if (!DateTime.TryParse(file[name], out dateValue))
+                throw new InvalidOperationException($"{Strings.TXT_INVALID_DATE}: {name}");
         }
 
         /// <summary>

@@ -20,12 +20,12 @@
                     break;
 
                 case ConfigurationType.Archive:
-                    this.User = ""; // TODO: Daten aus Logfile lesen (inkl. Archiv-PFad)
+                    this.User = ""; // TODO: Felder auf GUI read-only. Evt. Daten zum Anzeigen aus Logfile lesen (inkl. Archiv-Pfad).
                     this.State = "";
-                    this.Atex = ""; // Properties.Settings.Default.DEFAULT_SAP_ATEX_PREPARE;
-                    this.OrderState = ""; //  Properties.Settings.Default.DEFAULT_SAP_ORDERSTATE_PREPARE;
-                    this.Classification = ""; // Properties.Settings.Default.DEFAULT_SAP_CLASSIFICATION_PREPARE;
-                    this.DocContent = ""; //  Properties.Settings.Default.DEFAULT_SAP_DOCCONTENT_PREPARE;
+                    this.Atex = ""; 
+                    this.OrderState = ""; 
+                    this.Classification = ""; 
+                    this.DocContent = ""; 
                     break;
             }
         }

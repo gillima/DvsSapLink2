@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using DvsSapLink2.Model;
 using DvsSapLink2.Resources;
+using DvsSapLink2.ViewModel;
 using static DvsSapLink2.Resources.Strings;
 
 namespace DvsSapLink2.Helper
@@ -88,7 +90,6 @@ namespace DvsSapLink2.Helper
         /// </summary>
         public static readonly IDictionary<FileAttributeName, Func<AttributeFile, SapData, string>> ConvertDefinitions = new Dictionary<FileAttributeName, Func<AttributeFile, SapData, string>>
         {
-            // TODO: Add new fields....
             { FileAttributeName.Dateiname, BuildDateiname },
             { FileAttributeName.Dateiversion, (f,s) => "1.0" },
             { FileAttributeName.SapID, (f,s) => string.Empty },
@@ -118,6 +119,9 @@ namespace DvsSapLink2.Helper
             { FileAttributeName.ErsetztDurch, (f,s) => string.Empty },
             // ErnstandAus
             { FileAttributeName.EinordnungsNr, (f,s) => string.Empty },
+            { FileAttributeName.ErstelltNameELO, BuildUserNameCreated },
+            { FileAttributeName.GeprueftNameELO, BuildUserNameApproved },
+            { FileAttributeName.FreigegebenNameELO, BuildUserNameReleased },
             // 3x Datum und Name
         };
 
@@ -185,6 +189,24 @@ namespace DvsSapLink2.Helper
             return $"{file[FileAttributeName.Zeichnungsnummer].Substring(0, 4).Trim()}";
         }
 
+        private static string BuildUserNameCreated(AttributeFile file, SapData sapData)
+        {
+            // TODO: hier möchte ich die Users-Liste aus dem Settings-File lesen und den Namen finden, der dem ErstelltName entspricht
+            return $"{file[FileAttributeName.ErstelltName]}";
+        }
+
+        private static string BuildUserNameApproved(AttributeFile file, SapData sapData)
+        {
+            // TODO: hier möchte ich die Users-Liste aus dem Settings-File lesen und den Namen finden, der dem GeprueftName entspricht
+            return $"{file[FileAttributeName.GeprueftName]}";
+        }
+
+        private static string BuildUserNameReleased(AttributeFile file, SapData sapData)
+        {
+            // TODO: hier möchte ich die Users-Liste aus dem Settings-File lesen und den Namen finden, der dem FreigegebenName entspricht
+            return $"{file[FileAttributeName.FreigegebenName]}";
+        }
+
         private static string FormatOrderNumber(string value)
         {
             // z.B. 0011005084* -> 11005084*, die führenden Nullen sollen entfernt werden (egal, ob noch eine -Pos kommt oder nicht)
@@ -209,11 +231,9 @@ namespace DvsSapLink2.Helper
         {
             if (!string.IsNullOrEmpty(value))
             {
-                // regex returns any characters from the start until the spaces
+                // regex returns any characters from the start until to the spaces
                 var match = Regex.Match(value, "^([^ ]*)[ ]+(.*)$");
                 value = match.Groups[1].Value;
-
-                // TODO: Datum so formatieren, dass es in ELO richtig als Datum importiert wird
             }
             return value;
         }
@@ -222,16 +242,21 @@ namespace DvsSapLink2.Helper
         {
             if (!string.IsNullOrEmpty(value))
             {
-                // regex returns any characters after the spaces until the end
+                // regex returns any characters after the spaces until the end (example string: "2018-04-30 I. Walt")
                 var match = Regex.Match(value, "^([^ ]*)[ ]+(.*)$");
                 value = match.Groups[2].Value;
+
+                value = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
             }
             return value;
         }
 
         private static string GetLanguageCode(string value)
         {
-            return $"{value.Replace("E", "en").Replace("D", "de")}";
+            // regex retruns one character D, E or / from possible content [D, E, D/]
+            var match = Regex.Match(value, "([D,E,\\/])$");
+            value = match.Groups[1].Value;
+            return $"{value.Replace("/", "xx").Replace("E", "en").Replace("D", "de")}";
         }
 
         private static string GetSheetNumber(string value)

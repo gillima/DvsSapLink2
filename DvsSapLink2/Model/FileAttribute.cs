@@ -133,20 +133,29 @@ namespace DvsSapLink2.Model
         [Elo("Erstellt / Geändert am", 30)]
         ErstelltDatum,
 
-        [Elo("Erstellt / Geändert von", 31)]
+        [Elo("-Erstellt", 0)]
         ErstelltName,
+
+        [Elo("Erstellt / Geändert von", 31)]
+        ErstelltNameELO,
 
         [Elo("Geprüft am", 32)]
         GeprueftDatum,
 
-        [Elo("Geprüft von", 33)]
+        [Elo("-Geprüft", 0)]
         GeprueftName,
+
+        [Elo("Geprüft von", 33)]
+        GeprueftNameELO,
 
         [Elo("Freigegeben am", 34)]
         FreigegebenDatum,
 
-        [Elo("Freigegeben von", 35)]
+        [Elo("Freigegeben", 0)]
         FreigegebenName,
+
+        [Elo("Freigegeben von", 35)]
+        FreigegebenNameELO,
 
     }
 
