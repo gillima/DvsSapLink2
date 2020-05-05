@@ -69,7 +69,7 @@ namespace DvsSapLink2.Helper
             // { FileAttributeName.UebernehmendeStelle, new FileAttributeDefinition(232, 8) },
             // { FileAttributeName.DokumentArt, new FileAttributeDefinition(240, 3) },
             { FileAttributeName.Sprache, new FileAttributeDefinition(243, 2, GetLanguageCode) },
-            { FileAttributeName.BlattFormat, new FileAttributeDefinition(245, 2) },
+            { FileAttributeName.BlattFormat, new FileAttributeDefinition(245, 2, FormatSheetForm) },
             { FileAttributeName.BlattNr, new FileAttributeDefinition(247, 2, GetSheetNumber) },
             // { FileAttributeName.AnzBlatt, new FileAttributeDefinition(249, 2) },
             // { FileAttributeName.ToleranzMittel, new FileAttributeDefinition(251, 1) },
@@ -179,7 +179,7 @@ namespace DvsSapLink2.Helper
 
         private static string BuildFullTitle(AttributeFile file, SapData sapData)
         {
-            return file[FileAttributeName.Untertitel] != null
+            return !String.IsNullOrEmpty(file[FileAttributeName.Untertitel].Trim())
                 ? $"{file[FileAttributeName.Haupttitel]} / {file[FileAttributeName.Untertitel]}"
                 : file[FileAttributeName.Haupttitel];
         }
@@ -191,23 +191,46 @@ namespace DvsSapLink2.Helper
 
         private static string BuildUserNameCreated(AttributeFile file, SapData sapData)
         {
-            // TODO: hier möchte ich die Users-Liste aus dem Settings-File lesen und den Namen finden, der dem ErstelltName entspricht
-            foreach (var entry in sapData.Users)
-            {
-            }
-            return $"{file[FileAttributeName.ErstelltName]}";
+            return GetEloUserFromAppConfig(file[FileAttributeName.ErstelltName], sapData);
         }
 
         private static string BuildUserNameApproved(AttributeFile file, SapData sapData)
         {
-            // TODO: hier möchte ich die Users-Liste aus dem Settings-File lesen und den Namen finden, der dem GeprueftName entspricht
-            return $"{file[FileAttributeName.GeprueftName]}";
+            return GetEloUserFromAppConfig(file[FileAttributeName.GeprueftName], sapData);
         }
 
         private static string BuildUserNameReleased(AttributeFile file, SapData sapData)
         {
-            // TODO: hier möchte ich die Users-Liste aus dem Settings-File lesen und den Namen finden, der dem FreigegebenName entspricht
-            return $"{file[FileAttributeName.FreigegebenName]}";
+            return GetEloUserFromAppConfig(file[FileAttributeName.FreigegebenName], sapData);
+        }
+
+        private static string GetEloUserFromAppConfig(string attributeUser, SapData sapData)
+        {
+            // Users-Liste aus dem Settings-File lesen und Namen finden, der dem ErstelltName entspricht 
+            // (vorläufig erste drei Zeichen des Nachnamens, max. 8 möglich)
+
+            var match = Regex.Match(attributeUser.ToLower(), "^([a-z]*\\b)[. ]*(\\w.*)$");
+
+            // string attributeUserPart1 = match.Success
+            //     ? match.Groups[1].Value.Substring(0, 1)
+            //     : string.Empty;
+            string attributeUserPart2 = match.Success
+                ? match.Groups[2].Value.Substring(0, 3)
+                : string.Empty;
+
+            foreach (var entry in sapData.Users)
+            {
+                match = Regex.Match(entry.Key.ToLower(), "^([a-z]*\\b)[. ]*(\\w.*)$");
+                string eloUserPart2 = match.Success
+                    ? match.Groups[2].Value.Substring(0, 3)
+                    : string.Empty;
+
+                if (eloUserPart2 == attributeUserPart2)
+                {
+                    return entry.Value;
+                }
+            }
+            return attributeUser;
         }
 
         private static string FormatOrderNumber(string value)
@@ -228,6 +251,17 @@ namespace DvsSapLink2.Helper
                 value = match.Groups[1].Value + $"000" + match.Groups[3].Value;
 
             return value.Trim();
+        }
+
+        private static string FormatSheetForm(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                // regex returns first A-character and following numbers
+                var match = Regex.Match(value, "([A]\\d{1,2}$)");
+                value = match.Groups[1].Value;
+            }
+            return value;
         }
 
         private static string GetDate(string value)

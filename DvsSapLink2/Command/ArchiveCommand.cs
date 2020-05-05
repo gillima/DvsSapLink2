@@ -51,10 +51,10 @@ namespace DvsSapLink2.Command
             viewModel.Sap.Data.Project = project.FirstOrDefault();
 
             // TODO: Logger erzeugt einen Konflikt, weil LogParser auf gleiches File zugreift. Zum Testen auskommentiert.
-            //using (var logger = new Logger(logFile, true))
+            using (var logger = new Logger(logFile, true))
             {
                 this.WriteEloFile(sapTransferFileTemp, file, viewModel);
-            //    logger.Write("LOG", Strings.TXT_TRANSFERFILE_CREATED);
+                logger.Write("LOG", Strings.TXT_TRANSFERFILE_CREATED);
 
                 this.CopyFile(file, ".dwg", this.configuration.DestinationDirectory);
                 this.CopyFile(file, ".dwg", this.configuration.ConversionDirectory);
@@ -67,7 +67,7 @@ namespace DvsSapLink2.Command
                 this.DeleteFile(file, ".txt");
                 this.DeleteFile(file, ".dwg");
 
-            //    logger.Write("LOG", Strings.TXT_DRAWINGFILE_ARCHIVED);
+                logger.Write("LOG", Strings.TXT_DRAWINGFILE_ARCHIVED);
             }
 
             MessageBox.Show(Strings.TXT_FILE_ARCHIVED, this.Title, MessageBoxButton.OK, MessageBoxImage.Information);

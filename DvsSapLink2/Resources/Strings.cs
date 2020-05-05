@@ -12,7 +12,7 @@ namespace DvsSapLink2.Resources
         public static string TXT_FILE_DATA = "Dokumentdaten";
         public static string TXT_SAP_DATA = "ELO Daten";
         public static string TXT_SAP_STATUS = "Status";
-        public static string TXT_SAP_ATEX = "ATEX-Relevant";
+        public static string TXT_SAP_ATEX = "Ex-Schutz relevant";
         public static string TXT_SAP_ORDERSTATE = "Auftragsstatus";
         public static string TXT_SAP_CLASSIFICATION = "Klassifizierung";
         public static string TXT_SAP_PROJECT = "Projektname";

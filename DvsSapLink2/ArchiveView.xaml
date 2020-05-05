@@ -11,13 +11,13 @@
     Icon="Resources/baseline_link_18dp.png"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
-    Title="{x:Static res:Strings.TXT_APP_TITLE}" Height="800" Width="800"
+    Title="{x:Static res:Strings.TXT_APP_TITLE}" Height="825" Width="800"
     SizeToContent="Height" ResizeMode="NoResize"
 >
     <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True">
 
         <StackPanel Orientation="Vertical" Margin="5">
-            <GroupBox Header="{x:Static res:Strings.TXT_DIRECTORIES}" DataContext="{Binding Configuration}">
+            <GroupBox  Padding="0 5 0 0" Header="{x:Static res:Strings.TXT_DIRECTORIES}" DataContext="{Binding Configuration}">
                 <StackPanel Orientation="Vertical">
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SOURCE_DIRECTORIES}">
                         <Button Content="{Binding SourceDirectory}" Command="{Binding SelectSourceDirectory}" IsEnabled="{Binding CanChangeSourceDirectory}" Style="{StaticResource BrowseBox}"/>
@@ -28,7 +28,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="{x:Static res:Strings.TXT_FILE_DATA}">
+            <GroupBox  Padding="0 5 0 0" Header="{x:Static res:Strings.TXT_FILE_DATA}">
                 <Grid Height="400">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -71,7 +71,7 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox Header="{x:Static res:Strings.TXT_SAP_DATA}" DataContext="{Binding Sap}">
+            <GroupBox  Padding="0 5 0 0" Header="{x:Static res:Strings.TXT_SAP_DATA}" DataContext="{Binding Sap}">
                 <StackPanel Orientation="Vertical">
 
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_USER}">
@@ -99,7 +99,7 @@
             </GroupBox>
         </StackPanel>
 
-        <Border BorderThickness="0" Background="WhiteSmoke" Padding="15 20 15 0">
+        <Border BorderThickness="0" Background="WhiteSmoke" Padding="15 10 15 5">
             <DockPanel LastChildFill="True">
                 <Button DockPanel.Dock="Right" Command="{Binding Archive}" CommandParameter="{Binding}">
                     <StackPanel Orientation="Vertical" MaxWidth="160">
