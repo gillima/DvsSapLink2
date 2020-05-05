@@ -192,6 +192,9 @@ namespace DvsSapLink2.Helper
         private static string BuildUserNameCreated(AttributeFile file, SapData sapData)
         {
             // TODO: hier möchte ich die Users-Liste aus dem Settings-File lesen und den Namen finden, der dem ErstelltName entspricht
+            foreach (var entry in sapData.Users)
+            {
+            }
             return $"{file[FileAttributeName.ErstelltName]}";
         }
 

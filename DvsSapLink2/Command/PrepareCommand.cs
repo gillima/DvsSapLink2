@@ -58,7 +58,6 @@ namespace DvsSapLink2.Command
                 logger.Write("PROJ", viewModel.Sap.Data.Project);
                 logger.Write("CONT", viewModel.Sap.Data.DocContent);
 
-
                 this.CopyFile(file, ".dwg", this.configuration.PendingDirectory);
                 this.CopyFile(file, ".pdf", this.configuration.PendingDirectory);
                 this.CopyFile(file, ".txt", this.configuration.PendingDirectory);

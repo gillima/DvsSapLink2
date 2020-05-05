@@ -1,4 +1,8 @@
-﻿namespace DvsSapLink2.Model
+﻿using System.Collections.Generic;
+using System.Configuration;
+using DvsSapLink2.Settings;
+
+namespace DvsSapLink2.Model
 {
     /// <summary>
     /// Data Transfer Object (DTO) for the SAP data related to the documents to archive
@@ -7,6 +11,8 @@
     {
         public SapData(ConfigurationType type)
         {
+            var section = (GuiSettings)ConfigurationManager.GetSection("guiSettings");
+            this.Users = section.Users.As<string, string>();
             this.Type = type;
             switch (type)
             {
@@ -40,6 +46,11 @@
         /// </summary>
         public string User { get; set; }
 
+        /// <summary>
+        /// Gets the list of users for the selection box
+        /// </summary>
+        public IDictionary<string, string> Users { get; }
+        
         /// <summary>
         /// Gets or sets the document state
         /// </summary>

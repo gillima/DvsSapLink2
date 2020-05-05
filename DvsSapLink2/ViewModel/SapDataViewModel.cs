@@ -21,7 +21,6 @@ namespace DvsSapLink2.ViewModel
         {
             var section = (GuiSettings)ConfigurationManager.GetSection("guiSettings");
             SapDataViewModel.States = section.States.As<string, string>();
-            SapDataViewModel.Users = section.Users.As<string, string>();
             SapDataViewModel.Atexs = section.Atexs.As<string, string>();
             SapDataViewModel.OrderStates = section.OrderStates.As<string, string>();
             SapDataViewModel.Classifications = section.Classifications.As<string, string>();
@@ -76,7 +75,7 @@ namespace DvsSapLink2.ViewModel
         /// <summary>
         /// Gets the list of users for the selection box
         /// </summary>
-        public static IDictionary<string, string> Users { get; }
+        public IDictionary<string, string> Users => this.sapData.Users;
 
 
         /// <summary>
