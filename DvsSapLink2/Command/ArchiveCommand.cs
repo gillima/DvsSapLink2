@@ -40,7 +40,7 @@ namespace DvsSapLink2.Command
             var docState = LogParser.ReadMessages(logFile, "STATE");
             viewModel.Sap.Data.State = docState.FirstOrDefault();
             var atex = LogParser.ReadMessages(logFile, "ATEX");
-            viewModel.Sap.Data.Atex = docState.FirstOrDefault();
+            viewModel.Sap.Data.Atex = atex.FirstOrDefault();
             var orderState = LogParser.ReadMessages(logFile, "ORDER");
             viewModel.Sap.Data.OrderState = orderState.FirstOrDefault();
             var classification = LogParser.ReadMessages(logFile, "CLASS");
@@ -48,7 +48,7 @@ namespace DvsSapLink2.Command
             var docContent = LogParser.ReadMessages(logFile, "CONT");
             viewModel.Sap.Data.DocContent = docContent.FirstOrDefault();
             var project = LogParser.ReadMessages(logFile, "PROJ");
-            viewModel.Sap.Data.Project = docContent.FirstOrDefault();
+            viewModel.Sap.Data.Project = project.FirstOrDefault();
 
             // TODO: Logger erzeugt einen Konflikt, weil LogParser auf gleiches File zugreift. Zum Testen auskommentiert.
             //using (var logger = new Logger(logFile, true))
