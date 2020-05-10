@@ -68,7 +68,7 @@ namespace DvsSapLink2.Command
         private string GetRelatedFileByExtension(string extension)
         {
             return Path.Combine(
-                    Path.GetDirectoryName(this.attributeFile.Path),
+                    Path.GetDirectoryName(this.attributeFile.Path) ?? string.Empty,
                     Path.GetFileNameWithoutExtension(this.attributeFile.Path)
                     + $".{extension}");
         }

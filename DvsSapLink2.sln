@@ -1,16 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DvsSapLink2", "DvsSapLink2\DvsSapLink2.csproj", "{F5E27C54-DB32-46B6-97A2-ED7C42EFBC4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug archive|Any CPU = Debug archive|Any CPU
+		Debug prepare|Any CPU = Debug prepare|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5E27C54-DB32-46B6-97A2-ED7C42EFBC4E}.Debug archive|Any CPU.ActiveCfg = Debug archive|Any CPU
+		{F5E27C54-DB32-46B6-97A2-ED7C42EFBC4E}.Debug archive|Any CPU.Build.0 = Debug archive|Any CPU
+		{F5E27C54-DB32-46B6-97A2-ED7C42EFBC4E}.Debug prepare|Any CPU.ActiveCfg = Debug prepare|Any CPU
+		{F5E27C54-DB32-46B6-97A2-ED7C42EFBC4E}.Debug prepare|Any CPU.Build.0 = Debug prepare|Any CPU
 		{F5E27C54-DB32-46B6-97A2-ED7C42EFBC4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F5E27C54-DB32-46B6-97A2-ED7C42EFBC4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5E27C54-DB32-46B6-97A2-ED7C42EFBC4E}.Release|Any CPU.ActiveCfg = Release|Any CPU

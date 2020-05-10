@@ -1,11 +1,11 @@
 ﻿namespace DvsSapLink2
 {
     /// <summary>
-    /// Interaction logic for ArchiveView.xaml
+    /// Interaction logic for PrepareView.xaml
     /// </summary>
-    public partial class ArchiveView
+    public partial class PrepareView
     {
-        public ArchiveView()
+        public PrepareView()
         {
             this.InitializeComponent();
         }

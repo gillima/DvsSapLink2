@@ -9,14 +9,14 @@ namespace DvsSapLink2.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var boolValue = value is bool && (bool)value;
+            var boolValue = value is bool boolArgument && boolArgument;
             if (parameter?.ToString() == "Invert") boolValue = !boolValue;
             return boolValue ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
     }
 }

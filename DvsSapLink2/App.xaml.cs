@@ -8,7 +8,7 @@ namespace DvsSapLink2
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         protected override void OnStartup(StartupEventArgs startup)
         {
@@ -21,12 +21,23 @@ namespace DvsSapLink2
 
             var configuration = new Configuration(configurationType);
             var sapData = new SapData(configurationType);
-
-            // create the main window and set data context
-            this.MainWindow = new ArchiveView
+            
+            if (configurationType == ConfigurationType.Prepare)
             {
-                DataContext = new MainViewModel(configuration, sapData)
-            };
+                // create the main window and set data context
+                this.MainWindow = new PrepareView
+                {
+                    DataContext = new MainViewModel(configuration, sapData)
+                };
+            }
+            else
+            {
+                // create the main window and set data context
+                this.MainWindow = new ArchiveView
+                {
+                    DataContext = new MainViewModel(configuration, sapData)
+                };
+            }
 
             // show the main window
             this.MainWindow.Show();
