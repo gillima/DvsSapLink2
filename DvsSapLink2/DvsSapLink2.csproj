@@ -111,7 +111,6 @@
     <Compile Include="Command\OpenFileCommand.cs" />
     <Compile Include="Command\PrepareCommand.cs" />
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converter\TypeToBoolConverter.cs" />
     <Compile Include="Helper\AttributeParser.cs" />
     <Compile Include="Helper\BrowseDirectoryCommand.cs" />
     <Compile Include="Helper\EloAttribute.cs" />
@@ -122,12 +121,16 @@
     <Compile Include="Model\AttributeFile.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\SapData.cs" />
+    <Compile Include="PrepareView.xaml.cs">
+      <DependentUpon>PrepareView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Strings.cs" />
     <Compile Include="Settings\SettingsDictionary.cs" />
     <Compile Include="Settings\DictionaryElement.cs" />
     <Compile Include="Settings\GuiSettings.cs" />
     <Compile Include="ViewModel\AttributeFileViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationViewModel.cs" />
+    <Compile Include="ViewModel\LogDataViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SapDataViewModel.cs" />
     <Page Include="ArchiveView.xaml">
@@ -138,6 +141,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PrepareView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
