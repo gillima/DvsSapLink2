@@ -97,8 +97,20 @@ namespace DvsSapLink2.ViewModel
             var logFile = Path.Combine(
                 this.configuration.LogDirectory,
                 this.file + ".log");
-            
-            if (!System.IO.File.Exists(logFile)) return;
+
+            if (!System.IO.File.Exists(logFile))
+            {
+                this.SourceDirectory = string.Empty;
+                this.DestinationDirectory = string.Empty;
+                this.User = string.Empty;
+                this.State = string.Empty;
+                this.Atex = string.Empty;
+                this.OrderState = string.Empty;
+                this.Classification = string.Empty;
+                this.Project = string.Empty;
+                this.DocContent = string.Empty;
+                return;
+            }
 
             this.SourceDirectory = LogParser.ReadMessages(logFile, "W_DIR").FirstOrDefault();
             this.DestinationDirectory = LogParser.ReadMessages(logFile, "A_DIR").FirstOrDefault();

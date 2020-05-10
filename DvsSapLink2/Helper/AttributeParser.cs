@@ -210,15 +210,15 @@ namespace DvsSapLink2.Helper
             // string attributeUserPart1 = match.Success
             //     ? match.Groups[1].Value.Substring(0, 1)
             //     : string.Empty;
-            string attributeUserPart2 = match.Success
-                ? match.Groups[2].Value.Substring(0, 3)
+            var attributeUserPart2 = match.Success
+                ? match.Groups[2].Value.Substring(0, Math.Min(match.Groups[2].Value.Length, 5))
                 : string.Empty;
 
             foreach (var entry in sapData.Users)
             {
                 match = Regex.Match(entry.Key.ToLower(), "^([a-z]*\\b)[. ]*(\\w.*)$");
-                string eloUserPart2 = match.Success
-                    ? match.Groups[2].Value.Substring(0, 3)
+                var eloUserPart2 = match.Success
+                    ? match.Groups[2].Value.Substring(0, Math.Min(match.Groups[2].Value.Length, 5))
                     : string.Empty;
 
                 if (eloUserPart2 == attributeUserPart2)
