@@ -79,7 +79,7 @@ namespace DvsSapLink2.Command
                 if (file == null || !File.Exists(file.Path))
                     throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
 
-                if (file.Title.ToString().Length > 15)
+                if (file.Title.Length > 15)
                     throw new InvalidOperationException(Strings.TXT_INVALID_FILE_NAME);
 
                 this.ValidateDate(file, FileAttributeName.ErstelltDatum, true);
@@ -129,8 +129,7 @@ namespace DvsSapLink2.Command
             if (!Regex.IsMatch(file[name], "\\d{4}-\\d{2}-\\d{2}"))
                 throw new InvalidOperationException($"{Strings.TXT_INVALID_DATE}: {name}");
 
-            DateTime dateValue;
-            if (!DateTime.TryParse(file[name], out dateValue))
+            if (!DateTime.TryParse(file[name], out _))
                 throw new InvalidOperationException($"{Strings.TXT_INVALID_DATE}: {name}");
         }
 
@@ -161,21 +160,22 @@ namespace DvsSapLink2.Command
         /// destination directory
         /// </summary>
         /// <param name="file">The attribute file</param>
-        /// <param name="fileExtension">File extension of the file to copy</param>
+        /// <param name="fileExtensionSource">File extension of the source file to copy</param>
         /// <param name="destinationDirectory">Destination directory</param>
-        protected void CopyFile(AttributeFile file, string fileExtensionSource, string destinationDirectory, string fileExtensionDestination = "")
+        /// <param name="fileExtensionDestination">File extension of the destination file</param>
+        protected void CopyFile(AttributeFile file, string fileExtensionSource, string destinationDirectory, string fileExtensionDestination = null)
         {
             if (file?.Path == null)
                 throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
             
             var source = Path.Combine(
-                Path.GetDirectoryName(file.Path),
+                Path.GetDirectoryName(file.Path) ?? string.Empty,
                 file.Title + fileExtensionSource);
                 
             if (!File.Exists(source))
                 throw new InvalidOperationException(Strings.TXT_SOURCE_FILE_MISSING);
 
-            if (fileExtensionDestination == "")
+            if (string.IsNullOrEmpty(fileExtensionDestination))
                 fileExtensionDestination = fileExtensionSource;
 
             var destination = Path.Combine(
@@ -199,7 +199,7 @@ namespace DvsSapLink2.Command
                 throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
 
             var source = Path.Combine(
-                Path.GetDirectoryName(file.Path),
+                Path.GetDirectoryName(file.Path) ?? string.Empty,
                 file.Title + fileExtension);
 
             if (File.Exists(source))

@@ -4,9 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using DvsSapLink2.Model;
-using DvsSapLink2.Resources;
-using DvsSapLink2.ViewModel;
-using static DvsSapLink2.Resources.Strings;
 
 namespace DvsSapLink2.Helper
 {
@@ -17,27 +14,27 @@ namespace DvsSapLink2.Helper
         /// </summary>
         private class FileAttributeDefinition
         {
-            private readonly int Start;
-            private readonly int Length;
-            private readonly Func<string, string> Transform;
+            private readonly int start;
+            private readonly int length;
+            private readonly Func<string, string> transform;
 
             public FileAttributeDefinition(int start, int length, Func<string, string> transform = null)
             {
-                this.Start = start;
-                this.Length = length;
-                this.Transform = transform ?? new Func<string, string>(value => value);
+                this.start = start;
+                this.length = length;
+                this.transform = transform ?? (value => value);
             }
 
             public bool TryParse(string content, out (string RawValue, string Value)? attribute)
             {
-                if (content.Length <= this.Start)
+                if (content.Length <= this.start)
                 {
                     attribute = (null, string.Empty);
                     return false;
                 }
 
-                var rawValue = content.Substring(this.Start, this.Length);
-                var value = this.Transform(rawValue.Trim());
+                var rawValue = content.Substring(this.start, this.length);
+                var value = this.transform(rawValue.Trim());
                 attribute = (rawValue, value);
                 return !string.IsNullOrEmpty(value);
             }
@@ -134,7 +131,6 @@ namespace DvsSapLink2.Helper
         {
             var content = File.ReadAllText(filePath);
 
-            var values = new Dictionary<FileAttributeName, string>();
             foreach (var definition in FileAttributeParser.Definitions)
             {
                 definition.Value.TryParse(content, out var attribute);
@@ -248,7 +244,7 @@ namespace DvsSapLink2.Helper
             // z.B. 11005084-101 -> 11005084-000101, Position soll 6-stellig sein für 8-stellige Auftragsnummern
             match = Regex.Match(value, "(^[0-9]{8}-)([0]{0,3})([0-9]{3})$");
             if (match.Success)
-                value = match.Groups[1].Value + $"000" + match.Groups[3].Value;
+                value = match.Groups[1].Value + "000" + match.Groups[3].Value;
 
             return value.Trim();
         }

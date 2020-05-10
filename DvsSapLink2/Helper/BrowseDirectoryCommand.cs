@@ -41,7 +41,7 @@ namespace DvsSapLink2.Helper
         /// </summary>
         public void Execute(object parameter)
         {
-            var browseFolderDialog = new System.Windows.Forms.FolderBrowserDialog
+            var browseFolderDialog = new FolderBrowserDialog
             {
                 SelectedPath = this.currentDirectory() ?? string.Empty,
                 ShowNewFolderButton = false,

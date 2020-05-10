@@ -73,12 +73,12 @@ namespace DvsSapLink2.ViewModel
         public ObservableCollection<FileAttribute> Attributes => this.attributes ?? (this.attributes = new ObservableCollection<FileAttribute>(this.attributeFile.Attributes));
 
         /// <summary>
-        /// Validates the file content and compares the drawing number with the filename (including revision)
+        /// Validates the file content and compares the drawing-number with the filename (including revision)
         /// </summary>
         /// <exception cref="FormatException"></exception>
         private void Validate()
         {
-            // validates whether the drawing filename drawingnumber matches the value in the attribute file
+            // validates whether the drawing filename drawing number matches the value in the attribute file
             var drawingAttribute = this.attributes.FirstOrDefault(a => a.Name == FileAttributeName.Zeichnungsnummer);
             if (drawingAttribute == null)
             {
@@ -103,7 +103,7 @@ namespace DvsSapLink2.ViewModel
             }
 
             var revIndex = string.IsNullOrEmpty(revisionAttribute.Value)
-                ? $"0"
+                ? "0"
                 : revisionAttribute.Value.Replace("-", "0");
             // regex selects one or two character(s) between the first and second "-"
             match = Regex.Match(this.Title, ".*?-(.{1,2})-.*");
@@ -114,7 +114,7 @@ namespace DvsSapLink2.ViewModel
                 throw new FormatException(TXT_REVISION_MISMATCH);
 
 
-            // validates whether the drawing filename sheetnumber matches the value in the attribute file
+            // validates whether the drawing filename sheet-number matches the value in the attribute file
             var sheetNoAttribute = this.attributes.FirstOrDefault(a => a.Name == FileAttributeName.BlattNr);
             if (sheetNoAttribute == null)
             {
