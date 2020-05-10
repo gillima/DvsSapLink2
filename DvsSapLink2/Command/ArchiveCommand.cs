@@ -50,7 +50,6 @@ namespace DvsSapLink2.Command
             var project = LogParser.ReadMessages(logFile, "PROJ");
             viewModel.Sap.Data.Project = project.FirstOrDefault();
 
-            // TODO: Logger erzeugt einen Konflikt, weil LogParser auf gleiches File zugreift. Zum Testen auskommentiert.
             using (var logger = new Logger(logFile, true))
             {
                 this.WriteEloFile(sapTransferFileTemp, file, viewModel);

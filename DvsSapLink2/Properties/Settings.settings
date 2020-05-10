@@ -6,7 +6,7 @@
       <Value Profile="(Default)">freigegeben</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_USER_PREPARE" Type="System.String" Scope="User">
-      <Value Profile="(Default)">paulo.venturinha</Value>
+      <Value Profile="(Default)">I. Walt</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_ATEX_PREPARE" Type="System.String" Scope="User">
       <Value Profile="(Default)">nein</Value>
@@ -18,34 +18,34 @@
       <Value Profile="(Default)">extern</Value>
     </Setting>
     <Setting Name="DEFAULT_SAP_DOCCONTENT_PREPARE" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Einkaufsartikel Herstellung</Value>
     </Setting>
     <Setting Name="WORKING_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork\irene.walt\DvsSapLink-Tests</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Work\UserWork</Value>
     </Setting>
     <Setting Name="PENDING_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork\irene.walt\DvsSapLink-Tests\ArchPending</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\ArchPending</Value>
     </Setting>
     <Setting Name="ARCHIVE_DWG_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork\irene.walt\DvsSapLink-Tests\Archive\bm</Value>
+      <Value Profile="(Default)">V:\Archiv_Originale\AutoCAD\bm</Value>
     </Setting>
     <Setting Name="ARCHIVE_LOG_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork\irene.walt\DvsSapLink-Tests\ArchiveLog</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\logArchiv\dwgLog</Value>
     </Setting>
     <Setting Name="ARCHIVE_SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork\irene.walt\DvsSapLink-Tests\Archive</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\logArchiv\eloTransfer</Value>
     </Setting>
     <Setting Name="CONVERSION_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork\irene.walt\DvsSapLink-Tests\KonvPending</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\KonvPending</Value>
     </Setting>
     <Setting Name="ARCHIVE_TXT_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork\irene.walt\DvsSapLink-Tests\Archive</Value>
+      <Value Profile="(Default)">V:\Archiv_Metadaten\txt_AutoCAD</Value>
     </Setting>
     <Setting Name="ARCHIVE_TIF_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork\irene.walt\DvsSapLink-Tests\Archive</Value>
+      <Value Profile="(Default)">V:\Archiv_tif\tif_AutoCAD</Value>
     </Setting>
     <Setting Name="SAPTRANSFER_DIRECTORY" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\AutoCAD_Data\UserWork\irene.walt\DvsSapLink-Tests\EloPending</Value>
+      <Value Profile="(Default)">V:\AutoCAD_Admin\ELOPending</Value>
     </Setting>
   </Settings>
 </SettingsFile>
