@@ -38,6 +38,11 @@ namespace DvsSapLink2.ViewModel
         }
 
         /// <summary>
+        /// Gets the actual configuration type
+        /// </summary>
+        public ConfigurationType Type => this.sapData.Type;
+
+        /// <summary>
         /// Gets the SAP data model object
         /// </summary>
         public SapData Data => this.sapData;
@@ -76,7 +81,6 @@ namespace DvsSapLink2.ViewModel
         /// Gets the list of users for the selection box
         /// </summary>
         public IDictionary<string, string> Users => this.sapData.Users;
-
 
         /// <summary>
         /// Gets or sets the document state
@@ -155,7 +159,6 @@ namespace DvsSapLink2.ViewModel
                 this.RaisePropertyChanged();
             }
         }
-
 
         /// <summary>
         /// Gets or sets the SAP user

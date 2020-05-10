@@ -71,29 +71,36 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox  Padding="0 5 0 0" Header="{x:Static res:Strings.TXT_SAP_DATA}" DataContext="{Binding Sap}">
+            <GroupBox x:Name="SapData" Padding="0 5 0 0" Header="{x:Static res:Strings.TXT_SAP_DATA}" DataContext="{Binding Sap}">
                 <StackPanel Orientation="Vertical">
-
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_USER}">
-                        <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding User}" />
+                        <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Key" SelectedValuePath="Value" 
+                                  SelectedValue="{Binding User}"
+                                  IsHitTestVisible="{Binding Path=DataContext.Type,ElementName=SapData,Converter={StaticResource TypeToBoolConverter}}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_STATUS}">
-                        <ComboBox ItemsSource="{Binding States}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding State}" />
+                        <ComboBox ItemsSource="{Binding States}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding State}" 
+                                  IsHitTestVisible="{Binding Path=DataContext.Type,ElementName=SapData,Converter={StaticResource TypeToBoolConverter}}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ATEX}">
-                        <ComboBox ItemsSource="{Binding Atexs}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Atex}" />
+                        <ComboBox ItemsSource="{Binding Atexs}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Atex}" 
+                                  IsHitTestVisible="{Binding Path=DataContext.Type,ElementName=SapData,Converter={StaticResource TypeToBoolConverter}}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ORDERSTATE}">
-                        <ComboBox ItemsSource="{Binding OrderStates}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding OrderState}" />
+                        <ComboBox ItemsSource="{Binding OrderStates}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding OrderState}" 
+                                  IsHitTestVisible="{Binding Path=DataContext.Type,ElementName=SapData,Converter={StaticResource TypeToBoolConverter}}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_CLASSIFICATION}">
-                        <ComboBox ItemsSource="{Binding Classifications}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Classification}" />
+                        <ComboBox ItemsSource="{Binding Classifications}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Classification}"
+                                  IsHitTestVisible="{Binding Path=DataContext.Type,ElementName=SapData,Converter={StaticResource TypeToBoolConverter}}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_PROJECT}">
-                        <TextBox Name="txtProject" Text="{Binding Project}" />
+                        <TextBox Text="{Binding Project}" 
+                                 IsReadOnly="{Binding Path=DataContext.Type,ElementName=SapData,Converter={StaticResource TypeToBoolConverter},ConverterParameter=inverted}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_DOCCONTENT}">
-                        <ComboBox ItemsSource="{Binding DocContents}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding DocContent}" />
+                        <ComboBox ItemsSource="{Binding DocContents}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding DocContent}" 
+                                  IsHitTestVisible="{Binding Path=DataContext.Type,ElementName=SapData,Converter={StaticResource TypeToBoolConverter}}" />
                     </HeaderedContentControl>
                 </StackPanel>
             </GroupBox>

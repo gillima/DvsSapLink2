@@ -26,7 +26,8 @@ namespace DvsSapLink2.Model
                     break;
 
                 case ConfigurationType.Archive:
-                    this.User = ""; // TODO: Felder auf GUI read-only. Evt. Daten zum Anzeigen aus Logfile lesen (inkl. Archiv-Pfad).
+                    // TODO: Read from log file
+                    this.User = "";
                     this.State = "";
                     this.Atex = ""; 
                     this.OrderState = ""; 

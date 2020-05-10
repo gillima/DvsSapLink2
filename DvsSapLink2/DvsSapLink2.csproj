@@ -111,6 +111,7 @@
     <Compile Include="Command\OpenFileCommand.cs" />
     <Compile Include="Command\PrepareCommand.cs" />
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\TypeToBoolConverter.cs" />
     <Compile Include="Helper\AttributeParser.cs" />
     <Compile Include="Helper\BrowseDirectoryCommand.cs" />
     <Compile Include="Helper\EloAttribute.cs" />
