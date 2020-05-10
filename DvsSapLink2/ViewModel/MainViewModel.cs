@@ -20,6 +20,7 @@ namespace DvsSapLink2.ViewModel
         {
             this.Configuration = new ConfigurationViewModel(configuration, this.Files);
             this.Sap = new SapDataViewModel(sapData);
+            this.Log = new LogDataViewModel(this.Configuration.Configuration);
             this.File = null;
             this.Archive.CanExecuteChanged += delegate { this.RaisePropertyChanged(nameof(MainViewModel.IsValid)); };
         }
@@ -58,6 +59,7 @@ namespace DvsSapLink2.ViewModel
             {
                 this.Set(ref this.file, value);
                 this.RaisePropertyChanged(nameof(MainViewModel.IsValid));
+                this.Log.File = this.file?.Title;
             }
         }
 
@@ -95,5 +97,10 @@ namespace DvsSapLink2.ViewModel
         /// Gets the view model for the SAP data of the archive action
         /// </summary>
         public SapDataViewModel Sap { get; }
+
+        /// <summary>
+        /// Gets the log view model
+        /// </summary>
+        public LogDataViewModel Log { get; }
     }
 }

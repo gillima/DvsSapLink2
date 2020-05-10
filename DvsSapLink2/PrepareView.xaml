@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="DvsSapLink2.ArchiveView"
+    x:Class="DvsSapLink2.PrepareView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,6 +17,16 @@
     <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True">
 
         <StackPanel Orientation="Vertical" Margin="5">
+            <GroupBox  Padding="0 5 0 0" Header="{x:Static res:Strings.TXT_DIRECTORIES}" DataContext="{Binding Configuration}">
+                <StackPanel Orientation="Vertical">
+                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SOURCE_DIRECTORIES}">
+                        <Button Content="{Binding SourceDirectory}" Command="{Binding SelectSourceDirectory}" IsEnabled="{Binding CanChangeSourceDirectory}" Style="{StaticResource BrowseBox}"/>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_DESTINATION_DIRECTORIES}">
+                        <Button Content="{Binding DestinationDirectory}" Command="{Binding SelectDestinationDirectory}" IsEnabled="{Binding CanChangeDestinationDirectory}" Style="{StaticResource BrowseBox}"/>
+                    </HeaderedContentControl>
+                </StackPanel>
+            </GroupBox>
 
             <GroupBox  Padding="0 5 0 0" Header="{x:Static res:Strings.TXT_FILE_DATA}">
                 <Grid Height="400">
@@ -61,34 +71,29 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox x:Name="SapData" Padding="0 5 0 0" Header="{x:Static res:Strings.TXT_SAP_DATA}" DataContext="{Binding Log}">
+            <GroupBox x:Name="SapData" Padding="0 5 0 0" Header="{x:Static res:Strings.TXT_SAP_DATA}" DataContext="{Binding Sap}">
                 <StackPanel Orientation="Vertical">
-                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SOURCE_DIRECTORIES}">
-                        <TextBox Text="{Binding SourceDirectory,Mode=OneWay}" IsReadOnly="True" />
-                    </HeaderedContentControl>
-                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_DESTINATION_DIRECTORIES}">
-                        <TextBox Text="{Binding DestinationDirectory,Mode=OneWay}" IsReadOnly="True" />
-                    </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_USER}">
-                        <TextBox Text="{Binding User,Mode=OneWay}" IsReadOnly="True" />
+                        <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Key" SelectedValuePath="Value" 
+                                  SelectedValue="{Binding User}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_STATUS}">
-                        <TextBox Text="{Binding State,Mode=OneWay}" IsReadOnly="True" />
+                        <ComboBox ItemsSource="{Binding States}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding State}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ATEX}">
-                        <TextBox Text="{Binding Atex,Mode=OneWay}" IsReadOnly="True" />
+                        <ComboBox ItemsSource="{Binding Atexs}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Atex}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ORDERSTATE}">
-                        <TextBox Text="{Binding OrderState,Mode=OneWay}" IsReadOnly="True" />
+                        <ComboBox ItemsSource="{Binding OrderStates}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding OrderState}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_CLASSIFICATION}">
-                        <TextBox Text="{Binding Classification,Mode=OneWay}" IsReadOnly="True" />
+                        <ComboBox ItemsSource="{Binding Classifications}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Classification}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_PROJECT}">
-                        <TextBox Text="{Binding Project,Mode=OneWay}" IsReadOnly="True" />
+                        <TextBox Text="{Binding Project}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_DOCCONTENT}">
-                        <TextBox Text="{Binding DocContent,Mode=OneWay}" IsReadOnly="True" />
+                        <ComboBox ItemsSource="{Binding DocContents}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding DocContent}" />
                     </HeaderedContentControl>
                 </StackPanel>
             </GroupBox>

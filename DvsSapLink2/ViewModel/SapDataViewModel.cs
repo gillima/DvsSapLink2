@@ -7,7 +7,7 @@ using GalaSoft.MvvmLight;
 namespace DvsSapLink2.ViewModel
 {
     /// <summary>
-    /// ViewModel providing the SAP data to the UI and adds meta information like list or labors and states
+    /// ViewModel providing the SAP data to the UI and adds meta information like lists
     /// </summary>
     public class SapDataViewModel : ViewModelBase
     {
@@ -15,14 +15,17 @@ namespace DvsSapLink2.ViewModel
 
         /// <summary>
         /// Static constructor executed on application load. Loads the app.config settings to fill
-        /// Labors and States to be used in combobox or other lists
+        /// Values to be used in combobox or other lists
         /// </summary>
         static SapDataViewModel()
         {
             var section = (GuiSettings)ConfigurationManager.GetSection("guiSettings");
-            SapDataViewModel.Labors = section.Labors.As<string, int>();
             SapDataViewModel.States = section.States.As<string, string>();
-            SapDataViewModel.Users = section.Users.As<string, string>();
+            SapDataViewModel.Atexs = section.Atexs.As<string, string>();
+            SapDataViewModel.OrderStates = section.OrderStates.As<string, string>();
+            SapDataViewModel.Classifications = section.Classifications.As<string, string>();
+            SapDataViewModel.Projects = section.Projects.As<string, string>();
+            SapDataViewModel.DocContents = section.DocContents.As<string, string>();
         }
 
         /// <summary>
@@ -35,14 +38,14 @@ namespace DvsSapLink2.ViewModel
         }
 
         /// <summary>
+        /// Gets the actual configuration type
+        /// </summary>
+        public ConfigurationType Type => this.sapData.Type;
+
+        /// <summary>
         /// Gets the SAP data model object
         /// </summary>
         public SapData Data => this.sapData;
-
-        /// <summary>
-        /// Gets the list of labors for the selection box
-        /// </summary>
-        public static IDictionary<string, int> Labors { get; }
 
         /// <summary>
         /// Gets the list of document states for the selection box
@@ -50,22 +53,34 @@ namespace DvsSapLink2.ViewModel
         public static IDictionary<string, string> States { get; }
 
         /// <summary>
-        /// Gets the list of document states for the selection box
+        /// Gets the list of Atex states for the selection box
         /// </summary>
-        public static IDictionary<string, string> Users { get; }
+        public static IDictionary<string, string> Atexs { get; }
 
         /// <summary>
-        /// Gets or sets the labor
+        /// Gets the list of document order states for the selection box
         /// </summary>
-        public int Labor
-        {
-            get => this.sapData.Labor;
-            set
-            {
-                this.sapData.Labor = value;
-                this.RaisePropertyChanged();
-            }
-        }
+        public static IDictionary<string, string> OrderStates { get; }
+
+        /// <summary>
+        /// Gets the list of document classifications for the selection box
+        /// </summary>
+        public static IDictionary<string, string> Classifications { get; }
+
+        /// <summary>
+        /// Gets the list of document contents for the selection box
+        /// </summary>
+        public static IDictionary<string, string> DocContents { get; }
+
+        /// <summary>
+        /// Gets the list of document contents for the selection box
+        /// </summary>
+        public static IDictionary<string, string> Projects { get; }
+
+        /// <summary>
+        /// Gets the list of users for the selection box
+        /// </summary>
+        public IDictionary<string, string> Users => this.sapData.Users;
 
         /// <summary>
         /// Gets or sets the document state
@@ -80,6 +95,70 @@ namespace DvsSapLink2.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets the ATEX state
+        /// </summary>
+        public string Atex
+        {
+            get => this.sapData.Atex;
+            set
+            {
+                this.sapData.Atex = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the document OrderState
+        /// </summary>
+        public string OrderState
+        {
+            get => this.sapData.OrderState;
+            set
+            {
+                this.sapData.OrderState = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the document classification
+        /// </summary>
+        public string Classification
+        {
+            get => this.sapData.Classification;
+            set
+            {
+                this.sapData.Classification = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the document state
+        /// </summary>
+        public string DocContent
+        {
+            get => this.sapData.DocContent;
+            set
+            {
+                this.sapData.DocContent = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the project name
+        /// </summary>
+        public string Project
+        {
+            get => this.sapData.Project;
+            set
+            {
+                this.sapData.Project = value;
+                this.RaisePropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Gets or sets the SAP user

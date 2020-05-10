@@ -22,6 +22,7 @@ namespace DvsSapLink2.Helper
         /// <param name="message">Message to log</param>
         public void Write(string key, string message)
         {
+            message = message ?? string.Empty;
             var now = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             var line = $"{Environment.UserName,-14}{now,-23}{key,-7}{message}";
             this.stream.WriteLine(line);

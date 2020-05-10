@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
@@ -67,6 +68,7 @@ namespace DvsSapLink2.Command
         /// Verify that the file doesn't exists at the destination and the destination is writable
         /// </summary>
         /// <param name="file">Source file to copy</param>
+ 
         public virtual bool Verify(AttributeFile file = null)
         {
             if (file == null) file = this.lastAttributeFile;
@@ -77,8 +79,14 @@ namespace DvsSapLink2.Command
                 if (file == null || !File.Exists(file.Path))
                     throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
 
-                if (file.Title.ToString().Length > 15)
+                if (file.Title.Length > 15)
                     throw new InvalidOperationException(Strings.TXT_INVALID_FILE_NAME);
+
+                this.ValidateDate(file, FileAttributeName.ErstelltDatum, true);
+                this.ValidateDate(file, FileAttributeName.GeprueftDatum, true);
+                this.ValidateDate(file, FileAttributeName.FreigegebenDatum, true);
+                this.ValidateOrderNumber(file, FileAttributeName.AuftragsNummer, false);
+
 
                 var fileToCheck = Path.Combine(this.configuration.SourceDirectory, file.Title + ".pdf");
                 if (!File.Exists(fileToCheck))
@@ -105,27 +113,74 @@ namespace DvsSapLink2.Command
         }
 
         /// <summary>
+        /// Validate a date. required format is yyyy-mm-dd
+        /// </summary>
+        /// <param name="file">Attribute file</param>
+        /// <param name="name">name of the attribute to check</param>
+        /// <param name="required">Indicates if a date is required or not</param>
+        private void ValidateDate(AttributeFile file, FileAttributeName name, bool required)
+        {
+            if (!required && string.IsNullOrEmpty(file[name]))
+                return;
+
+            if (string.IsNullOrEmpty(file[name]))
+                throw new InvalidOperationException($"{Strings.TXT_MISSING_DATE}: {name}");
+
+            if (!Regex.IsMatch(file[name], "\\d{4}-\\d{2}-\\d{2}"))
+                throw new InvalidOperationException($"{Strings.TXT_INVALID_DATE}: {name}");
+
+            if (!DateTime.TryParse(file[name], out _))
+                throw new InvalidOperationException($"{Strings.TXT_INVALID_DATE}: {name}");
+        }
+
+        /// <summary>
+        /// Validate a ordernumber. required format is 
+        /// - RFQ_123456789
+        /// - nicht 9 Zeichen lang
+        /// - nicht 1- oder 1-...
+        /// </summary>
+        /// <param name="file">Attribute file</param>
+        /// <param name="name">name of the attribute to check</param>
+        /// <param name="required">Indicates if a date is required or not</param>
+        private void ValidateOrderNumber(AttributeFile file, FileAttributeName name, bool required)
+        {
+            if (!required && string.IsNullOrEmpty(file[name]))
+                return;
+
+            if (string.IsNullOrEmpty(file[name]))
+                throw new InvalidOperationException($"{Strings.TXT_MISSING_ORDER_NUMBER}");
+
+            if (Regex.IsMatch(file[name], "(^RFQ_.{0,8}$)|(^RFQ_.{10,99}$)|^1-$|^1-[.]+|^[0-9]{9}$"))
+                throw new InvalidOperationException($"{Strings.TXT_INVALID_ORDER_NUMBER}");
+        }
+
+
+        /// <summary>
         /// Copy the file with the given extension related to the attribute file into the
         /// destination directory
         /// </summary>
         /// <param name="file">The attribute file</param>
-        /// <param name="fileExtension">File extension of the file to copy</param>
+        /// <param name="fileExtensionSource">File extension of the source file to copy</param>
         /// <param name="destinationDirectory">Destination directory</param>
-        protected void CopyFile(AttributeFile file, string fileExtension, string destinationDirectory)
+        /// <param name="fileExtensionDestination">File extension of the destination file</param>
+        protected void CopyFile(AttributeFile file, string fileExtensionSource, string destinationDirectory, string fileExtensionDestination = null)
         {
             if (file?.Path == null)
                 throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
             
             var source = Path.Combine(
-                Path.GetDirectoryName(file.Path),
-                file.Title + fileExtension);
+                Path.GetDirectoryName(file.Path) ?? string.Empty,
+                file.Title + fileExtensionSource);
                 
             if (!File.Exists(source))
                 throw new InvalidOperationException(Strings.TXT_SOURCE_FILE_MISSING);
-             
+
+            if (string.IsNullOrEmpty(fileExtensionDestination))
+                fileExtensionDestination = fileExtensionSource;
+
             var destination = Path.Combine(
                 destinationDirectory,
-                file.Title + fileExtension);
+                file.Title + fileExtensionDestination);
             
             File.Copy(source, destination);
             if (!File.Exists(destination))
@@ -144,7 +199,7 @@ namespace DvsSapLink2.Command
                 throw new InvalidOperationException(Strings.TXT_NO_FILE_SELECTED);
 
             var source = Path.Combine(
-                Path.GetDirectoryName(file.Path),
+                Path.GetDirectoryName(file.Path) ?? string.Empty,
                 file.Title + fileExtension);
 
             if (File.Exists(source))
