@@ -59,7 +59,7 @@
                         Grid.IsSharedSizeScope="True"
                         Margin="5 0 0 0"
                         DataContext="{Binding File}"
-                        ItemsSource="{Binding Attributes}" 
+                        ItemsSource="{Binding Attributes}"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                     >
                         <ItemsControl.ItemTemplate>
@@ -86,7 +86,27 @@
                         <ComboBox ItemsSource="{Binding OrderStates}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding OrderState}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_PROJECT}">
-                        <TextBox Text="{Binding Project}" />
+                        <HeaderedContentControl.Style>
+                            <Style TargetType="{x:Type HeaderedContentControl}" BasedOn="{StaticResource {x:Type HeaderedContentControl}}">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding OrderState}" Value="auftragsbezogen">
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </HeaderedContentControl.Style>
+                        <TextBox Text="{Binding Project}">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding OrderState}" Value="auftragsbezogen">
+                                            <Setter Property="BorderBrush" Value="Red"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_DOCCONTENT}">
                         <ComboBox ItemsSource="{Binding DocContents}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding DocContent}" />

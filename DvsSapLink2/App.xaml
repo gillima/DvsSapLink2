@@ -15,7 +15,7 @@
                                 <ColumnDefinition Width="Auto" SharedSizeGroup="header" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label FontWeight="Bold" Padding="3" Content="{TemplateBinding Header}" />
+                            <Label FontWeight="Bold" Foreground="{TemplateBinding Foreground}" Padding="3" Content="{TemplateBinding Header}" />
                             <ContentPresenter Margin="3" Grid.Column="1" Content="{TemplateBinding Content}" HorizontalAlignment="Stretch"  />
                         </Grid>
                     </ControlTemplate>
