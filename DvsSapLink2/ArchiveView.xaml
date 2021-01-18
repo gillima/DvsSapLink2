@@ -69,20 +69,17 @@
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_DESTINATION_DIRECTORIES}">
                         <TextBox Text="{Binding DestinationDirectory,Mode=OneWay}" IsReadOnly="True" />
                     </HeaderedContentControl>
-                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_USER}">
-                        <TextBox Text="{Binding User,Mode=OneWay}" IsReadOnly="True" />
-                    </HeaderedContentControl>
-                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_STATUS}">
+                    <!-- <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_STATUS}">
                         <TextBox Text="{Binding State,Mode=OneWay}" IsReadOnly="True" />
-                    </HeaderedContentControl>
+                    </HeaderedContentControl> -->
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ATEX}">
                         <TextBox Text="{Binding Atex,Mode=OneWay}" IsReadOnly="True" />
                     </HeaderedContentControl>
-                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ORDERSTATE}">
-                        <TextBox Text="{Binding OrderState,Mode=OneWay}" IsReadOnly="True" />
-                    </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_CLASSIFICATION}">
                         <TextBox Text="{Binding Classification,Mode=OneWay}" IsReadOnly="True" />
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ORDERSTATE}">
+                        <TextBox Text="{Binding OrderState,Mode=OneWay}" IsReadOnly="True" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_PROJECT}">
                         <TextBox Text="{Binding Project,Mode=OneWay}" IsReadOnly="True" />

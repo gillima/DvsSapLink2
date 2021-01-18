@@ -34,8 +34,6 @@ namespace DvsSapLink2.Command
             var archiveDir = LogParser.ReadMessages(logFile, "A_DIR");
             this.configuration.DestinationDirectory = archiveDir.FirstOrDefault();
             // MessageBox.Show($"Archive Directory: {archiveDir.FirstOrDefault()}");
-            var archiveUser = LogParser.ReadMessages(logFile, "USER");
-            viewModel.Sap.Data.User = archiveUser.FirstOrDefault();
             var docState = LogParser.ReadMessages(logFile, "STATE");
             viewModel.Sap.Data.State = docState.FirstOrDefault();
             var atex = LogParser.ReadMessages(logFile, "ATEX");
