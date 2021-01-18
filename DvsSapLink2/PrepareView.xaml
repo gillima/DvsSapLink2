@@ -73,21 +73,17 @@
 
             <GroupBox x:Name="SapData" Padding="0 5 0 0" Header="{x:Static res:Strings.TXT_SAP_DATA}" DataContext="{Binding Sap}">
                 <StackPanel Orientation="Vertical">
-                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_USER}">
-                        <ComboBox ItemsSource="{Binding Users}" DisplayMemberPath="Key" SelectedValuePath="Value" 
-                                  SelectedValue="{Binding User}" />
-                    </HeaderedContentControl>
-                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_STATUS}">
+                    <!-- <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_STATUS}">
                         <ComboBox ItemsSource="{Binding States}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding State}" />
-                    </HeaderedContentControl>
+                    </HeaderedContentControl> -->
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ATEX}">
                         <ComboBox ItemsSource="{Binding Atexs}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Atex}" />
                     </HeaderedContentControl>
-                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ORDERSTATE}">
-                        <ComboBox ItemsSource="{Binding OrderStates}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding OrderState}" />
-                    </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_CLASSIFICATION}">
                         <ComboBox ItemsSource="{Binding Classifications}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Classification}" />
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_ORDERSTATE}">
+                        <ComboBox ItemsSource="{Binding OrderStates}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding OrderState}" />
                     </HeaderedContentControl>
                     <HeaderedContentControl Header="{x:Static res:Strings.TXT_SAP_PROJECT}">
                         <TextBox Text="{Binding Project}" />
