@@ -136,6 +136,7 @@ namespace DvsSapLink2.Command
         /// <summary>
         /// Validate a ordernumber. required format is 
         /// - RFQ_123456789
+        /// - RFQ_123456
         /// - nicht 9 Zeichen lang
         /// - nicht 1- oder 1-...
         /// </summary>
@@ -150,7 +151,8 @@ namespace DvsSapLink2.Command
             if (string.IsNullOrEmpty(file[name]))
                 throw new InvalidOperationException($"{Strings.TXT_MISSING_ORDER_NUMBER}");
 
-            if (Regex.IsMatch(file[name], "(^RFQ_.{0,8}$)|(^RFQ_.{10,99}$)|^1-$|^1-[.]+|^[0-9]{9}$"))
+            var regexOrderNumber = "(^RFQ_.{0,5}$)|(^RFQ_.{7,8}$)|(^RFQ_.{10,99}$)|(^1-$)|(^1-[.]+)|(^[0-9]{9}$)";
+            if (Regex.IsMatch(file[name], regexOrderNumber))
                 throw new InvalidOperationException($"{Strings.TXT_INVALID_ORDER_NUMBER}");
         }
 
