@@ -76,7 +76,7 @@ namespace DvsSapLink2.Command
 
         private void WriteEloFile(string fileName, AttributeFile file, MainViewModel viewModel)
         {
-            using (var stream = new StreamWriter(fileName, false, System.Text.Encoding.GetEncoding("ISO-8859-1")))
+            using (var stream = new StreamWriter(fileName, false, System.Text.Encoding.UTF8))
             {
                 var attributes = this.GetFileAttributes(file, viewModel.Sap.Data);
                 foreach (var attribute in attributes
